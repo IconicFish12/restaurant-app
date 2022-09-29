@@ -19,6 +19,8 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+
+
 </head>
 
 <body id="page-top">
@@ -288,7 +290,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{ asset('logout') }}">Logout</a>
                 </div>
             </div>
         </div>
@@ -317,6 +319,8 @@
 
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
+    {{-- SweetAlert --}}
+    @include('sweetalert::alert')
 
 </body>
 

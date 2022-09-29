@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->date('birth');
-            $table->integer('phone_number');
+            $table->string('phone_number');
             $table->enum('role',['costumer', 'admin'])->default('costumer');
             $table->string('username')->unique();
             $table->string('email')->unique();

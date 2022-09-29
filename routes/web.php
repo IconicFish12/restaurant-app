@@ -16,10 +16,18 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 //AUTH ROUTE
-Route::get('/login', [AuthController::class, 'loginView'])->middleware('guest');
-Route::get('/register', [AuthController::class, 'regiterView']);
-Route::post('/authenticate', );
+Route::prefix('login')->name('login')->middleware('guest')->group(function () {
+    Route::get('/', [AuthController::class, 'loginView']);
+    Route::post('/', [AuthController::class, 'auth']);
+});
+
+Route::prefix('registration')->group(function() {
+    Route::get('/',  [AuthController::class, 'registerView']);
+    Route::post('/register', [AuthController::class, 'registerAction']);
+});
+
+Route::get('logout', [AuthController::class, 'logout']);
 
 //DASHBOARD VIEW / BACKEND SYSTEM
-Route::get('/', [DashboardController::class, 'dashboardView']);
+Route::get('/administrator', [DashboardController::class, 'dashboardView'])->middleware('auth');
 
