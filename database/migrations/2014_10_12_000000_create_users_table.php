@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('lastname');
             $table->date('birth');
             $table->integer('phone_number');
-            $table->enum('level',['costumer', 'admin'])->default('costumer');
+            $table->enum('role',['costumer', 'admin'])->default('costumer');
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
