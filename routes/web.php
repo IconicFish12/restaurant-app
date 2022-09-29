@@ -29,5 +29,11 @@ Route::prefix('registration')->group(function() {
 Route::get('logout', [AuthController::class, 'logout']);
 
 //DASHBOARD VIEW / BACKEND SYSTEM
-Route::get('/administrator', [DashboardController::class, 'dashboardView'])->middleware('auth');
+Route::middleware('auth')->prefix('administrator')->group(function () {
+    Route::get('/', [DashboardController::class, 'dashboardView']);
+});
 
+//WEBSITE VIEW / FRONTEND
+Route::middleware('auth')->group( function() {
+    Route::get('/', [DashboardController::class, 'webView'])->name('/');
+});

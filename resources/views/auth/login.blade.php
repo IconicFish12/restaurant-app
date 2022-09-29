@@ -15,15 +15,15 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">LOGIN AS ADMIN!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">PLEASE LOG IN FIRST</h1>
                                     </div>
                                     <form class="" method="POST" action="{{ asset('login') }}" autocomplete="off">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="email" class="form-control form-control-user"
-                                                id="email" aria-describedby="emailHelp" name="email"
-                                                placeholder="Enter Email Address...">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                id="username" aria-describedby="emailHelp" name="username"
+                                                placeholder="Enter Your Username...">
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Password</label>

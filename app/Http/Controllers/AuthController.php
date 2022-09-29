@@ -22,15 +22,21 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function auth(Request $request)
+    public function auth(Request $request, User $user)
     {
         $data = $request->validate([
-            'email' => "required|email:dns",
+            'username' => "required|max:50",
             'password' => "required"
         ]);
 
         if(Auth::attempt($data)){
-            if(User::where("email", $data["email"])->first()->role !== "admin"){
+            if(User::where("username", $data["username"])->first()->role === "costumer"){
+                $request->session()->regenerate();
+
+                return redirect()->intended('/')->with('success', "Welcome, $request->username");
+            }
+            
+            if(User::where("username", $data["username"])->first()->role !== "admin"){
                 Auth::logout();
 
                 return redirect('login')->with('toast_error', 'You Are Not Admin');
@@ -38,10 +44,10 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect('/administrator')->with('success', "Login Success");
+            return redirect('/administrator')->with('success', "Welcome, $request->username");
         }
 
-        return redirect("login")->with("toast_error", "Email or password not found or wrong");
+        return redirect("login")->with("toast_error", "Username or password not found or wrong");
 
     }
 
