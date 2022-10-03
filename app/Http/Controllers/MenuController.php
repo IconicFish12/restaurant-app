@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\User;
+use App\Models\Category;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 
@@ -20,7 +21,8 @@ class MenuController extends Controller
             'title' => "Vanushki Menus",
             'page_name' => "Vanushki Menu",
             "user" => User::where('role', 'admin')->first(),
-            "dataArr" => Menu::with('category')->get()
+            "dataArr" => Menu::with('category')->get(),
+            "category" => Category::all()
         ]);
     }
 
@@ -42,7 +44,18 @@ class MenuController extends Controller
      */
     public function store(StoreMenuRequest $request)
     {
-        //
+        // dd($request);
+        $data = $request->validated();
+
+        $fileName = $request->file('image')->getClientOriginalName();
+
+        $data['image'] = $request->file('image')->storeAs('images', $fileName, "public_path");
+
+        if(Menu::create($data)){
+            return back()->with('success', "Successfully created $request->name");
+        }
+        return back()->with('error', "Faild when created $request->name");
+
     }
 
     /**

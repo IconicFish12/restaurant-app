@@ -19,22 +19,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($dataArr->count(0))
+                    @if ($dataArr->count())
                         @foreach ($dataArr as $category)
-                            <td>{{ $loop->iteration }}</td>
-                            <td style="font-size: 17.8px">{{ $category->category_name }}</td>
-                            <td class="d-flex justify-content-center">
-                                <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="submit" onclick="return alert('Are you Sure want to delete {{ $category->category_name }}')" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $category->category_name }}</td>
+                                <td class="d-flex justify-content-center">
+                                    <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
+                                        <i class="fas fa-edit"></i>
                                     </button>
-                                </form>
-                            </td>
+                                    <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" onclick="return alert('Are you Sure want to delete {{ $category->category_name }}')" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
                     @endif
                 </tbody>
