@@ -19,7 +19,8 @@ class MenuController extends Controller
         return view('admin.menu', [
             'title' => "Vanushki Menus",
             'page_name' => "Vanushki Menu",
-            "user" => User::where('role', 'admin')->first()
+            "user" => User::where('role', 'admin')->first(),
+            "dataArr" => Menu::with('category')->get()
         ]);
     }
 

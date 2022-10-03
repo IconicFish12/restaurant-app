@@ -30,7 +30,7 @@
                                 <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
                                     @method('delete')
                                     @csrf
-                                    <button type="submit" onclick="return alert('Are you Suer want to delete {{ $category->category_name }}')" class="btn btn-danger">
+                                    <button type="submit" onclick="return alert('Are you Sure want to delete {{ $category->category_name }}')" class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

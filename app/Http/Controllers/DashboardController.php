@@ -18,8 +18,8 @@ class DashboardController extends Controller
 
     public function webView(Request $request, User $user)
     {
-        return view('layouts.home', [
-            'user' => User::where("username", "IconicFish")->get()
+        return view('layouts.web', [
+            'user' => User::where("username", "IconicFish")->first()
         ]);
     }
 
