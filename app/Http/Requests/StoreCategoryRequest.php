@@ -13,7 +13,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,20 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "category_name" => "required|unique:categories|max:50"
         ];
     }
+
+    /**
+ * Get the error messages for the defined validation rules.
+ *
+ * @return array
+ */
+public function messages()
+{
+    return [
+        'category_name.required' => 'A Category Name is required',
+        'category_name.unique' => 'A Category Name is Must Unique'
+    ];
+}
 }

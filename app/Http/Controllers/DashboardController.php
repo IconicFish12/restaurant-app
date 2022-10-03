@@ -10,7 +10,10 @@ class DashboardController extends Controller
 
     public function dashboardView()
     {
-        return view('layouts.admin');
+        return view('layouts.admin', [
+            "page_name" => "Dashboard Vanushki",
+            "user" => User::where('role', 'admin')->first()
+        ]);
     }
 
     public function webView(Request $request, User $user)

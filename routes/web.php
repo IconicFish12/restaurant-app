@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +30,22 @@ Route::prefix('registration')->group(function() {
 Route::get('logout', [AuthController::class, 'logout']);
 
 //DASHBOARD VIEW / BACKEND SYSTEM
-Route::middleware('auth')->prefix('administrator')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'dashboardView']);
+
+    Route::prefix('/menus')->group(function(){
+        Route::get('/', [MenuController::class, 'index']);
+    });
+
+    Route::prefix('/categories')->group(function(){
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::post('/', [CategoryController::class, 'store']);
+        Route::get('/{category:id}', [CategoryController::class, 'show']);
+        Route::put('/{category:id}', [CategoryController::class, 'update']);
+        Route::delete('/{category:id}', [CategoryController::class, 'destroy']);
+    });
 });
 
-//WEBSITE VIEW / FRONTEND
-Route::middleware('auth')->group( function() {
-    Route::get('/', [DashboardController::class, 'webView'])->name('/');
+Route::prefix('/home')->middleware('auth')->group(function(){
+    Route::get('/', [DashboardController::class, 'webView']);
 });

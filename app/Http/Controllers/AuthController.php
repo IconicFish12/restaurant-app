@@ -33,9 +33,9 @@ class AuthController extends Controller
             if(User::where("username", $data["username"])->first()->role === "costumer"){
                 $request->session()->regenerate();
 
-                return redirect()->intended('/')->with('success', "Welcome, $request->username");
+                return redirect()->intended('/home')->with('success', "Welcome, $request->username");
             }
-            
+
             if(User::where("username", $data["username"])->first()->role !== "admin"){
                 Auth::logout();
 
@@ -44,7 +44,7 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect('/administrator')->with('success', "Welcome, $request->username");
+            return redirect('/')->with('success', "Welcome, $request->username");
         }
 
         return redirect("login")->with("toast_error", "Username or password not found or wrong");

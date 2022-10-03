@@ -14,5 +14,9 @@
     @endforeach
 
     <a href="{{ asset('logout') }}">Logout</a>
+
+    {{-- SWEET ALERT --}}
+    @include('sweetalert::alert')
+
 </body>
 </html>

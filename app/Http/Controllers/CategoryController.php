@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
@@ -15,7 +16,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.category', [
+            'title' => "Menu Categories",
+            "page_name" => "Category Menu",
+            "user" => User::where('role', 'admin')->first(),
+            "dataArr" => Category::all()
+        ]);
     }
 
     /**
@@ -36,7 +42,11 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        if(Category::create($data)){
+            return back()->with('success', "$request->category_name created successfully");
+        }
     }
 
     /**
@@ -47,7 +57,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+       return response()->json(Category::find($category->id));
     }
 
     /**
@@ -70,7 +80,18 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        // dd($request);
+        $data = $request->validated();
+
+        if($request->category_name == $category->category_name){
+            return back()->with('info', "Nothing change");
+        }
+
+        if(category::find($category->id)->update($data)){
+            return back()->with('success', "Successfully Updated $request->category_name");
+        }
+        return back()->with('error', "Failed to update $request->category_name");
+
     }
 
     /**
@@ -81,6 +102,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if(Category::destroy($category->id)){
+            return back()->with('success', "Success Delete $category->name");
+        }
+        return back()->with('error', "Success Delete $category->name");
     }
 }
