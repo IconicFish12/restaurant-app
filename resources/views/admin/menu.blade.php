@@ -143,12 +143,43 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="" method="post" id="edit_form">
+          <form action="" method="post" id="edit_form" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="form-group">
-                <label for="category_name">Category Name</label>
-                <input type="text" class="form-control" name="category_name" id="edit_category_name" value="{{ old('category_name') }}" placeholder="Enter category name">
+                <label for="name">Menu Name</label>
+                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Enter Menu name">
+            </div>
+            <div class="form-group">
+                <label for="category_id">Menu Category</label>
+                <select class="form-select form-control" name="category_id" id="category_id" aria-label="Default select example">
+                    @foreach ($category as $item)
+                        <option selected value="{{ $item->id }}">{{ $item->category_name }}</option>
+                        @if (old('category_id') == $item->id)
+                            <option value="{{ $item->id }}">{{ $item->category_name }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="menu_type">Menu Type</label>
+                <select class="form-select form-control" name="menu_type" id="menu_type" aria-label="Default select example">
+                    <option value="mainCourse">Main Course</option>
+                    <option value="appetizer">Appetizer</option>
+                    <option value="dessert">Dessert</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price">Menu Price</label>
+                <input type="number" class="form-control" name="price" id="price" value="{{ old('price') }}" placeholder="Enter Menu price">
+            </div>
+            <div class="form-group">
+                <label for="image">Menu Image</label>
+                <input type="file" class="form-control" name="image" id="image" value="{{ old('image') }}" placeholder="Enter Menu price">
+            </div>
+            <div class="form-group">
+                <label for="description">Menu Description</label>
+                <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter Menu Decsription"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

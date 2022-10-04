@@ -89,7 +89,7 @@ class MenuController extends Controller
      */
     public function update(UpdateMenuRequest $request, Menu $menu)
     {
-        //
+        dd($request);
     }
 
     /**
