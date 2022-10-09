@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/menus')->group(function(){
         Route::get('/', [MenuController::class, 'index']);
         Route::post('/', [MenuController::class, 'store']);
+        Route::get('/{menu:id}', [MenuController::class, 'show']);
+        Route::put('/{menu:id}', [MenuController::class, 'update']);
+        Route::delete('/{menu:id}', [MenuController::class, 'destroy']);
     });
 
     Route::prefix('/categories')->group(function(){

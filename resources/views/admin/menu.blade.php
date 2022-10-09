@@ -45,7 +45,7 @@
                                     <button type="button"  onclick="getData({{ $menu->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/categories/{{ $menu->id }}" method="POST" class="mx-3">
+                                    <form action="/menus/{{ $menu->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $menu->name }}')" class="btn btn-danger">
@@ -148,11 +148,11 @@
             @csrf
             <div class="form-group">
                 <label for="name">Menu Name</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Enter Menu name">
+                <input type="text" class="form-control" name="name" id="edit_name" value="{{ old('name') }}" placeholder="Enter Menu name">
             </div>
             <div class="form-group">
                 <label for="category_id">Menu Category</label>
-                <select class="form-select form-control" name="category_id" id="category_id" aria-label="Default select example">
+                <select class="form-select form-control" name="category_id" id="edit_category_id" aria-label="Default select example">
                     @foreach ($category as $item)
                         <option selected value="{{ $item->id }}">{{ $item->category_name }}</option>
                         @if (old('category_id') == $item->id)
@@ -163,7 +163,7 @@
             </div>
             <div class="form-group">
                 <label for="menu_type">Menu Type</label>
-                <select class="form-select form-control" name="menu_type" id="menu_type" aria-label="Default select example">
+                <select class="form-select form-control" name="menu_type" id="edit_menu_type" aria-label="Default select example">
                     <option value="mainCourse">Main Course</option>
                     <option value="appetizer">Appetizer</option>
                     <option value="dessert">Dessert</option>
@@ -171,7 +171,7 @@
             </div>
             <div class="form-group">
                 <label for="price">Menu Price</label>
-                <input type="number" class="form-control" name="price" id="price" value="{{ old('price') }}" placeholder="Enter Menu price">
+                <input type="number" class="form-control" name="price" id="edit_price" value="{{ old('price') }}" placeholder="Enter Menu price">
             </div>
             <div class="form-group">
                 <label for="image">Menu Image</label>
@@ -179,7 +179,7 @@
             </div>
             <div class="form-group">
                 <label for="description">Menu Description</label>
-                <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter Menu Decsription"></textarea>
+                <textarea name="description" id="edit_description" class="form-control" rows="4" placeholder="Enter Menu Decsription"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -193,10 +193,14 @@
 
 <script>
     let getData= id => {
-    fetch(`categories/${id}`).then(response => response.json()).then(response => {
-        document.getElementById("edit_form").action = `categories/${id}`
-        document.getElementById("edit_category_name").value = response.category_name;
-    });
+    fetch(`menus/${id}`).then(response => response.json()).then(response => {
+        document.getElementById("edit_form").action = `menus/${id}`
+        document.getElementById("edit_name").value = response.name;
+        document.getElementById("edit_category_id").value = response.category_id
+        document.getElementById("edit_menu_type").value = response.menu_type
+        document.getElementById("edit_price").value = response.price
+        document.getElementById("edit_description").value = response.description
+     });
 }
 </script>
 @endsection

@@ -66,7 +66,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+        return response()->json(Menu::find($menu->id));
     }
 
     /**
@@ -100,6 +100,9 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        if(Menu::destroy($menu->id)){
+            return back()->with('success', "Successfully Delete $menu->name");
+        }
+        return back()->with('error', "Failed to Delete $menu->name");
     }
 }

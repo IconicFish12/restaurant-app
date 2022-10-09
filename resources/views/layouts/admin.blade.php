@@ -6,8 +6,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="vanushki admin dashboard">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="author" content="ibnu">
 
     <title>{{ $title ?? "Vanushki Restaurant" }}</title>
 
@@ -18,7 +19,6 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-
 
 
 </head>
@@ -32,7 +32,7 @@
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ asset('/administrator') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ asset('/') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -44,7 +44,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ asset('/administrator') }}">
+                <a class="nav-link" href="{{ asset('/') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -67,30 +67,34 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menus Component</h6>
-                        <a class="collapse-item" href="{{ asset('menus') }}">Restaurant Menu</a>
-                        <a class="collapse-item" href="{{ asset('categories') }}">Menu Category</a>
+                        <a class="collapse-item" href="{{ asset('menus') }}">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Restaurant Menu</span>
+                        </a>
+                        <a class="collapse-item" href="{{ asset('categories') }}">
+                            <i class="fas fa-th-large"></i>
+                            <span>Menu Category</span>
+                        </a>
                     </div>
                 </div>
             </li>
 
             {{-- <!-- Nav Item - Utilities Collapse Menu --> --}}
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <span>Management</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <h6 class="collapse-header">Management</h6>
+                        <a class="collapse-item" href="#">User</a>
+                        <a class="collapse-item" href="#">Empolyee</a>
                     </div>
                 </div>
-            </li> --}}
+            </li>
 
             {{-- <!-- Divider -->
             <hr class="sidebar-divider">
@@ -308,6 +312,12 @@
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+    {{-- AJAX --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    {{-- Script to get data --}}
+    @yield('script')
 
     {{-- SweetAlert --}}
     @include('sweetalert::alert')

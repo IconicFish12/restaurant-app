@@ -19,24 +19,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($dataArr->count())
+                    @if ($dataArr->count(0))
                         @foreach ($dataArr as $category)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $category->category_name }}</td>
-                                <td class="d-flex justify-content-center">
-                                    <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
-                                        <i class="fas fa-edit"></i>
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td style="font-size: 17.8px">{{ $category->category_name }}</td>
+                            <td class="d-flex justify-content-center">
+                                <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" onclick="return alert('Are you Suer want to delete {{ $category->category_name }}')" class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
-                                    <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" onclick="return alert('Are you Sure want to delete {{ $category->category_name }}')" class="btn btn-danger">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                                </form>
+                            </td>
+                        </tr>
                         @endforeach
                     @endif
                 </tbody>
@@ -107,6 +107,7 @@
     </div>
 </div>
 
+@section('script')
 <script>
     let getData= id => {
     fetch(`categories/${id}`).then(response => response.json()).then(response => {
@@ -115,4 +116,5 @@
     });
 }
 </script>
+@endsection
 @endsection

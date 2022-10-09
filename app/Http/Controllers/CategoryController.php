@@ -19,7 +19,7 @@ class CategoryController extends Controller
         return view('admin.category', [
             'title' => "Menu Categories",
             "page_name" => "Category Menu",
-            "user" => User::where('role', 'admin')->first(),
+            "user" => User::orderBy('id', 'ASC')->first(),
             "dataArr" => Category::all()
         ]);
     }
@@ -40,7 +40,7 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request, Category $category  )
     {
         $data = $request->validated();
 
@@ -57,7 +57,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-       return response()->json(Category::find($category->id));
+        return response()->json(Category::find($category->id));
     }
 
     /**
