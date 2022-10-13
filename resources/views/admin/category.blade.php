@@ -9,8 +9,13 @@
     </div>
     <div class="card-body">
         <div class="row d-flex flex-row-reverse">
-            <div class="col-sm-3 form-group">
-                <input type="search" name="" class="form-control" id="">
+            <div class="col-sm-4 ">
+                <form action="{{ asset('categories') }}">
+                    <div class="input-group mb-3 ">
+                        <input type="text" class="form-control " placeholder="Search A Category" value="{{ request('search') }}" name="search">
+                        <button class="btn btn-danger" type="submit">Search</button>
+                      </div>
+                </form>
             </div>
         </div>
         <table class="table table-bordered table-striped table-hover">
@@ -53,6 +58,7 @@
             <h3 class="text-center">Data Not Found</h3>
             @endif
         </table>
+        {{ $dataArr->links() }}
     </div>
 </div>
 

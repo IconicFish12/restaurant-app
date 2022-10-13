@@ -21,7 +21,7 @@ class MenuController extends Controller
             'title' => "Vanushki Menus",
             'page_name' => "Vanushki Menu",
             "user" => User::where('role', 'admin')->first(),
-            "dataArr" => Menu::with('category')->get(),
+            "dataArr" => Menu::latest()->filter(request(['search']))->with('category')->paginate(20),
             "category" => Category::all()
         ]);
     }
@@ -33,7 +33,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

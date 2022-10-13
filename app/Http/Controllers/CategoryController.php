@@ -17,13 +17,10 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::latest();
-
         return view('admin.category', [
             'title' => "Menu Categories",
             "page_name" => "Category Menu",
-            "user" => User::orderBy('id', 'ASC')->first(),
-            "dataArr" => $categories->get()
+            "dataArr" => Category::latest()->filter(request(['search']))->paginate(20)
         ]);
     }
 

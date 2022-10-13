@@ -18,30 +18,30 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // $data = [
-        //     [
-        //         "firstname" => "Ibnu Syawal",
-        //         "lastname" => "Aliefian",
-        //         "birth" => "2004-11-04",
-        //         "phone_number" => "082162941198",
-        //         "role" => "admin",
-        //         "username" => "Admin",
-        //         "password" => Hash::make('password'),
-        //         "email" => "IbnuSyawal@gmail.com"
-        //     ],
-        //     [
-        //         "firstname" => "Mochammad Ibnu",
-        //         "lastname" => "Kamil",
-        //         "birth" => "2007-05-13",
-        //         "phone_number" => "081123515454",
-        //         "role" => "costumer",
-        //         "username" => "IbnuKamil",
-        //         "password" => Hash::make('password'),
-        //         "email" => "IbnuKamil@gmail.com"
-        //     ],
-        // ];
+        $data = [
+            [
+                "firstname" => "Ibnu Syawal",
+                "lastname" => "Aliefian",
+                "birth" => "2004-11-04",
+                "phone_number" => "082162941198",
+                "role" => "admin",
+                "username" => "Admin",
+                "password" => Hash::make('password'),
+                "email" => "IbnuSyawal@gmail.com"
+            ],
+            [
+                "firstname" => "Mochammad Ibnu",
+                "lastname" => "Kamil",
+                "birth" => "2007-05-13",
+                "phone_number" => "081123515454",
+                "role" => "costumer",
+                "username" => "IbnuKamil",
+                "password" => Hash::make('password'),
+                "email" => "IbnuKamil@gmail.com"
+            ],
+        ];
 
-        // User::insert($data);
+        User::insert($data);
 
         $this->call([
             CategorySeeder::class,
