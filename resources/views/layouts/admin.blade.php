@@ -68,7 +68,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menus Component</h6>
                         <a class="collapse-item" href="{{ asset('menus') }}">
-                            <i class="fas fa-clipboard-list"></i>
+                            <i class="fas fa-utensils"></i>
                             <span>Restaurant Menu</span>
                         </a>
                         <a class="collapse-item" href="{{ asset('categories') }}">
@@ -83,15 +83,21 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-users"></i>
                     <span>Management</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Management</h6>
-                        <a class="collapse-item" href="#">User</a>
-                        <a class="collapse-item" href="#">Empolyee</a>
+                        <a class="collapse-item" href="{{ asset('users') }}">
+                            <i class="fas fa-user"></i>
+                            <span>Users</span>
+                        </a>
+                        <a class="collapse-item" href="#">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Employees</span>
+                        </a>
                     </div>
                 </div>
             </li>
@@ -172,7 +178,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <h3 class="d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 text-primary">
+                    <h3 class="d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 text-danger">
                         {{ $page_name ?? "Vanushki Restaurant" }}
                     </h3>
 
@@ -209,7 +215,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $user->username }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
                                 <img class="img-profile rounded-circle" src="{{ asset('/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -312,9 +318,6 @@
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
-
-    {{-- AJAX --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     {{-- Script to get data --}}
     @yield('script')

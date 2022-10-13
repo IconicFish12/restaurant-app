@@ -19,6 +19,8 @@ class CategorySeeder extends Seeder
             ["category_name" => "Mie"],
             ["category_name" => "Makanan Berat"],
             ["category_name" => "Salad"],
+            ["category_name" => "Makanan Ringan"],
+            ["category_name" => "Es Krim"],
         ];
 
         Category::insert($data);

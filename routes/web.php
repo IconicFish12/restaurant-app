@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,10 @@ Route::get('logout', [AuthController::class, 'logout']);
 
 //DASHBOARD VIEW / BACKEND SYSTEM
 Route::middleware('auth')->group(function () {
+    // DASHBOARD VIEW
     Route::get('/', [DashboardController::class, 'dashboardView']);
 
+    // DASHBOARD MODULE
     Route::prefix('/menus')->group(function(){
         Route::get('/', [MenuController::class, 'index']);
         Route::post('/', [MenuController::class, 'store']);
@@ -47,6 +50,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/{category:id}', [CategoryController::class, 'show']);
         Route::put('/{category:id}', [CategoryController::class, 'update']);
         Route::delete('/{category:id}', [CategoryController::class, 'destroy']);
+    });
+
+    // USER AND EMPLOYEE MANAGEMENT
+    Route::prefix('/users')->group(function() {
+        Route::get('/', [UserController::class, 'index']);
     });
 });
 

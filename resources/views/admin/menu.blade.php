@@ -3,78 +3,82 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createMenuModal">
+        <button type="button" class="btn btn-danger mx-3" data-toggle="modal" data-target="#createMenuModal">
             <i class="fas fa-plus"></i>
             <span>Create</span>
         </button>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Menu Name</th>
-                        <td>Menu Category</td>
-                        <th>Menu Type</th>
-                        <th>Menu Price</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($dataArr->count(0))
-                        @foreach ($dataArr as $menu)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $menu->name }}</td>
-                                <td>{{ $menu->category->category_name }}</td>
-                                <td>{{ $menu->menu_type }}</td>
-                                <td>@money($menu->price)</td>
-                                <td>
-                                    @if (File::exists($menu->image))
-                                        <img src="{{ asset($menu->image) }}" alt="" width="85px">
-                                    @else
-                                        <i class="fas fa-image"></i>
-                                        <span>Image Not Found</span>
-                                    @endif
-                                </td>
-                                <td>{{ $menu->description}}</td>
-                                <td class="d-flex justify-content-center">
-                                    <button type="button"  onclick="getData({{ $menu->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <form action="/menus/{{ $menu->id }}" method="POST" class="mx-3">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" onclick="return alert('Are you Sure want to delete {{ $menu->name }}')" class="btn btn-danger">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>No</th>
-                        <th>Menu Name</th>
-                        <td>Menu Category</td>
-                        <th>Menu Type</th>
-                        <th>Menu Price</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
-            </table>
+        <div class="row d-flex flex-row-reverse">
+            <div class="col-sm-3 form-group">
+                <input type="search" name="" class="form-control" id="">
+            </div>
         </div>
+        <table class="table table-bordered table-striped table-hover">
+            @if ($dataArr->count())
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Menu Name</th>
+                    <td>Menu Category</td>
+                    <th>Menu Type</th>
+                    <th>Menu Price</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($dataArr as $menu)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $menu->name }}</td>
+                        <td>{{ $menu->category->category_name }}</td>
+                        <td>{{ $menu->menu_type }}</td>
+                        <td>@money($menu->price)</td>
+                        <td>
+                            @if (File::exists($menu->image))
+                                <img src="{{ asset($menu->image) }}" alt="" width="85px">
+                            @else
+                                <i class="fas fa-image"></i>
+                                <span>Image Not Found</span>
+                            @endif
+                        </td>
+                        <td>{{ $menu->description}}</td>
+                        <td class="d-flex justify-content-center">
+                            <button type="button"  onclick="getData({{ $menu->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <form action="/menus/{{ $menu->id }}" method="POST" class="mx-3">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" onclick="return alert('Are you Sure want to delete {{ $menu->name }}')" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>No</th>
+                    <th>Menu Name</th>
+                    <td>Menu Category</td>
+                    <th>Menu Type</th>
+                    <th>Menu Price</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            @else
+                <h3 class="text-center">Data Not Found</h3>
+            @endif
+        </table>
     </div>
 </div>
 
-{{-- Modal Create Menu --}}
 <div class="modal fade" id="createMenuModal" tabindex="-1" aria-labelledby="createMenuLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

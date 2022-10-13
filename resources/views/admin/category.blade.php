@@ -1,56 +1,61 @@
 @extends('layouts.admin')
 @section('container')
-
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCategoryModal">
+        <button type="button" class="btn btn-danger mx-4" data-toggle="modal" data-target="#createCategoryModal">
             <i class="fas fa-plus"></i>
             <span>Create</span>
         </button>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Category Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($dataArr->count(0))
-                        @foreach ($dataArr as $category)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td style="font-size: 17.8px">{{ $category->category_name }}</td>
-                            <td class="d-flex justify-content-center">
-                                <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="submit" onclick="return alert('Are you Suer want to delete {{ $category->category_name }}')" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    @endif
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>No</th>
-                        <th>Category Name</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
-            </table>
+        <div class="row d-flex flex-row-reverse">
+            <div class="col-sm-3 form-group">
+                <input type="search" name="" class="form-control" id="">
+            </div>
         </div>
+        <table class="table table-bordered table-striped table-hover">
+            @if ($dataArr->count())
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($dataArr as $category)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $category->category_name }}</td>
+                        <td class="d-flex justify-content-center">
+                            <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" onclick="return alert('Are you Suer want to delete {{ $category->category_name }}')" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </tfoot>
+            @else
+            <h3 class="text-center">Data Not Found</h3>
+            @endif
+        </table>
     </div>
 </div>
+
 
 {{-- Modal Create Category --}}
 <div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryLabel" aria-hidden="true">
@@ -117,4 +122,6 @@
 }
 </script>
 @endsection
+
+
 @endsection

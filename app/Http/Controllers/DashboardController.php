@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         return view('layouts.admin', [
             "page_name" => "Dashboard Vanushki",
-            "user" => User::where('role', 'admin')->first()
+            "user" => User::where('role', 'Admin')->first()
         ]);
     }
 

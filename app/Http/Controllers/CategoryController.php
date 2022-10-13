@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+Use illuminate\Http\Request;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 
@@ -14,13 +15,15 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $categories = Category::latest();
+
         return view('admin.category', [
             'title' => "Menu Categories",
             "page_name" => "Category Menu",
             "user" => User::orderBy('id', 'ASC')->first(),
-            "dataArr" => Category::all()
+            "dataArr" => $categories->get()
         ]);
     }
 
