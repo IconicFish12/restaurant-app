@@ -2,89 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.user', [
-            'user' => User::all(),
+            'user' => User::latest()->filter(request(['search']))->paginate(15),
             'title' => "User Management",
-            'page_name' => "User Management",
-            'header' => 'User Data'
+            'page_name' => "User Management"
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreUserRequest $request)
     {
-        //
+        $user = User::insert([
+            "firstname" => $request->firstname,
+            "lastname" => $request->lastname,
+            "birth" => $request->birth,
+            "phone_number" => $request->phone_number,
+            "username" => $request->username,
+            "email" => $request->email,
+            "password" => Hash::make($request->password)
+        ]);
+
+        return back()->with('success', "Successfully Created data User");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user)
     {
-        //
+        return response()->json(User::find($user->id), 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
-        //
+        if(User::destroy($user->id)){
+            return back()->with('success', "Successfully Deleting User data");
+        }
+        return back()->with('error', "Error when Deleting User data");
     }
 }

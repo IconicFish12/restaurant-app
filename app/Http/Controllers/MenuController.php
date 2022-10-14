@@ -21,7 +21,7 @@ class MenuController extends Controller
             'title' => "Vanushki Menus",
             'page_name' => "Vanushki Menu",
             "user" => User::where('role', 'admin')->first(),
-            "dataArr" => Menu::latest()->filter(request(['search']))->with('category')->paginate(20),
+            "dataArr" => Menu::latest()->filter(request(['search']))->with('category')->paginate(15),
             "category" => Category::all()
         ]);
     }

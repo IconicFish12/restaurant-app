@@ -13,7 +13,7 @@
             <div class="col-sm-4">
                 <form action="{{ asset('menus') }}" method="GET">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search A Category" value="{{ request('search') }}" name="search">
+                        <input type="text" class="form-control" placeholder="Search A Menu" value="{{ request('search') }}" name="search">
                         <button class="btn btn-danger" type="submit">Search</button>
                       </div>
                 </form>

@@ -25,7 +25,7 @@ class AuthController extends Controller
     public function auth(Request $request, User $user)
     {
         $data = $request->validate([
-            'username' => "required|max:50",
+            'username' => "required",
             'password' => "required"
         ]);
 

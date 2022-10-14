@@ -15,12 +15,12 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.category', [
             'title' => "Menu Categories",
             "page_name" => "Category Menu",
-            "dataArr" => Category::latest()->filter(request(['search']))->paginate(20)
+            "dataArr" => Category::latest()->filter(request(['search']))->paginate(15)
         ]);
     }
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request, Category $category  )
+    public function store(StoreCategoryRequest $request,)
     {
         $data = $request->validated();
 

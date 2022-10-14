@@ -322,8 +322,8 @@
     {{-- Script to get data --}}
     @yield('script')
 
-    {{-- SweetAlert --}}
     @include('sweetalert::alert')
+
 
 </body>
 

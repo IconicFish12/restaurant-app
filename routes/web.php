@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function () {
     // USER AND EMPLOYEE MANAGEMENT
     Route::prefix('/users')->group(function() {
         Route::get('/', [UserController::class, 'index']);
+        Route::post('/', [UserController::class, 'store']);
+        Route::get('/{user:id}', [UserController::class, 'show']);
+        Route::delete('/{user:id}', [UserController::class, 'destroy']);
     });
 });
 
