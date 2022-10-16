@@ -15,7 +15,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.employees', [
+            'title' => "Employee Management",
+            "page_name" => "Employee Management",
+            "dataArr" => Employee::latest()->filter(request(['search']))->paginate(15)
+        ]);
     }
 
     /**

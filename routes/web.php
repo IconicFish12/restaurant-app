@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 
@@ -59,6 +60,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/{user:id}', [UserController::class, 'show']);
         Route::put('/{user:id}', [UserController::class, 'update']);
         Route::delete('/{user:id}', [UserController::class, 'destroy']);
+    });
+
+    Route::prefix('/employees')->group(function () {
+        Route::get('/', [EmployeeController::class, 'index']);
     });
 });
 

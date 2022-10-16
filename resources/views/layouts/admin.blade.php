@@ -94,7 +94,7 @@
                             <i class="fas fa-user"></i>
                             <span>Users</span>
                         </a>
-                        <a class="collapse-item" href="#">
+                        <a class="collapse-item" href="{{ asset('employees') }}">
                             <i class="fas fa-user-tie"></i>
                             <span>Employees</span>
                         </a>

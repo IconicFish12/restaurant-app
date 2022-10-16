@@ -1,28 +1,29 @@
 @extends('layouts.admin')
 @section('container')
 
-@if ($user->count())
-    <div class="card shadow mb-4">
-        <div class="card-header my-3">
-            <button type="button" class="btn btn-danger mx-4" data-toggle="modal" data-target="#createUserModal">
-                <i class="fas fa-plus"></i>
-                <span>Create</span>
-            </button>
-        </div>
-        <div class="card-body">
-            <div class="row d-flex flex-row-reverse">
-                <div class="col-sm-4 ">
-                    <form action="{{ asset('users') }}" method="GET">
-                        <div class="input-group mb-3 ">
-                            <input type="text" class="form-control" value="{{ request('search') }}" placeholder="Search A User" name="search">
-                            <button class="btn btn-danger" type="submit">Search</button>
-                          </div>
-                    </form>
-                </div>
+
+<div class="card shadow mb-4">
+    <div class="card-header my-3">
+        <button type="button" class="btn btn-danger mx-4" data-toggle="modal" data-target="#createUserModal">
+            <i class="fas fa-plus"></i>
+            <span>Create</span>
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="row d-flex flex-row-reverse">
+            <div class="col-sm-4 ">
+                <form action="{{ asset('users') }}" method="GET">
+                    <div class="input-group mb-3 ">
+                        <input type="text" class="form-control" value="{{ request('search') }}" placeholder="Search A User" name="search">
+                        <button class="btn btn-danger" type="submit">Search</button>
+                    </div>
+                </form>
             </div>
-            <div class="table-wrapper">
-                <div class="md-card-content" style="overflow-x: auto;">
-                    <table class="table table-bordered table-striped table-hover" >
+        </div>
+        <div class="table-wrapper">
+            <div class="md-card-content" style="overflow-x: auto;">
+                <table class="table table-bordered table-striped table-hover" >
+                    @if ($user->count())
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -75,15 +76,15 @@
                                 <th>Action</th>
                             </tr>
                         </tfoot>
-                    </table>
-                </div>
+                    @else
+                        <h3 class="text-center">Data Not Found</h3>
+                    @endif
+                </table>
             </div>
-            {{ $user->links() }}
         </div>
+        {{ $user->links() }}
     </div>
-@else
-    <h3 class="text-center fs-4" style="padding: auto">Data Not Found</h3>
-@endif
+</div>
 
 
 <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
