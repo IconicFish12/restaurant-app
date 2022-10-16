@@ -19,68 +19,72 @@
                 </form>
             </div>
         </div>
-        <table class="table table-bordered table-striped table-hover">
-            @if ($dataArr->count())
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Menu Name</th>
-                    <td>Menu Category</td>
-                    <th>Menu Type</th>
-                    <th>Menu Price</th>
-                    <th>Image</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($dataArr as $menu)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $menu->name }}</td>
-                        <td>{{ $menu->category->category_name }}</td>
-                        <td>{{ $menu->menu_type }}</td>
-                        <td>@money($menu->price)</td>
-                        <td>
-                            @if (File::exists($menu->image))
-                                <img src="{{ asset($menu->image) }}" alt="" width="85px">
-                            @else
-                                <i class="fas fa-image"></i>
-                                <span>Image Not Found</span>
-                            @endif
-                        </td>
-                        <td>{{ $menu->description}}</td>
-                        <td class="d-flex justify-content-center">
-                            <button type="button"  onclick="getData({{ $menu->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <form action="/menus/{{ $menu->id }}" method="POST" class="mx-3">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" onclick="return alert('Are you Sure want to delete {{ $menu->name }}')" class="btn btn-danger">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>No</th>
-                    <th>Menu Name</th>
-                    <td>Menu Category</td>
-                    <th>Menu Type</th>
-                    <th>Menu Price</th>
-                    <th>Image</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
-            @else
-                <h3 class="text-center">Data Not Found</h3>
-            @endif
-        </table>
+        <div class="table-wrapper">
+            <div class="md-card-content" style="overflow-x: auto;">
+                <table class="table table-bordered table-striped table-hover">
+                    @if ($dataArr->count())
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Menu Name</th>
+                            <td>Menu Category</td>
+                            <th>Menu Type</th>
+                            <th>Menu Price</th>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($dataArr as $menu)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $menu->name }}</td>
+                                <td>{{ $menu->category->category_name }}</td>
+                                <td>{{ $menu->menu_type }}</td>
+                                <td>@money($menu->price)</td>
+                                <td>
+                                    @if (File::exists($menu->image))
+                                        <img src="{{ asset($menu->image) }}" alt="" width="85px">
+                                    @else
+                                        <i class="fas fa-image"></i>
+                                        <span>Image Not Found</span>
+                                    @endif
+                                </td>
+                                <td>{{ $menu->description}}</td>
+                                <td class="d-flex justify-content-center">
+                                    <button type="button"  onclick="getData({{ $menu->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <form action="/menus/{{ $menu->id }}" method="POST" class="mx-3">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" onclick="return alert('Are you Sure want to delete {{ $menu->name }}')" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Menu Name</th>
+                            <td>Menu Category</td>
+                            <th>Menu Type</th>
+                            <th>Menu Price</th>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    @else
+                        <h3 class="text-center">Data Not Found</h3>
+                    @endif
+                </table>
+            </div>
+        </div>
         {{ $dataArr->links() }}
     </div>
 </div>

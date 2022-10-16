@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +36,27 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return response()->json(User::find($user->id), 200);
+        return response()->json(User::find($user->id));
+    }
+
+    public function update(User $user, UpdateUserRequest $request)
+    {
+        $user->update([
+            "firstname" => $request->firstname,
+            "lastname" => $request->lastname,
+            "birth" => $request->birth,
+            "phone_number" => $request->phone_number,
+            "username" => $request->username,
+            "email" => $request->email,
+        ]);
+
+        if($request->password){
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+        }
+
+        return back()->with('success', 'Successfully Update User Data');
     }
 
     public function destroy(User $user)

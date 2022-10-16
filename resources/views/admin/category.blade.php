@@ -18,46 +18,50 @@
                 </form>
             </div>
         </div>
-        <table class="table table-bordered table-striped table-hover">
-            @if ($dataArr->count())
-            <thead>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Category Name</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($dataArr as $category)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $category->category_name }}</td>
-                        <td class="d-flex justify-content-center">
-                            <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" onclick="return alert('Are you Suer want to delete {{ $category->category_name }}')" class="btn btn-danger">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Category Name</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </tfoot>
-            @else
-            <h3 class="text-center">Data Not Found</h3>
-            @endif
-        </table>
+        <div class="table-wrapper">
+            <div class="md-card-content" style="overflow-x: auto;">
+                <table class="table table-bordered table-striped table-hover">
+                    @if ($dataArr->count())
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($dataArr as $category)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $category->category_name }}</td>
+                                <td class="d-flex justify-content-center">
+                                    <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" onclick="return alert('Are you Suer want to delete {{ $category->category_name }}')" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </tfoot>
+                    @else
+                    <h3 class="text-center">Data Not Found</h3>
+                    @endif
+                </table>
+            </div>
+        </div>
         {{ $dataArr->links() }}
     </div>
 </div>

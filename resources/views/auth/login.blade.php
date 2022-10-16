@@ -28,7 +28,8 @@
                                         <div class="form-group">
                                             <label for="password">Password</label>
                                             <input type="password" class="form-control form-control-user" name="password"
-                                                id="password" placeholder="Password">
+                                            id="password" placeholder="Password">
+                                            {{-- <i class="fas fa-eye" id="toggle" style="margin-left: -30px; cursor: pointer;"></i> --}}
                                         </div>
                                         {{-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -57,4 +58,16 @@
         </div>
 
     </div>
+
+    <script>
+        const toggle = document.querySelector('#toggle')
+        const password = document.querySelector('#password')
+
+        toggle.addEventListener('click', function(e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password'
+            password.setAttribute('type', type)
+
+            this.classList.toggle('fa-eye-slash');
+        })
+    </script>
 @endsection
