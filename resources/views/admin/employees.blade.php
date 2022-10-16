@@ -3,7 +3,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <button type="button" class="btn btn-danger mx-3" data-toggle="modal" data-target="#createMenuModal">
+        <button type="button" class="btn btn-danger mx-3" data-toggle="modal" data-target="#createEmployeeModal">
             <i class="fas fa-plus"></i>
             <span>Create</span>
         </button>
@@ -82,6 +82,57 @@
             </div>
         </div>
         {{ $dataArr->links() }}
+    </div>
+</div>
+
+<div class="modal fade" id="createEmployeeModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userModalLabel">Create User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ asset('employees') }}" method="post">
+                @csrf
+                <div class="form-group">
+                        <div class="form-group">
+                            <label for="name">Employee Name</label>
+                            <input type="text" class="form-control form-control-user" id="name" value="{{ old('name') }}" name="name"
+                            placeholder="Enter Employee Name">
+                        </div>
+                            <div class="form-group">
+                            <label for="birth">Birth</label>
+                            <input type="date" class="form-control form-control-user" id="birth" value="{{ old('birth') }}" name="birth">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Employee Age</label>
+                            <input type="number" class="form-control form-control-user" id="age" value="{{ old('age') }}" name="age" placeholder="Your Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number">Phone Number</label>
+                            <input type="number" class="form-control form-control-user" id="phone_number" value="{{ old('phone_number') }}" name="phone_number" placeholder="Your Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Position</label>
+                            <input type="text" class="form-control form-control-user" id="position" value="{{ old('position') }}" name="position"
+                            placeholder="Enter Employee Position">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control form-control-user" id="email" value="{{ old('email') }}" name="email"
+                            placeholder="Email Address">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 

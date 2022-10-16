@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 
@@ -40,7 +41,20 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        //
+        if($request->validated()){
+            Employee::insert([
+                "name" => $request->name,
+                "birth" => $request->birth,
+                "employee_code" => Str::random(5) . random_int(10, 99) . Str::random(2),
+                "phone_number" => $request->phone_number,
+                "age" => $request->age,
+                "position" => $request->position,
+                "email" => $request->email
+            ]);
+
+            return back()->with('success', "Successfully Create Data $request->name");
+        }
+        return back()->with('error', "Error Creating Data $request->name");
     }
 
     /**

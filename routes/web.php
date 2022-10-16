@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/employees')->group(function () {
         Route::get('/', [EmployeeController::class, 'index']);
+        Route::post('/', [EmployeeController::class, 'store']);
     });
 });
 

@@ -15,7 +15,10 @@ class Employee extends Model
     public function scopeFilter($query, array $filter)
     {
         $query->when($filter['search'] ?? false, function($query, $collect){
-            $query->where('');
+            $query->where('name', 'LIKE' , '%' . $collect . '%')
+            ->orWhere('employee_code', 'LIKE', '%' . $collect . '%')
+            ->orWhere('position', 'LIKE', '%' . $collect . '%')
+            ->ordWhere('phone_number', 'LIKE' , '%' . $collect . '%');
         });
     }
 }
