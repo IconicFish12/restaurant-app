@@ -65,6 +65,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/employees')->group(function () {
         Route::get('/', [EmployeeController::class, 'index']);
         Route::post('/', [EmployeeController::class, 'store']);
+        Route::get('/{employee:id}', [EmployeeController::class, 'show']);
+        Route::put('/{employee:id}', [EmployeeController::class, 'update']);
+        Route::delete('/{employee:id}', [EmployeeController::class, 'destroy']);
     });
 });
 

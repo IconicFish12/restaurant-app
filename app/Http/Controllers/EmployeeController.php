@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Support\Str;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
@@ -45,7 +46,7 @@ class EmployeeController extends Controller
             Employee::insert([
                 "name" => $request->name,
                 "birth" => $request->birth,
-                "employee_code" => Str::random(5) . random_int(10, 99) . Str::random(2),
+                "employee_code" => "employee-" . random_int(10, 99),
                 "phone_number" => $request->phone_number,
                 "age" => $request->age,
                 "position" => $request->position,
@@ -65,7 +66,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return response()->json(Employee::find($employee->id), 200);
     }
 
     /**
@@ -88,7 +89,20 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        //
+        // dd($request->all());
+        $data = $request->validated();
+
+        if($request->has('employee_code')){
+
+            if(Employee::find($employee->id)->update(["employee_code" =>$request->employee_code])){
+                return back()->with("success", "Successfully updating Employee Code");
+            }
+        }
+
+        if(Employee::find($employee->id)->update($data)){
+            return back()->with("success", "Successfully updating Employee data");
+        }
+        return back()->with("error", "Error when updating Employee data");
     }
 
     /**
@@ -99,6 +113,9 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        if(Employee::destroy($employee->id)){
+            return back()->with('success', "Successfully Deleting $employee->name");
+        }
+        return back()->with('error', "Error Deleting $employee->name");
     }
 }
