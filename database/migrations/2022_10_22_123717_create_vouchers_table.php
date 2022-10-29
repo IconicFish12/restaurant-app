@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email');
-            $table->string('phone_number', 13);
-            $table->longText('message');
+            $table->longText('description');
+            $table->dateTime('expired');
+            $table->string('code')->unique();
+            $table->string('type');
+            $table->integer('amount');
+            $table->integer('limit');
+            $table->string('minPurchase');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('vouchers');
     }
 };

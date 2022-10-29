@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
@@ -68,6 +69,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/{employee:id}', [EmployeeController::class, 'show']);
         Route::put('/{employee:id}', [EmployeeController::class, 'update']);
         Route::delete('/{employee:id}', [EmployeeController::class, 'destroy']);
+    });
+
+    //CONTACT SERVICE
+    Route::prefix('/messages')->group(function (){
+        Route::get('/', [ContactController::class, 'index']);
+        Route::post('/', [ContactController::class, 'store']);
     });
 });
 

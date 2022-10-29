@@ -8,13 +8,30 @@
         </button>
     </div>
     <div class="card-body">
-        <div class="row d-flex flex-row-reverse">
-            <div class="col-sm-4 ">
-                <form action="{{ asset('categories') }}">
+        <div class=" d-flex justify-content-between flex-column flex-md-row">
+            <div class="col-md-3 ">
+                <form action="{{ asset('categories') }}" method="GET" class="d-block mb-2">
+                    @if (request()->has("search"))
+                    <div class="form-group">
+                        <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
+                    </div>
+                    @endif
+                    <span class="d-block">Data Per Page</span>
+                    <input type="number" name="paginate" id="paginate" list="paginates" class="form-control" value="{{ request('paginate') }}">
+                    <datalist id="paginates">
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                    </datalist>
+                </form>
+            </div>
+            <div class="col-md-3 ">
+                <form action="{{ asset('categories') }}" method="GET" class="d-block mb-2">
+                    <span class="d-block">Search</span>
                     <div class="input-group mb-3 ">
-                        <input type="text" class="form-control " placeholder="Search A Category" value="{{ request('search') }}" name="search">
-                        <button class="btn btn-danger" type="submit">Search</button>
-                      </div>
+                        <input type="seacrh" class="form-control " placeholder="Search A Category" value="{{ request('search') }}" name="search">
+                    </div>
                 </form>
             </div>
         </div>
@@ -61,8 +78,8 @@
                     @endif
                 </table>
             </div>
+            {{ $dataArr->links() }}
         </div>
-        {{ $dataArr->links() }}
     </div>
 </div>
 

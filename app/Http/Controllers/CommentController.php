@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
-use App\Http\Requests\StoreContactRequest;
-use App\Http\Requests\UpdateContactRequest;
-use App\Models\Employee;
+use App\Models\Comment;
+use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
 
-class ContactController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +15,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('admin.contact', [
-            "title" => "Message Costumer",
-            "page_name" => "All messages from customers",
-            "dataArr" => Contact::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10)
-        ]);
+        //
     }
 
     /**
@@ -36,10 +31,10 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreContactRequest  $request
+     * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreContactRequest $request)
+    public function store(StoreCommentRequest $request)
     {
         //
     }
@@ -47,10 +42,10 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Contact $contact)
+    public function show(Comment $comment)
     {
         //
     }
@@ -58,10 +53,10 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contact $contact)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -69,11 +64,11 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateContactRequest  $request
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Http\Requests\UpdateCommentRequest  $request
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateContactRequest $request, Contact $contact)
+    public function update(UpdateCommentRequest $request, Comment $comment)
     {
         //
     }
@@ -81,10 +76,10 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Contact  $contact
+     * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy(Comment $comment)
     {
         //
     }

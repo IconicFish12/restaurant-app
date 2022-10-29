@@ -29,7 +29,8 @@ class UpdateEmployeeRequest extends FormRequest
             "age" => ["required","integer","max:60"],
             "phone_number" => ["required","max:13"],
             "position" => ["required"],
-            "email" => ["required","email:dns"]
+            "email" => ["required","email:dns"],
+            "employe_code"  => ["required", "unique:employees", "max:20"]
         ];
     }
 
@@ -49,6 +50,9 @@ class UpdateEmployeeRequest extends FormRequest
             'phone_number.max' => 'Phone number cannot be more than 15',
             "position.required" => "A Employee Position is required",
             "email.required" => "A Email is required",
+            "employee_code.required" => "A Employee Code is required",
+            "employee_code.unique" => "Employee Code Must Unique",
+            "employee_code.max" => "Employee Code cannot be more than 20",
         ];
     }
 }

@@ -111,25 +111,26 @@
             </div> --}}
 
             <!-- Nav Item - Pages Collapse Menu -->
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <i class="fas fa-headset"></i>
+                    <span>Contact Service</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <h6 class="collapse-header">Contact Service:</h6>
+                        <a class="collapse-item" href="{{ asset('messages') }}">
+                            <i class="fa fa-comment" aria-hidden="true"></i>
+                            <span >Message</span>
+                        </a>
+                        <a class="collapse-item" href="register.html">
+                            <i class="fas fa-reply-all"></i>
+                            <span>Replies</span>
+                        </a>
                     </div>
                 </div>
-            </li> --}}
+            </li>
 
             {{-- <!-- Nav Item - Charts -->
             <li class="nav-item">

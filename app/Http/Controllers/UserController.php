@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user', [
-            'user' => User::latest()->filter(request(['search']))->paginate(15),
+            'user' => User::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10),
             'title' => "User Management",
             'page_name' => "User Management"
         ]);

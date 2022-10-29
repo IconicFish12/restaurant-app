@@ -20,7 +20,7 @@ class EmployeeController extends Controller
         return view('admin.employees', [
             'title' => "Employee Management",
             "page_name" => "Employee Management",
-            "dataArr" => Employee::latest()->filter(request(['search']))->paginate(15)
+            "dataArr" => Employee::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10)
         ]);
     }
 
@@ -94,7 +94,7 @@ class EmployeeController extends Controller
 
         if($request->has('employee_code')){
 
-            if(Employee::find($employee->id)->update(["employee_code" =>$request->employee_code])){
+            if(Employee::find($employee->id)->update(["employee_code" => $request->employee_code])){
                 return back()->with("success", "Successfully updating Employee Code");
             }
         }
