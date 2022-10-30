@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Models\Employee;
+use Illuminate\Mail\Mailables\Content;
 
 class ContactController extends Controller
 {
@@ -18,7 +19,7 @@ class ContactController extends Controller
     {
         return view('admin.contact', [
             "title" => "Message Costumer",
-            "page_name" => "All messages from customers",
+            "page_name" => "Messages from customers",
             "dataArr" => Contact::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10)
         ]);
     }
@@ -41,7 +42,14 @@ class ContactController extends Controller
      */
     public function store(StoreContactRequest $request)
     {
-        //
+        // return $request->all();
+        $data = $request->validated();
+
+        if(Contact::create($data)){
+            return redirect('/message')->with('success', "Successfully Create Data Contact $request->name");
+        }else {
+            return redirect('/message')->with('error', 'Error When Creating Contact data');
+        }
     }
 
     /**
@@ -86,6 +94,9 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        if(Contact::destroy($contact->id)){
+            return back()->with('success', "Successfully Deleting Message From $contact->name");
+        }
+        return back()->with('error', "Error When Deleting Message From $contact->name");
     }
 }

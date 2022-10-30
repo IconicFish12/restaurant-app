@@ -49,6 +49,10 @@
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control form-control-user"
                                         id="password" placeholder="Password" name="password">
+                                    <label for="" style="font-size: 14.7px">
+                                        <i class="fas fa-eye mt-2 text-muted" id="toggle" style="margin-left: 5px; cursor: pointer;"></i>
+                                        Show Password
+                                    </label>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
                             </form>
@@ -67,4 +71,16 @@
     </div>
 
 </div>
+
+<script>
+    const toggle = document.querySelector('#toggle')
+    const password = document.querySelector('#password')
+
+    toggle.addEventListener('click', function(e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password'
+        password.setAttribute('type', type)
+
+        this.classList.toggle('fa-eye-slash');
+    })
+</script>
 @endsection

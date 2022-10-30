@@ -59,12 +59,12 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuOne"
+                    aria-expanded="true" aria-controls="menuOne">
                     <i class="fas fa-clipboard-list"></i>
                     <span>Menus</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="menuOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menus Component</h6>
                         <a class="collapse-item" href="{{ asset('menus') }}">
@@ -75,18 +75,22 @@
                             <i class="fas fa-th-large"></i>
                             <span>Menu Category</span>
                         </a>
+                        <a class="collapse-item" href="{{ asset('tables') }}">
+                            <i class="fas fa-th-large"></i>
+                            <span>Restaurant Tables</span>
+                        </a>
                     </div>
                 </div>
             </li>
 
             {{-- <!-- Nav Item - Utilities Collapse Menu --> --}}
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuTwo"
+                    aria-expanded="true" aria-controls="menuTwo">
                     <i class="fas fa-users"></i>
                     <span>Management</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="menuTwo" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Management</h6>
@@ -102,6 +106,58 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuThree"
+                    aria-expanded="true" aria-controls="menuThree">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Transaction activity</span>
+                </a>
+                <div id="menuThree" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Transaction Component</h6>
+                        <a class="collapse-item" href="{{ asset('orders') }}">
+                            <i class="fas fa-box-open"></i>
+                            <span>Order</span>
+                        </a>
+                        <a class="collapse-item" href="{{ asset('histories') }}">
+                            <i class="fas fa-history"></i>
+                            <span>History</span>
+                        </a>
+                        <a class="collapse-item" href="{{ asset('vouchers') }}">
+                            <i class="fas fa-ticket-alt"></i>
+                            <span>Voucher</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuFour"
+                    aria-expanded="true" aria-controls="menuFour">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Payment Management</span>
+                </a>
+                <div id="menuFour" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Payment Component</h6>
+                        <a class="collapse-item" href="{{ asset('orders') }}">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Payment Method</span>
+                        </a>
+                        <a class="collapse-item" href="{{ asset('histories') }}">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span>E-Money</span>
+                        </a>
+                        <a class="collapse-item" href="{{ asset('vouchers') }}">
+                            <i class="fas fa-wallet"></i>
+                            <span>Bank Transaction</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+
             {{-- <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -112,16 +168,16 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuLast"
+                    aria-expanded="true" aria-controls="menuLast">
                     <i class="fas fa-headset"></i>
                     <span>Contact Service</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="menuLast" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Contact Service:</h6>
                         <a class="collapse-item" href="{{ asset('messages') }}">
-                            <i class="fa fa-comment" aria-hidden="true"></i>
+                            <i class="fas fa-bell"></i>
                             <span >Message</span>
                         </a>
                         <a class="collapse-item" href="register.html">
@@ -132,19 +188,28 @@
                 </div>
             </li>
 
-            {{-- <!-- Nav Item - Charts -->
+            <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                <a class="nav-link" href="invoice">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Invoice</span>
+                </a>
             </li>
 
-            <!-- Nav Item - Tables -->
+            {{-- Nav Item - Database Backup --}}
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li> --}}
+                <a class="nav-link" href="invoice">
+                    <i class="fas fa-database"></i>
+                    <span>Database Backup</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="invoice">
+                    <i class="fas fa-book"></i>
+                    <span>Documentation</span>
+                </a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

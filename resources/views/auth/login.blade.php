@@ -5,7 +5,7 @@
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
-            <div class="col-xl-6 col-lg-6 col-md-6">
+            <div class="col-xl-5 col-lg-4 col-md-6">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
@@ -29,7 +29,10 @@
                                             <label for="password">Password</label>
                                             <input type="password" class="form-control form-control-user" name="password"
                                             id="password" placeholder="Password">
-                                            {{-- <i class="fas fa-eye" id="toggle" style="margin-left: -30px; cursor: pointer;"></i> --}}
+                                            <label for="" style="font-size: 14.7px">
+                                                <i class="fas fa-eye mt-2 text-muted" id="toggle" style="margin-left: 5px; cursor: pointer;"></i>
+                                                Show Password
+                                            </label>
                                         </div>
                                         {{-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">

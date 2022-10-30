@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('phone_number', 13);
+            $table->string('subject', 50);
             $table->longText('message');
             $table->timestamps();
         });

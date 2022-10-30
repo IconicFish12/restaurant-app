@@ -75,9 +75,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/messages')->group(function (){
         Route::get('/', [ContactController::class, 'index']);
         Route::post('/', [ContactController::class, 'store']);
+        Route::delete('/{contact:id}', [ContactController::class, 'destroy']);
     });
 });
 
 Route::prefix('/home')->middleware('auth')->group(function(){
     Route::get('/', [DashboardController::class, 'webView']);
+    Route::post('/message', [ContactController::class, 'store']);
 });

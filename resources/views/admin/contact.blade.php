@@ -46,7 +46,6 @@
                             <th>Name</th>
                             <td>Email</td>
                             <th>Message</th>
-                            <th>Phone Number</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -57,12 +56,11 @@
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->email }}</td>
                                 <td>{{ $data->message }}</td>
-                                <td>{{ $data->phone_number }}</td>
                                 <td class="d-flex justify-content-center">
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateEmployeeModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/employees/{{ $data->id }}" method="POST" class="mx-3">
+                                    <form action="/messages/{{ $data->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $data->name }}')" class="btn btn-danger">
@@ -79,7 +77,6 @@
                             <th>Name</th>
                             <td>Email</td>
                             <th>Message</th>
-                            {{-- <th></th> --}}
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -107,25 +104,25 @@
             <form action="{{ asset('messages') }}" method="post">
                 @csrf
                 <div class="form-group">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control form-control-user" id="name" value="{{ old('name') }}" name="name"
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control form-control-user" id="name" value="{{ old('name') }}" name="name"
                             placeholder="Enter Employee Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone_number">Phone Number</label>
-                            <input type="number" class="form-control form-control-user" id="phone_number" value="{{ old('phone_number') }}" name="phone_number" placeholder="Your Phone Number">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control form-control-user" id="email" value="{{ old('email') }}" name="email"
-                            placeholder="Email Address">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea name="message" id="message" class="form-control" rows="3" placeholder="Enter The Message" aria-valuenow="{{ old('description') }}"></textarea>
-                        </div>
                     </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="number" class="form-control form-control-user" id="phone_number" value="{{ old('phone_number') }}" name="phone_number" placeholder="Your Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control form-control-user" id="email" value="{{ old('email') }}" name="email"
+                            placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" class="form-control" rows="3" placeholder="Enter The Message" aria-valuenow="{{ old('description') }}"></textarea>
+                    </div>
+                </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Save</button>

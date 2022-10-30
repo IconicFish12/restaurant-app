@@ -18,7 +18,7 @@ class Contact extends Model
             return $query->where('name', 'LIKE', '%' . $collect. '%')
             ->orWhere('email', 'LIKE', '%' . $collect. '%')
             ->orWhere('message', 'LIKE', '%' . $collect. '%')
-            ->orWhere('phone_number', 'LIKE', '%' . $collect. '%')
+            ->orWhere('subject', 'LIKE', '%' . $collect. '%')
             ;
         });
     }
