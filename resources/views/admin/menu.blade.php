@@ -27,7 +27,7 @@
                     </datalist>
                 </form>
             </div>
-            <div class="col-sm-4">
+            <div class="col-md-3">
                 <form action="{{ asset('menus') }}" method="GET" class="d-block mb-2">
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3">

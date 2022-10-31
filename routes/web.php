@@ -1,13 +1,19 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\WorkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,8 +81,43 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/messages')->group(function (){
         Route::get('/', [ContactController::class, 'index']);
         Route::post('/', [ContactController::class, 'store']);
+        Route::get('/{contact:id}', [ContactController::class, 'show']);
         Route::delete('/{contact:id}', [ContactController::class, 'destroy']);
     });
+
+    //TRANSACTION ACTIVITY
+    Route::prefix('/orders')->group(function(){
+        Route::get('/', [OrderController::class, 'index']);
+    });
+
+    Route::prefix('/histories')->group(function(){
+        Route::get('/', [HistoryController::class, 'index']);
+    });
+
+    Route::prefix('/vouchers')->group(function() {
+        Route::get('/', [VoucherController::class, 'index']);
+        Route::post('/', [VoucherController::class, 'store']);
+        Route::get('/{voucher:id}', [VoucherController::class, 'show']);
+        Route::delete('/{voucher:id}', [VoucherController::class, 'destroy']);
+    });
+
+    //PAYMENT MANAGEMENT
+
+
+    //EMPLOYEE PERFORMANCE
+    Route::prefix('/performances')->group(function () {
+        Route::get('/', [PerformanceController::class, 'index']);
+    });
+
+    Route::prefix('/works')->group(function (){
+        Route::get('/', [WorkController::class, 'index']);
+    });
+
+    //MORE
+    Route::get('/backup', [BackupController::class, 'index']);
+    Route::post('/backup/create', [BackupController::class, 'store']);
+    Route::delete('/backup/delete/{i}', [BackupController::class, 'destroy']);
+
 });
 
 Route::prefix('/home')->middleware('auth')->group(function(){

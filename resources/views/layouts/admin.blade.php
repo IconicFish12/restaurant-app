@@ -142,15 +142,15 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Payment Component</h6>
-                        <a class="collapse-item" href="{{ asset('orders') }}">
+                        <a class="collapse-item" href="{{ asset('payment-methods') }}">
                             <i class="fas fa-file-invoice-dollar"></i>
                             <span>Payment Method</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('histories') }}">
+                        <a class="collapse-item" href="{{ asset('e-payments') }}">
                             <i class="fas fa-money-check-alt"></i>
                             <span>E-Money</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('vouchers') }}">
+                        <a class="collapse-item" href="{{ asset('bank-payments') }}">
                             <i class="fas fa-wallet"></i>
                             <span>Bank Transaction</span>
                         </a>
@@ -168,19 +168,19 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuLast"
-                    aria-expanded="true" aria-controls="menuLast">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuFive"
+                    aria-expanded="true" aria-controls="menuFive">
                     <i class="fas fa-headset"></i>
                     <span>Contact Service</span>
                 </a>
-                <div id="menuLast" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="menuFive" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Contact Service:</h6>
                         <a class="collapse-item" href="{{ asset('messages') }}">
                             <i class="fas fa-bell"></i>
                             <span >Message</span>
                         </a>
-                        <a class="collapse-item" href="register.html">
+                        <a class="collapse-item" href="{{ asset('replies') }}l">
                             <i class="fas fa-reply-all"></i>
                             <span>Replies</span>
                         </a>
@@ -188,24 +188,45 @@
                 </div>
             </li>
 
+            <!-- Nav Item - Employee -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuSix"
+                    aria-expanded="true" aria-controls="menuSix">
+                    <i class="fas fa-users-cog"></i>
+                    <span>Employee Performance</span>
+                </a>
+                <div id="menuSix" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Performance Management:</h6>
+                        <a class="collapse-item" href="{{ asset('works') }}">
+                            <i class="fas fa-tasks"></i>
+                            <span >Work Todo</span>
+                        </a>
+                        <a class="collapse-item" href="{{ asset('performances') }}">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Performance</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="invoice">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Invoice</span>
+                <a class="nav-link" href="{{ asset('invoices') }}">
+                    <i class="fas fa-user-clock"></i>
+                    <span>Attendance</span>
                 </a>
             </li>
 
             {{-- Nav Item - Database Backup --}}
             <li class="nav-item">
-                <a class="nav-link" href="invoice">
+                <a class="nav-link" href="{{ asset('backup') }}">
                     <i class="fas fa-database"></i>
                     <span>Database Backup</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="invoice">
+                <a class="nav-link" href="{{ asset('documentation') }}">
                     <i class="fas fa-book"></i>
                     <span>Documentation</span>
                 </a>

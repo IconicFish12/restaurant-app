@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\History;
-use App\Http\Requests\StoreHistoryRequest;
-use App\Http\Requests\UpdateHistoryRequest;
+use App\Models\Attendance;
+use App\Http\Requests\StoreAttendanceRequest;
+use App\Http\Requests\UpdateAttendanceRequest;
 
-class HistoryController extends Controller
+class AttendanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return view('admin.history', [
-            "title" => "History Management",
-            "page_name" => "Costumer Order History",
-            "dataArr" => History::latest()->with('user,order')->get()
-        ]);
+        //
     }
 
     /**
@@ -35,10 +31,10 @@ class HistoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreHistoryRequest  $request
+     * @param  \App\Http\Requests\StoreAttendanceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreHistoryRequest $request)
+    public function store(StoreAttendanceRequest $request)
     {
         //
     }
@@ -46,10 +42,10 @@ class HistoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\History  $history
+     * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function show(History $history)
+    public function show(Attendance $attendance)
     {
         //
     }
@@ -57,10 +53,10 @@ class HistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\History  $history
+     * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function edit(History $history)
+    public function edit(Attendance $attendance)
     {
         //
     }
@@ -68,11 +64,11 @@ class HistoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateHistoryRequest  $request
-     * @param  \App\Models\History  $history
+     * @param  \App\Http\Requests\UpdateAttendanceRequest  $request
+     * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateHistoryRequest $request, History $history)
+    public function update(UpdateAttendanceRequest $request, Attendance $attendance)
     {
         //
     }
@@ -80,10 +76,10 @@ class HistoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\History  $history
+     * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(History $history)
+    public function destroy(Attendance $attendance)
     {
         //
     }

@@ -15,7 +15,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.order', [
+            "title" => "Order Management",
+            "page_name" => "Costumer Order",
+            "dataArr" => Order::latest()->with('user,menu,table,payment')->get()
+        ]);
     }
 
     /**

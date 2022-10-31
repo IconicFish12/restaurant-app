@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\History;
-use App\Http\Requests\StoreHistoryRequest;
-use App\Http\Requests\UpdateHistoryRequest;
+use App\Models\Performance;
+use App\Http\Requests\StorePerformanceRequest;
+use App\Http\Requests\UpdatePerformanceRequest;
 
-class HistoryController extends Controller
+class PerformanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,9 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        return view('admin.history', [
-            "title" => "History Management",
-            "page_name" => "Costumer Order History",
-            "dataArr" => History::latest()->with('user,order')->get()
+        return view('admin.performance', [
+            "title" => "Performance Management",
+            "page_name" =>  "Employee Performance",
         ]);
     }
 
@@ -35,10 +34,10 @@ class HistoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreHistoryRequest  $request
+     * @param  \App\Http\Requests\StorePerformanceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreHistoryRequest $request)
+    public function store(StorePerformanceRequest $request)
     {
         //
     }
@@ -46,10 +45,10 @@ class HistoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\History  $history
+     * @param  \App\Models\Performance  $performance
      * @return \Illuminate\Http\Response
      */
-    public function show(History $history)
+    public function show(Performance $performance)
     {
         //
     }
@@ -57,10 +56,10 @@ class HistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\History  $history
+     * @param  \App\Models\Performance  $performance
      * @return \Illuminate\Http\Response
      */
-    public function edit(History $history)
+    public function edit(Performance $performance)
     {
         //
     }
@@ -68,11 +67,11 @@ class HistoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateHistoryRequest  $request
-     * @param  \App\Models\History  $history
+     * @param  \App\Http\Requests\UpdatePerformanceRequest  $request
+     * @param  \App\Models\Performance  $performance
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateHistoryRequest $request, History $history)
+    public function update(UpdatePerformanceRequest $request, Performance $performance)
     {
         //
     }
@@ -80,10 +79,10 @@ class HistoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\History  $history
+     * @param  \App\Models\Performance  $performance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(History $history)
+    public function destroy(Performance $performance)
     {
         //
     }

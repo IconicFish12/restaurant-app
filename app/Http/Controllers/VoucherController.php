@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Voucher;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreVoucherRequest;
 use App\Http\Requests\UpdateVoucherRequest;
 
@@ -15,7 +16,11 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.voucher', [
+            "title" => "Restaurant Voucher",
+            "page_name" => "Restaurant's Vouchers",
+            "dataArr" => Voucher::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10)
+        ]);
     }
 
     /**
@@ -36,7 +41,22 @@ class VoucherController extends Controller
      */
     public function store(StoreVoucherRequest $request)
     {
-        //
+        // dd($request);
+        if($request->validated()){
+            Voucher::insert([
+                "name" => $request->name,
+                "code" => Str::random(4) . random_int(10, 99),
+                "expired" => $request->expired,
+                "type" => $request->type,
+                "amount" => $request->amount,
+                "limit" => $request->limit,
+                "minPurchase" => $request->minPurchase,
+                "description" => $request->description
+            ]);
+
+            return back()->with('success', "Successfully Creating Voucher $request->name");
+        }
+        return back()->with('error', "Error When Creating Voucher $request->name");
     }
 
     /**
@@ -47,7 +67,7 @@ class VoucherController extends Controller
      */
     public function show(Voucher $voucher)
     {
-        //
+        return response()->json(Voucher::find($voucher->id), 200);
     }
 
     /**
@@ -81,6 +101,9 @@ class VoucherController extends Controller
      */
     public function destroy(Voucher $voucher)
     {
-        //
+        if(Voucher::destroy($voucher->id)){
+            return back()->with("success", "Successfully Deleting $voucher->name");
+        }
+        return back()->with("error", "Error When Deleting $voucher->name");
     }
 }
