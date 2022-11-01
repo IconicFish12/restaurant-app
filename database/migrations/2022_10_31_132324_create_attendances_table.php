@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->time('in');
+            $table->time('out');
+            $table->longText('information')->nullable();
+            $table->longText('attandance_proff')->nullable();
             $table->timestamps();
         });
     }

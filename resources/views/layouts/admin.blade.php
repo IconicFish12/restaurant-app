@@ -62,8 +62,8 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuOne"
                     aria-expanded="true" aria-controls="menuOne">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span>Menus</span>
+                    <i class="fas fa-store"></i>
+                    <span>Restaurant Core</span>
                 </a>
                 <div id="menuOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">

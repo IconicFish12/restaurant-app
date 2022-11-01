@@ -15,7 +15,11 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.attandance_data', [
+            "title" => "Attendance management",
+            "page_name" => "Employee Attendance",
+            "dataArr" => Attendance::all()
+        ]);
     }
 
     /**

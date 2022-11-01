@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('performances', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->time('start');
+            $table->time('end');
+            $table->longText('description');
             $table->timestamps();
         });
     }

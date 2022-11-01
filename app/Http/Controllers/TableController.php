@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Table;
 use App\Http\Requests\StoreTableRequest;
 use App\Http\Requests\UpdateTableRequest;
+use Spatie\Backtrace\Backtrace;
 
 class TableController extends Controller
 {
@@ -18,6 +19,7 @@ class TableController extends Controller
         return view('admin.table', [
             "title" => "Table Management",
             "page_name" => "Restaurant Table",
+            "dataArr" => Table::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10)
         ]);
     }
 
@@ -39,7 +41,14 @@ class TableController extends Controller
      */
     public function store(StoreTableRequest $request)
     {
-        //
+
+        if($request->validated()){
+            Table::insert(["table_number" => "Table-" . $request->table_number]);
+
+            return back()->with('success', "Successfully Creating Table Number $request->table_number");
+        }
+        return back()->with('error', "Error When Creating Table Number $request->table_number");
+
     }
 
     /**
@@ -50,7 +59,7 @@ class TableController extends Controller
      */
     public function show(Table $table)
     {
-        //
+        return response()->json(Table::find($table->id), 200);
     }
 
     /**
@@ -73,7 +82,13 @@ class TableController extends Controller
      */
     public function update(UpdateTableRequest $request, Table $table)
     {
-        //
+        $data = $request->validated();
+
+        if(Table::find($table->id)->update($data)){
+            return back()->with('success', "Successfully Updating Table Number $request->table_number");
+        }
+        return back()->with('error', "Error When Updating Table Number $request->table_number");
+
     }
 
     /**
@@ -84,6 +99,9 @@ class TableController extends Controller
      */
     public function destroy(Table $table)
     {
-        //
+        if (Table::destroy($table->id)) {
+            return back()->with("success", "Successfully Deleting Data Table Number $table->table_number");
+        }
+        return back()->with("error", "Error When Deleting Data Table Number $table->table_number");
     }
 }

@@ -13,7 +13,7 @@ class UpdateTableRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateTableRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "table_number" => ["required", "string", "max:15", "unique:tables"]
         ];
     }
 }

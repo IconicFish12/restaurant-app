@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Work extends Model
 {
     use HasFactory;
+
+    protected $guarded = [""];
+
+    public function employee()
+    {
+        return $this->hasMany(Employee::class, 'employee_id');
+    }
 }

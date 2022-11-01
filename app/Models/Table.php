@@ -11,5 +11,10 @@ class Table extends Model
 
     protected $guarded = [""];
 
-    
+    public function scopeFilter($query, array $filter)
+    {
+        $query->when($filter['search'] ?? false, function($query, $collect){
+            $query->where('table_number', 'LIKE' , '%' . $collect . '%');
+        });
+    }
 }

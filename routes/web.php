@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\CategoryController;
@@ -63,6 +64,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/tables')->group(function() {
         Route::get('/', [TableController::class, 'index']);
+        Route::post('/', [TableController::class, 'store']);
+        Route::get('/{table:id}', [TableController::class, 'show']);
+        Route::put('/{table:id}', [TableController::class, 'update']);
+        Route::delete('/{table:id}', [TableController::class, 'destroy']);
     });
 
     // USER AND EMPLOYEE MANAGEMENT
@@ -125,6 +130,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/backup/delete/{i}', [BackupController::class, 'destroy']);
 
     Route::get('/documentation', [DashboardController::class, 'documentation']);
+
+    Route::prefix('/attendances', [AttendanceController::class, 'index']);
 
 });
 
