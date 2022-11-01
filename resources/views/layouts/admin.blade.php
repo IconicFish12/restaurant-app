@@ -46,7 +46,8 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ asset('/') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Dashboard</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -76,7 +77,7 @@
                             <span>Menu Category</span>
                         </a>
                         <a class="collapse-item" href="{{ asset('tables') }}">
-                            <i class="fas fa-th-large"></i>
+                            <i class="fas fa-table"></i>
                             <span>Restaurant Tables</span>
                         </a>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateVoucherRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateVoucherRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,14 @@ class UpdateVoucherRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => ["required"],
+            "code" => [ Rule::requiredIf(request()->has('code')) , "max:10", "unique:vouchers"],
+            "type" => ["required", "max:50"],
+            "expired" => ["required", "date"],
+            "amount" => ["required", "integer", "max:200"],
+            "limit" => ["required", "integer", "max:200"],
+            "minPurchase" => ["required", "numeric"],
+            "description" => ["required", "string"],
         ];
     }
 }

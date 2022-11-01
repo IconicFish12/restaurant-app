@@ -90,7 +90,21 @@ class VoucherController extends Controller
      */
     public function update(UpdateVoucherRequest $request, Voucher $voucher)
     {
-        //
+        // dd($request);
+        $data = $request->validated();
+
+        if($request->has('code')){
+            if(Voucher::find($voucher->id)->update(["code" => $request->code])){
+                return back()->with("success", "Successfully updating Voucher Code");
+            }
+            return back()->with("error", "Error updating Voucher Code");
+
+        }
+
+        if(Voucher::find($voucher->id)->update($data)){
+            return back()->with("success", "Successfully Updating Voucher $request->name");
+        }
+        return back()->with("error", "Error Updating Voucher $request->name");
     }
 
     /**

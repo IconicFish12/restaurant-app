@@ -11,6 +11,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PerformanceController;
+use App\Http\Controllers\TableController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\WorkController;
@@ -60,6 +61,10 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{category:id}', [CategoryController::class, 'destroy']);
     });
 
+    Route::prefix('/tables')->group(function() {
+        Route::get('/', [TableController::class, 'index']);
+    });
+
     // USER AND EMPLOYEE MANAGEMENT
     Route::prefix('/users')->group(function() {
         Route::get('/', [UserController::class, 'index']);
@@ -98,6 +103,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [VoucherController::class, 'index']);
         Route::post('/', [VoucherController::class, 'store']);
         Route::get('/{voucher:id}', [VoucherController::class, 'show']);
+        Route::put('/{voucher:id}', [VoucherController::class, 'update']);
         Route::delete('/{voucher:id}', [VoucherController::class, 'destroy']);
     });
 
@@ -117,6 +123,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/backup', [BackupController::class, 'index']);
     Route::post('/backup/create', [BackupController::class, 'store']);
     Route::delete('/backup/delete/{i}', [BackupController::class, 'destroy']);
+
+    Route::get('/documentation', [DashboardController::class, 'documentation']);
 
 });
 

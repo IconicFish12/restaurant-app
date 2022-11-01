@@ -16,8 +16,10 @@ class Voucher extends Model
         $query->when($filter['search'] ?? false, function($query, $collect){
             $query->where('name', 'LIKE' , '%' . $collect . '%')
             ->orWhere('code', 'LIKE', '%' . $collect . '%')
-            ->orWhere('position', 'LIKE', '%' . $collect . '%')
-            ->ordWhere('phone_number', 'LIKE' , '%' . $collect . '%');
+            ->orWhere('type', 'LIKE', '%' . $collect . '%')
+            ->ordWhere('description', 'LIKE' , '%' . $collect . '%')
+            ->ordWhere('limit', 'LIKE' , '%' . $collect . '%')
+            ->ordWhere('expired', 'LIKE' , '%' . $collect . '%');
         });
     }
 }

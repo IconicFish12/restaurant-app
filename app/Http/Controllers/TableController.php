@@ -15,7 +15,10 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.table', [
+            "title" => "Table Management",
+            "page_name" => "Restaurant Table",
+        ]);
     }
 
     /**

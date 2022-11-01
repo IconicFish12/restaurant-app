@@ -93,7 +93,6 @@ class EmployeeController extends Controller
         $data = $request->validated();
 
         if($request->has('employee_code')){
-
             if(Employee::find($employee->id)->update(["employee_code" => $request->employee_code])){
                 return back()->with("success", "Successfully updating Employee Code");
             }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateEmployeeRequest extends FormRequest
@@ -30,7 +31,7 @@ class UpdateEmployeeRequest extends FormRequest
             "phone_number" => ["required","max:13"],
             "position" => ["required"],
             "email" => ["required","email:dns"],
-            "employe_code"  => ["required", "unique:employees", "max:20"]
+            "employe_code"  => [Rule::requiredIf(request()->has('employee_code')), "unique:employees", "max:20"]
         ];
     }
 
