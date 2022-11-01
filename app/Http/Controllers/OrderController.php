@@ -18,7 +18,7 @@ class OrderController extends Controller
         return view('admin.order', [
             "title" => "Order Management",
             "page_name" => "Costumer Order",
-            "dataArr" => Order::latest()->with('user,menu,table,payment')->get()
+            "dataArr" => Order::latest()->with('user,menu,table')->paginate(request('paginate') ?? 10)
         ]);
     }
 
@@ -35,12 +35,13 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \App\Models\Order  $order
      * @param  \App\Http\Requests\StoreOrderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $request)
+    public function store(StoreOrderRequest $request, Order $order)
     {
-        //
+        return $request->all() && Order::find($order->id);
     }
 
     /**

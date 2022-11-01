@@ -26,8 +26,8 @@ class Order extends Model
         $this->belongsTo(Table::class, 'table_id');
     }
 
-    public function payment()
-    {
-        $this->belongsTo(PaymentMethod::class, 'payment_id');
-    }
+    // public function payment()
+    // {
+    //     $this->belongsTo(PaymentMethod::class, 'payment_id');
+    // }
 }

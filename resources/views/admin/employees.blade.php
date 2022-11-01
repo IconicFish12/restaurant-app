@@ -29,6 +29,7 @@
             </div>
             <div class="col-md-3">
                 <form action="{{ asset('employees') }}" method="GET">
+                    <span class="d-block">Search</span>
                     <div class="input-group mb-3">
                         <input type="search" class="form-control" placeholder="Search A Employee" value="{{ request('search') }}" name="search">
                       </div>

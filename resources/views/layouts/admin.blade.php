@@ -212,7 +212,7 @@
             </li>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ asset('invoices') }}">
+                <a class="nav-link" href="{{ asset('attendances-data') }}">
                     <i class="fas fa-user-clock"></i>
                     <span>Attendance</span>
                 </a>

@@ -19,10 +19,10 @@ return new class extends Migration
             $table->foreignId('menu_id');
             $table->foreignId('user_id');
             $table->foreignId('table_id');
-            $table->foreignId('payment_id');
+            $table->string('payment_method');
             $table->string('order_code');
             $table->integer('quantity');
-            $table->enum("service", ["takeAway", "delivery"]);
+            // $table->enum("service", ["takeAway", "delivery"]);
             $table->longText('detail');
             $table->integer('price');
             $table->integer('total_pay');

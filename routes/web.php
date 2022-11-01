@@ -16,6 +16,7 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\WorkController;
+use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,7 +132,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/documentation', [DashboardController::class, 'documentation']);
 
-    Route::prefix('/attendances', [AttendanceController::class, 'index']);
+    Route::prefix('/attendances-data')->group(function(){
+        Route::get('/', [AttendanceController::class, 'index']);
+    });
 
 });
 
