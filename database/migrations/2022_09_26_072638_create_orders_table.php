@@ -21,11 +21,11 @@ return new class extends Migration
             $table->foreignId('table_id');
             $table->string('payment_method');
             $table->string('order_code');
-            $table->integer('quantity');
+            $table->string('quantity', 50);
             // $table->enum("service", ["takeAway", "delivery"]);
             $table->longText('detail');
-            $table->integer('price');
-            $table->integer('total_pay');
+            $table->string('price', 50);
+            $table->string('total_pay', 50);
             $table->timestamps();
         });
     }

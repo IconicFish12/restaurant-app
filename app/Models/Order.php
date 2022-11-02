@@ -13,17 +13,27 @@ class Order extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function menu()
     {
-        $this->hasMany(Menu::class, 'menu_id');
+        return $this->belongsTo(Menu::class, 'menu_id');
     }
 
     public function table()
     {
-        $this->belongsTo(Table::class, 'table_id');
+        return $this->belongsTo(Table::class, 'table_id');
+    }
+
+    public function scopeFilter($query, array $filter)
+    {
+        $query->when($filter['search'] ?? false, function($query, $collect){
+            $query->where('name', 'LIKE' , '%' . $collect . '%')
+            ->orWhere('employee_code', 'LIKE', '%' . $collect . '%')
+            ->orWhere('position', 'LIKE', '%' . $collect . '%')
+            ->ordWhere('phone_number', 'LIKE' , '%' . $collect . '%');
+        });
     }
 
     // public function payment()

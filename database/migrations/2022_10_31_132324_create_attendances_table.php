@@ -19,7 +19,7 @@ return new class extends Migration
             $table->time('in');
             $table->time('out');
             $table->longText('information')->nullable();
-            $table->longText('attandance_proff')->nullable();
+            $table->longText('attandance_prove')->nullable();
             $table->timestamps();
         });
     }

@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Category;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -47,9 +49,9 @@ class MenuController extends Controller
         // dd($request);
         $data = $request->validated();
 
-        $fileName = $request->file('image')->getClientOriginalName();
+        // $fileName = $request->file('image')->getClientOriginalName();
 
-        $data['image'] = $request->file('image')->storeAs('images', $fileName, "public_path");
+        $data['image'] = $request->file('image')->store('/images', "public_path");
 
         if(Menu::create($data)){
             return back()->with('success', "Successfully created $request->name");
@@ -101,6 +103,8 @@ class MenuController extends Controller
     public function destroy(Menu $menu)
     {
         if(Menu::destroy($menu->id)){
+            Storage::disk('public_path')->delete($menu->image);
+
             return back()->with('success', "Successfully Delete $menu->name");
         }
         return back()->with('error', "Failed to Delete $menu->name");

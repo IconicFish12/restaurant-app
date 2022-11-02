@@ -8,7 +8,6 @@ use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PerformanceController;
@@ -16,7 +15,6 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\WorkController;
-use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,10 +97,14 @@ Route::middleware('auth')->group(function () {
     //TRANSACTION ACTIVITY
     Route::prefix('/orders')->group(function(){
         Route::get('/', [OrderController::class, 'index']);
+        Route::post('/', [OrderController::class, 'store']);
+        Route::get('/{order:id}', [OrderController::class, 'show']);
+        Route::put('/{order:id}', [OrderController::class, 'update']);
+        Route::put('/{order:id}', [OrderController::class, 'destroy']);
     });
 
     Route::prefix('/histories')->group(function(){
-        Route::get('/', [HistoryController::class, 'index']);
+        Route::get('/', [OrderController::class, 'orderHistory']);
     });
 
     Route::prefix('/vouchers')->group(function() {

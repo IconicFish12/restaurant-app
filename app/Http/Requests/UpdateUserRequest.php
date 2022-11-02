@@ -28,7 +28,7 @@ class UpdateUserRequest extends FormRequest
             'lastname' => ["required"],
             'birth' => ['required', 'date'],
             'phone_number' => ["required", "max:15"],
-            'username' => ["required", "max:50"],
+            'username' => ["required", "max:50", "min:6"],
             'password' => ["required", "min:6"],
             'email' => ["required", "email:dns"],
             'role' => ["required"]
@@ -49,8 +49,9 @@ class UpdateUserRequest extends FormRequest
             'phone_number.required' => 'A Phone Number is required',
             'phone_number.max' => 'Phone number cannot be more than 15',
             'username.required' => 'A Username is required',
+            'username.min' => 'Username cannot be less than 6',
             'username.max' => 'Username cannot be more than 50',
-            'password.min' => 'password cannot be less than 6',
+            'password.min' => 'Password cannot be less than 6',
             'email.required' => 'A Email is required',
             'email.email' => 'Email Must be Verified Email',
             'role.required' => 'A Role is required'

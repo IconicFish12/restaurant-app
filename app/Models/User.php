@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function scopeFilter($query, array $filter)
     {
         $query->when($filter['search'] ?? false, function($query, $collect) {
