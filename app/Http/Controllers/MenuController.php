@@ -9,6 +9,7 @@ use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class MenuController extends Controller
 {
@@ -91,7 +92,20 @@ class MenuController extends Controller
      */
     public function update(UpdateMenuRequest $request, Menu $menu)
     {
-        dd($request);
+        $data = $request->validated();
+
+        if($request->hasFile('image')){
+            if(Storage::disk("public_path")->exists($menu->image)){
+                Storage::disk("public_path")->delete($menu->image);
+
+            }
+            $data['image'] = $request->file('image')->store('images', "public_path");
+        }
+
+        if($menu->update($data)){
+            return back()->with('success', "Successfully Updating Menu $request->name");
+        }
+        return back()->with('error', "Error When Updating Menu $request->name");
     }
 
     /**

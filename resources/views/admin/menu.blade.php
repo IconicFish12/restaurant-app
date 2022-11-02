@@ -61,7 +61,7 @@
                                 <td>{{ $menu->menu_type }}</td>
                                 <td>@money($menu->price)</td>
                                 <td>
-                                    @if (File::exists($menu->image))
+                                    @if (Storage::disk("public_path")->exists($menu->image))
                                         <img src="{{ asset($menu->image) }}" alt="" width="85px">
                                     @else
                                         <i class="fas fa-image"></i>
@@ -206,7 +206,7 @@
             </div>
             <div class="form-group">
                 <label for="image">Menu Image</label>
-                <input type="file" class="form-control" name="image" id="image" value="{{ old('image') }}" placeholder="Enter Menu price">
+                <input type="file" class="form-control" name="image" id="edit_image" value="{{ old('image') }}" placeholder="Enter Menu price">
             </div>
             <div class="form-group">
                 <label for="description">Menu Description</label>
