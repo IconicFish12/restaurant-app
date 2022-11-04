@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -10,9 +13,13 @@ class DashboardController extends Controller
 
     public function dashboardView()
     {
-        return view('layouts.admin', [
+        // dd(Order::all()->sum('total_pay'));
+
+        return view('admin.home', [
             "page_name" => "Dashboard Vanushki",
-            "user" => User::where('role', 'Admin')->first()
+            "menu" =>  Menu::all()->count(),
+            "employee" => Employee::all()->count(),
+            "order" => Order::all()->sum('total_pay')
         ]);
     }
 
