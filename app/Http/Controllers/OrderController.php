@@ -120,7 +120,7 @@ class OrderController extends Controller
         return view('admin.history', [
             "title" => "History Management",
             "page_name" => "Costumer Order History",
-            "dataArr" => Order::all()
+            "dataArr" => Order::filter(request(['search']))->paginate(request('paginate')??10)
         ]);
     }
 

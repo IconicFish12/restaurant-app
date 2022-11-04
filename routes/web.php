@@ -129,7 +129,7 @@ Route::middleware('auth')->group(function () {
 
     //MORE
     Route::get('/backup', [BackupController::class, 'index']);
-    Route::post('/backup/create', [BackupController::class, 'store']);
+    Route::get('/backup/create', [BackupController::class, 'store']);
     Route::delete('/backup/delete/{i}', [BackupController::class, 'destroy']);
 
     Route::get('/documentation', [DashboardController::class, 'documentation']);
@@ -140,7 +140,11 @@ Route::middleware('auth')->group(function () {
 
 });
 
+// WEB ROUTE
+
 Route::prefix('/home')->middleware('auth')->group(function(){
     Route::get('/', [DashboardController::class, 'webView']);
     Route::post('/message', [ContactController::class, 'store']);
 });
+
+// Route::get('/home', [DashboardController::class, 'webView']);

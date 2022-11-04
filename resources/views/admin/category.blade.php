@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('container')
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <button type="button" class="btn btn-danger mx-4" data-toggle="modal" data-target="#createCategoryModal">
