@@ -112,17 +112,17 @@
 
 <div class="modal fade" id="createOrderModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Create User</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ asset('orders') }}" method="post">
-                @csrf
-                <div class="form-group">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ asset('orders') }}" method="post">
+                    @csrf
+                    <div class="form-group">
                         <div class="form-group">
                             <label for="menu_id">Menu</label>
                             <select name="menu_id" id="menu_id" class="form-control">
@@ -159,7 +159,7 @@
                                 @endforeach
                             </select>
                         </div>
-                            <div class="form-group">
+                        <div class="form-group">
                             <label for="payment_method">Payment Method</label>
                             <input type="text" class="form-control form-control-user" id="payment_method" value="{{ old('payment_method') }}" name="payment_method" placeholder="Enter Payment Method">
                         </div>
@@ -189,18 +189,18 @@
 
 <div class="modal fade" id="updateOrderModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Create User</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="" method="post" id="edit_form">
-                @method('PUT')
-                @csrf
-                <div class="form-group">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="edit_form">
+                    @method('PUT')
+                    @csrf
+                    <div class="form-group">
                         <div class="form-group">
                             <label for="menu_id">Menu</label>
                             <select name="menu_id" id="edit_menu_id" class="form-control">
@@ -241,10 +241,6 @@
                             <label for="payment_method">Payment Method</label>
                             <input type="text" class="form-control form-control-user" id="edit_payment_method" value="{{ old('payment_method') }}" name="payment_method" placeholder="Enter Payment Method">
                         </div>
-                        {{-- <div class="form-group">
-                            <label for="order_code">Order Code</label>
-                            <input type="text" class="form-control form-control-user" id="edit_order_code" value="{{ old('order_code') }}" name="order_code" placeholder="Enter Payment Method">
-                        </div> --}}
                         <div class="form-group">
                             <label for="quantity">Item Quantity</label>
                             <input type="number" class="form-control form-control-user" id="edit_quantity" value="{{ old('quantity') }}" name="quantity" placeholder="Enter Item Quantity">

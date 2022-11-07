@@ -1,6 +1,8 @@
 @extends('layouts.auth')
 @section('auth')
+
 <div class="container">
+
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -34,19 +36,15 @@
                                                 Show Password
                                             </label>
                                         </div>
-                                        {{-- <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div> --}}
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                     </form>
                                     <hr>
                                     {{-- <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div> --}}
+                                    <div class="text-center">
+                                        <a class="small" href="{{ asset('attendance') }}">Employee Attendances</a>
+                                    </div>
                                     <div class="text-center">
                                         <a class="small" href="{{ asset('registration') }}">Create an Account!</a>
                                     </div>
@@ -60,7 +58,7 @@
 
         </div>
 
-    </div>
+</div>
 
     <script>
         const toggle = document.querySelector('#toggle')

@@ -34,13 +34,7 @@ class AuthController extends Controller
             'password' => "required"
         ]);
 
-        if(Auth::attempt($data)){
-            if(User::where("username", $data["username"])->first()->role === "costumer"){
-                $request->session()->regenerate();
-
-                return redirect()->intended('/home')->with('success', "Welcome, $request->username");
-            }
-
+        if(Auth::guard('admin')->attempt($data)){
             if(User::where("username", $data["username"])->first()->role !== "admin"){
                 Auth::logout();
 
@@ -54,6 +48,11 @@ class AuthController extends Controller
 
         return redirect("login")->with("toast_error", "Username or password not found or wrong");
 
+    }
+
+    public function attendanceAction(Request $request)
+    {
+        dd($request);
     }
 
     public function registerAction(Request $request)

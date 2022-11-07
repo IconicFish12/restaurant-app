@@ -32,15 +32,20 @@ Route::prefix('login')->name('login')->middleware('guest')->group(function () {
     Route::post('/', [AuthController::class, 'auth']);
 });
 
+Route::prefix('attendance')->name('attendance')->middleware('guest')->group(function(){
+    Route::get('/', [AuthController::class, 'attendanceView']);
+    Route::post('/action', [AuthController::class, 'attendanceAction']);
+});
+
 Route::prefix('registration')->group(function() {
     Route::get('/',  [AuthController::class, 'registerView']);
     Route::post('/register', [AuthController::class, 'registerAction']);
 });
 
-Route::get('logout', [AuthController::class, 'logout']);
+Route::get('logout', [AuthController::class, 'logout'])->middleware("auth:admin,employee");
 
 //DASHBOARD VIEW / BACKEND SYSTEM
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin,employee')->group(function () {
     // DASHBOARD VIEW
     Route::get('/', [DashboardController::class, 'dashboardView']);
 
@@ -139,12 +144,3 @@ Route::middleware('auth')->group(function () {
     });
 
 });
-
-// WEB ROUTE
-
-Route::prefix('/home')->middleware('auth')->group(function(){
-    Route::get('/', [DashboardController::class, 'webView']);
-    Route::post('/message', [ContactController::class, 'store']);
-});
-
-// Route::get('/home', [DashboardController::class, 'webView']);

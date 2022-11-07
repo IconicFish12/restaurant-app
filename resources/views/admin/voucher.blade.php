@@ -108,54 +108,54 @@
 
 <div class="modal fade" id="createVoucherModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Create Voucher</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ asset('vouchers') }}" method="post">
-                @csrf
-                <div class="form-group">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create Voucher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ asset('vouchers') }}" method="post">
+                    @csrf
                     <div class="form-group">
-                        <label for="name">Voucher Name</label>
-                        <input type="text" class="form-control form-control-user" id="name" value="{{ old('name') }}" name="name"
-                        placeholder="Enter Voucher Name">
-                    </div>
                         <div class="form-group">
-                        <label for="expired">Expired</label>
-                        <input type="datetime-local" name="expired" class="form-control form-control-user" id="expired" value="{{ old('expired') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Voucher Type</label>
-                        <input type="text" class="form-control form-control-user" id="type" value="{{ old('type') }}" name="type" placeholder="Voucher Type">
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">Amount</label>
-                        <input type="number" class="form-control form-control-user" id="amount" value="{{ old('amount') }}" name="amount" placeholder="Voucher Amount">
-                    </div>
-                    <div class="form-group">
-                        <label for="limit">Limit Quantity</label>
-                        <input type="text" class="form-control form-control-user" id="limit" value="{{ old('limit') }}" name="limit"
-                        placeholder="Enter Voucher Limit">
-                    </div>
-                    <div class="form-group">
-                        <label for="minPurchase">Minimal Purchase</label>
-                        <input type="text" class="form-control form-control-user" id="minPurchase" value="{{ old('minPurchase') }}" name="minPurchase"
-                        placeholder="Voucher Minimal Purchase">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" id="description" rows="4" placeholder="Enter Voucher Description" aria-valuenow="{{ old('description') }}" class="form-control"></textarea>
+                            <label for="name">Voucher Name</label>
+                            <input type="text" class="form-control form-control-user" id="name" value="{{ old('name') }}" name="name"
+                            placeholder="Enter Voucher Name">
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Save</button>
-                </div>
-            </form>
+                            <div class="form-group">
+                            <label for="expired">Expired</label>
+                            <input type="datetime-local" name="expired" class="form-control form-control-user" id="expired" value="{{ old('expired') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Voucher Type</label>
+                            <input type="text" class="form-control form-control-user" id="type" value="{{ old('type') }}" name="type" placeholder="Voucher Type">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" class="form-control form-control-user" id="amount" value="{{ old('amount') }}" name="amount" placeholder="Voucher Amount">
+                        </div>
+                        <div class="form-group">
+                            <label for="limit">Limit Quantity</label>
+                            <input type="text" class="form-control form-control-user" id="limit" value="{{ old('limit') }}" name="limit"
+                            placeholder="Enter Voucher Limit">
+                        </div>
+                        <div class="form-group">
+                            <label for="minPurchase">Minimal Purchase</label>
+                            <input type="text" class="form-control form-control-user" id="minPurchase" value="{{ old('minPurchase') }}" name="minPurchase"
+                            placeholder="Voucher Minimal Purchase">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" rows="4" placeholder="Enter Voucher Description" aria-valuenow="{{ old('description') }}" class="form-control"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -163,64 +163,64 @@
 
 <div class="modal fade" id="updateVoucherModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Create Voucher</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="" method="post" id="edit_form">
-                @method('PUT')
-                @csrf
-                <div class="form-group">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create Voucher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="edit_form">
+                    @method('PUT')
+                    @csrf
                     <div class="form-group">
-                        <label for="name">Voucher Name</label>
-                        <input  type="text" class="form-control form-control-user" id="edit_name" value="{{ old('name') }}" name="name"
-                        placeholder="Enter Voucher Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="code">Voucher Code</label>
-                        <input  type="text" class="form-control form-control-user" id="edit_code" value="{{ old('code') }}" name="code"
-                        placeholder="Enter Voucher Code" disabled>
-                        <label for="code" class="mt-3 text-small text-muted">
-                            <input type="checkbox" id="enable">
-                            If you want to edit this Code check this
-                        </label>
-                    </div>
                         <div class="form-group">
-                        <label for="expired">Expired</label>
-                        <input  type="datetime-local" name="expired" class="form-control form-control-user" id="edit_expired" value="{{ old('expired') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Voucher Type</label>
-                        <input  type="text" class="form-control form-control-user" id="edit_type" value="{{ old('type') }}" name="type" placeholder="Voucher Type">
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">Amount</label>
-                        <input  type="number" class="form-control form-control-user" id="edit_amount" value="{{ old('amount') }}" name="amount" placeholder="Voucher Amount">
-                    </div>
-                    <div class="form-group">
-                        <label for="limit">Limit Quantity</label>
-                        <input  type="text" class="form-control form-control-user" id="edit_limit" value="{{ old('limit') }}" name="limit"
-                        placeholder="Enter Voucher Limit">
-                    </div>
-                    <div class="form-group">
-                        <label for="minPurchase">Minimal Purchase</label>
-                        <input  type="text" class="form-control form-control-user" id="edit_minPurchase" value="{{ old('minPurchase') }}" name="minPurchase"
-                        placeholder="Voucher Minimal Purchase">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" id="edit_description" rows="4" placeholder="Enter Voucher Description" aria-valuenow="{{ old('description') }}" class="form-control"></textarea>
+                            <label for="name">Voucher Name</label>
+                            <input  type="text" class="form-control form-control-user" id="edit_name" value="{{ old('name') }}" name="name"
+                            placeholder="Enter Voucher Name">
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Save</button>
-                </div>
-            </form>
+                        <div class="form-group">
+                            <label for="code">Voucher Code</label>
+                            <input  type="text" class="form-control form-control-user" id="edit_code" value="{{ old('code') }}" name="code"
+                            placeholder="Enter Voucher Code" disabled>
+                            <label for="code" class="mt-3 text-small text-muted">
+                                <input type="checkbox" id="enable">
+                                If you want to edit this Code check this
+                            </label>
+                        </div>
+                            <div class="form-group">
+                            <label for="expired">Expired</label>
+                            <input  type="datetime-local" name="expired" class="form-control form-control-user" id="edit_expired" value="{{ old('expired') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Voucher Type</label>
+                            <input  type="text" class="form-control form-control-user" id="edit_type" value="{{ old('type') }}" name="type" placeholder="Voucher Type">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input  type="number" class="form-control form-control-user" id="edit_amount" value="{{ old('amount') }}" name="amount" placeholder="Voucher Amount">
+                        </div>
+                        <div class="form-group">
+                            <label for="limit">Limit Quantity</label>
+                            <input  type="text" class="form-control form-control-user" id="edit_limit" value="{{ old('limit') }}" name="limit"
+                            placeholder="Enter Voucher Limit">
+                        </div>
+                        <div class="form-group">
+                            <label for="minPurchase">Minimal Purchase</label>
+                            <input  type="text" class="form-control form-control-user" id="edit_minPurchase" value="{{ old('minPurchase') }}" name="minPurchase"
+                            placeholder="Voucher Minimal Purchase">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="edit_description" rows="4" placeholder="Enter Voucher Description" aria-valuenow="{{ old('description') }}" class="form-control"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

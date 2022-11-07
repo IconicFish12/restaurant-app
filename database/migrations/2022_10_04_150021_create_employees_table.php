@@ -21,7 +21,9 @@ return new class extends Migration
             $table->integer('age');
             $table->string('phone_number');
             $table->string('position');
+            $table->enum('active', ['Y', 'N']);
             $table->string('email')->unique();
+            $table->string('profile');
             $table->timestamps();
         });
     }

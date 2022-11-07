@@ -46,6 +46,7 @@
                             <th>Employee Name</th>
                             <td>Employee Code</td>
                             <th>Date Birth</th>
+                            <th>Employee Status</th>
                             <th>Age</th>
                             <th>Phone Number</th>
                             <th>Position</th>
@@ -60,6 +61,21 @@
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->employee_code }}</td>
                                 <td>{{ $data->birth }}</td>
+                                <td>
+                                    <form action="/employees/{{ $data->id }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        @if ($data->status == "Y")
+                                            <button type="submit" class="btn btn-success" value="N" name="status">
+                                                Active
+                                            </button>
+                                        @else
+                                            <button type="submit" class="btn btn-danger" value="Y" name="status">
+                                                Not Active
+                                            </button>
+                                        @endif
+                                    </form>
+                                </td>
                                 <td>{{ $data->age }}</td>
                                 <td>{{ $data->phone_number }}</td>
                                 <td>{{ $data->position}}</td>
@@ -85,6 +101,7 @@
                             <th>Employee Name</th>
                             <td>Employee Code</td>
                             <th>Date Birth</th>
+                            <th>Employee Status</th>
                             <th>Age</th>
                             <th>Phone Number</th>
                             <th>Position</th>
@@ -104,21 +121,21 @@
 
 <div class="modal fade" id="createEmployeeModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Create User</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ asset('employees') }}" method="post">
-                @csrf
-                <div class="form-group">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ asset('employees') }}" method="post">
+                    @csrf
+                    <div class="form-group">
                         <div class="form-group">
                             <label for="name">Employee Name</label>
                             <input type="text" class="form-control form-control-user" id="name" value="{{ old('name') }}" name="name"
-                            placeholder="Enter Employee Name">
+                                placeholder="Enter Employee Name">
                         </div>
                             <div class="form-group">
                             <label for="birth">Birth</label>
@@ -135,17 +152,26 @@
                         <div class="form-group">
                             <label for="position">Position</label>
                             <input type="text" class="form-control form-control-user" id="position" value="{{ old('position') }}" name="position"
-                            placeholder="Enter Employee Position">
+                                placeholder="Enter Employee Position">
+                        </div>
+                        <div class="form-group">
+                            <label for="active">Employee Status</label>
+                            <select name="active" id="active" class="form-select form-control">
+                                <option value="Y">Active</option>
+                                <option value="N">Not Active</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control form-control-user" id="email" value="{{ old('email') }}" name="email"
-                            placeholder="Email Address">
+                                placeholder="Email Address">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Save</button>
+                    <div class="modal-">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Save</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -156,33 +182,33 @@
 
 <div class="modal fade" id="updateEmployeeModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Create User</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="" method="post" id="edit_form">
-                @method('put')
-                @csrf
-                <div class="form-group">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create Employee Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="edit_form">
+                    @method('put')
+                    @csrf
+                    <div class="form-group">
                         <div class="form-group">
                             <label for="name">Employee Name</label>
                             <input type="text" class="form-control form-control-user" id="edit_name" value="{{ old('name') }}" name="name"
-                            placeholder="Enter Employee Name">
+                                placeholder="Enter Employee Name">
                         </div>
                         <div class="form-group">
                             <label for="employee_code">Employee Code</label>
                             <input type="text" class="form-control form-control-user" id="edit_employee_code" disabled value="{{ old('employee_code') }}" name="employee_code"
-                            placeholder="Enter Employee Name">
+                                placeholder="Enter Employee Name">
                             <label for="employee_code" class="mt-3 text-small text-muted">
                                 <input type="checkbox" id="enable">
                                 If you want to edit this Code check this
                             </label>
                         </div>
-                            <div class="form-group">
+                        <div class="form-group">
                             <label for="birth">Birth</label>
                             <input type="date" class="form-control form-control-user" id="edit_birth" value="{{ old('birth') }}" name="birth">
                         </div>
@@ -197,16 +223,16 @@
                         <div class="form-group">
                             <label for="position">Position</label>
                             <input type="text" class="form-control form-control-user" id="edit_position" value="{{ old('position') }}" name="position"
-                            placeholder="Enter Employee Position">
+                                placeholder="Enter Employee Position">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control form-control-user" id="edit_email" value="{{ old('email') }}" name="email"
-                            placeholder="Email Address">
+                                placeholder="Email Address">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Save</button>
                     </div>
                 </form>
@@ -215,7 +241,7 @@
     </div>
 </div>
 
-@section('script')
+{{-- @section('script')
     <script>
         let getData = id => {
             fetch(`employees/${id}`).then(response => response.json()).then(response => {
@@ -241,6 +267,6 @@
             })
         })
     </script>
-@endsection
+@endsection --}}
 
 @endsection

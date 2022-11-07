@@ -24,6 +24,8 @@ class User extends Authenticatable
     // ];
     protected $guarded = [""];
 
+    protected $guard = "admin";
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -45,7 +47,7 @@ class User extends Authenticatable
 
     public function order()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'user_id');
     }
 
     public function scopeFilter($query, array $filter)

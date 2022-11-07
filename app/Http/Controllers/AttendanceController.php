@@ -40,7 +40,7 @@ class AttendanceController extends Controller
      */
     public function store(StoreAttendanceRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**

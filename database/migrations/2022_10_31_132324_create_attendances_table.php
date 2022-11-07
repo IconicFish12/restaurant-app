@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('employee_id');
+            $table->string('employee_code');
             $table->date('date');
             $table->time('in');
-            $table->time('out');
+            $table->time('out')->nullable();
             $table->longText('information')->nullable();
             $table->longText('attandance_prove')->nullable();
             $table->timestamps();

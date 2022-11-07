@@ -19,7 +19,7 @@ class DashboardController extends Controller
             "page_name" => "Dashboard Vanushki",
             "menu" =>  Menu::all()->count(),
             "employee" => Employee::all()->count(),
-            "order" => Order::all()->sum('total_pay')
+            "income" => Order::all()->sum('total_pay') ?? 0
         ]);
     }
 

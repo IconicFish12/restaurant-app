@@ -106,17 +106,17 @@
 
 <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Create User</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="{{ asset('users') }}" method="post">
-                @csrf
-                <div class="form-group">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ asset('users') }}" method="post">
+                    @csrf
+                    <div class="form-group">
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="firstname">First Name</label>
@@ -129,7 +129,7 @@
                                     placeholder="Last Name">
                             </div>
                         </div>
-                            <div class="form-group">
+                        <div class="form-group">
                             <label for="birth">Birth</label>
                             <input type="date" class="form-control form-control-user" id="birth" value="{{ old('birth') }}" name="birth">
                         </div>
@@ -140,17 +140,17 @@
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control form-control-user" id="username" value="{{ old('username') }}" name="username"
-                            placeholder="Username">
+                                placeholder="Username">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control form-control-user" id="email" value="{{ old('email') }}" name="email"
-                            placeholder="Email Address">
+                                placeholder="Email Address">
                         </div>
                         <div class="form-group ">
                             <label for="password">Password</label>
                             <input type="text" class="form-control form-control-user" value="{{ old('password') }}"
-                            id="password" placeholder="Password" name="password">
+                                id="password" placeholder="Password" name="password">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -165,18 +165,18 @@
 
 <div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Create User</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="" method="post" id="edit_form">\
-                @method('put')
-                @csrf
-                <div class="form-group">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Create User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="edit_form">\
+                    @method('put')
+                    @csrf
+                    <div class="form-group">
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="firstname">First Name</label>
@@ -207,17 +207,17 @@
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control form-control-user" id="edit_username" name="username"
-                            placeholder="Username">
+                                placeholder="Username">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control form-control-user" id="edit_email" name="email"
-                            placeholder="Email Address">
+                                placeholder="Email Address">
                         </div>
                         <div class="form-group ">
                             <label for="password">Password</label>
                             <input type="text" class="form-control form-control-user"
-                            id="edit_password" placeholder="Password" name="password">
+                                id="edit_password" placeholder="Password" name="password">
                         </div>
                     </div>
                     <div class="modal-footer">
