@@ -5,7 +5,7 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('orders') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/orders') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
                         <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
@@ -22,7 +22,7 @@
                 </form>
             </div>
             <div class="col-md-3">
-                <form action="{{ asset('orders') }}" method="GET">
+                <form action="{{ asset('administrator/orders') }}" method="GET">
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3">
                         <input type="search" class="form-control" placeholder="Search A Costumer Order" value="{{ request('search') }}" name="search">

@@ -23,24 +23,43 @@
                                 <form method="POST" action="{{ asset('attendance/action') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="code">Employee Code</label>
+                                        <label for="employee_code">Employee Code</label>
                                         <input type="text" class="form-control form-control-user"
-                                            id="code" aria-describedby="emailHelp" name="code"
-                                            placeholder="Enter Your Employee Code">
+                                            id="employee_code" aria-describedby="emailHelp" name="employee_code"
+                                            placeholder="Enter Your Employee Code" value="{{ old('employee_code') }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" class="form-control form-control-user" name="email"
-                                        id="email" placeholder="Employee Email">
+                                        id="email" placeholder="Employee Email" value="{{ old('email') }}">
                                     </div>
-                                    <div class="form-group mb-4">
-                                        <label for="email">Status</label>
-                                        <select name="status" id="status" class="form-select form-control">
+                                    <div class="form-group ">
+                                        <label for="email">Presence</label>
+                                        <select name="presence" id="presence" class="form-select form-control">
                                             <option value="attend" selected>Attend</option>
                                             <option value="permit">Permit</option>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">Submit</button>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control form-control-user" name="password"
+                                        id="password" placeholder="Password">
+                                        <label for="" style="font-size: 14.7px">
+                                            <i class="fas fa-eye mt-2 text-muted" id="toggle" style="margin-left: 5px; cursor: pointer;"></i>
+                                            Show Password
+                                        </label>
+                                    </div>
+                                    <div class="mb-4 d-flex align-items-center justify-content-between">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="status1" name="status" checked value="IN" class="custom-control-input ">
+                                            <label class="custom-control-label" for="status1">Absent in</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="status2" name="status" value="OUT" class="custom-control-input">
+                                            <label class="custom-control-label" for="status2">Absent Out</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger btn-user btn-block">Submit</button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
@@ -58,5 +77,16 @@
 
 </div>
 
+<script>
+    const toggle = document.querySelector('#toggle')
+    const password = document.querySelector('#password')
+
+    toggle.addEventListener('click', function(e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password'
+        password.setAttribute('type', type)
+
+        this.classList.toggle('fa-eye-slash');
+    })
+</script>
 
 @endsection

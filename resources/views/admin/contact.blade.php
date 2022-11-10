@@ -11,7 +11,7 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('categories') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/messages') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
                         <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
@@ -28,7 +28,7 @@
                 </form>
             </div>
             <div class="col-md-3 ">
-                <form action="{{ asset('messages') }}" method="GET" >
+                <form action="{{ asset('administrator/messages') }}" method="GET" >
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3">
                         <input type="search" class="form-control" placeholder="Search A Contact Data" value="{{ request('search') }}" name="search">
@@ -60,7 +60,7 @@
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateEmployeeModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/messages/{{ $data->id }}" method="POST" class="mx-3">
+                                    <form action="administrator/messages/{{ $data->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $data->name }}')" class="btn btn-danger">
@@ -101,7 +101,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{ asset('messages') }}" method="post">
+            <form action="{{ asset('administrator/messages') }}" method="post">
                 @csrf
                 <div class="form-group">
                     <div class="form-group">

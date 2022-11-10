@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -50,10 +52,12 @@ class EmployeeController extends Controller
                 "phone_number" => $request->phone_number,
                 "age" => $request->age,
                 "position" => $request->position,
-                "email" => $request->email
+                "email" => $request->email,
+                "status" => $request->status,
+                "password" => Hash::make($request->password)
             ]);
 
-            return back()->with('success', "Successfully Create Data $request->name");
+            return back()->with('toast_success', "Successfully Create Data $request->name");
         }
         return back()->with('error', "Error Creating Data $request->name");
     }
@@ -84,23 +88,39 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateEmployeeRequest  $request
+     * @param  \Illuminate\Http\Request  $req
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEmployeeRequest $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request ,Employee $employee)
     {
-        // dd($request->all());
-        $data = $request->validated();
 
-        if($request->has('employee_code')){
-            if(Employee::find($employee->id)->update(["employee_code" => $request->employee_code])){
-                return back()->with("success", "Successfully updating Employee Code");
+        if($request->validated()){
+            $employee->update([
+                'name' => $request->name,
+                'birth' => $request->birth,
+                'age' => $request->age,
+                'phone_number' => $request->phone_number,
+                'position' => $request->position,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+
+            return back()->with('toast_success', "Successfully Updating $employee->name");
+        }
+
+        if($request->has('status')){
+            if(Employee::find($employee->id)->update(["status" => $request->status])){
+                return back()->with("toast_success", "Successfully updating Employee Status");
             }
         }
 
-        if(Employee::find($employee->id)->update($data)){
-            return back()->with("success", "Successfully updating Employee data");
+        if($request->has('employee_code')){
+            if(Employee::find($employee->id)->update(["employee_code" => $request->employee_code])){
+                return back()->with("toast_success", "Successfully updating Employee Code");
+            }
         }
+
         return back()->with("error", "Error when updating Employee data");
     }
 
@@ -113,7 +133,7 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee)
     {
         if(Employee::destroy($employee->id)){
-            return back()->with('success', "Successfully Deleting $employee->name");
+            return back()->with('toast_success', "Successfully Deleting $employee->name");
         }
         return back()->with('error', "Error Deleting $employee->name");
     }

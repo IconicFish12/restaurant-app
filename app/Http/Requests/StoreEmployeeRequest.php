@@ -29,7 +29,9 @@ class StoreEmployeeRequest extends FormRequest
             "age" => ["required","integer","max:60"],
             "phone_number" => ["required","max:13","unique:employees"],
             "position" => ["required"],
-            "email" => ["required","email:dns","unique:employees"]
+            "email" => ["required","email:dns","unique:employees"],
+            "status" => ["required"],
+            'password' => ["required", "min:6", "unique:users"],
         ];
     }
 
@@ -42,12 +44,15 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'name.required' => 'A Employee Name is required',
+            'status.required' => 'A Employee Status is required',
             'birth.unique' => 'A birth is required',
             'age.required' => "A Employee Age is required",
             'age.integer' => 'Age Must be a number',
             'phone_number.required' => 'A Phone Number is required',
             'phone_number.max' => 'Phone number cannot be more than 15',
             "position.required" => "A Employee Position is required",
+            'password.required' => "A Password is required",
+            'password.min' => 'Password cannot be less than 6',
             "email.required" => "A Email is required",
         ];
     }

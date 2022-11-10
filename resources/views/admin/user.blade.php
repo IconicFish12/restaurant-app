@@ -12,7 +12,7 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('users') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/users') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
                         <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
@@ -29,7 +29,7 @@
                 </form>
             </div>
             <div class="col-md-3 ">
-                <form action="{{ asset('users') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/users') }}" method="GET" class="d-block mb-2">
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3 ">
                         <input type="search" class="form-control" value="{{ request('search') }}" placeholder="Search A User" name="search">
@@ -69,7 +69,7 @@
                                         <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateUserModal">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <form action="/users/{{ $data->id }}" method="POST" class="mx-3">
+                                        <form action="administrator/users/{{ $data->id }}" method="POST" class="mx-3">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" onclick="return alert('Are you Suer want to delete {{ $data->category_name }}')" class="btn btn-danger">
@@ -114,7 +114,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ asset('users') }}" method="post">
+                <form action="{{ asset('administrator/users') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <div class="form-group row">
@@ -233,8 +233,8 @@
 @section('script')
 <script>
     let getData= id => {
-    fetch(`users/${id}`).then(response => response.json()).then(response => {
-        document.getElementById("edit_form").action = `users/${id}`
+    fetch(`/administrator/users/${id}`).then(response => response.json()).then(response => {
+        document.getElementById("edit_form").action = `/administrator/users/${id}`
         document.getElementById("edit_firstname").value = response.firstname;
         document.getElementById("edit_birth").value = response.birth;
         document.getElementById("edit_phone_number").value = response.phone_number;

@@ -12,7 +12,7 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('vouchers') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/vouchers') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
                         <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
@@ -29,7 +29,7 @@
                 </form>
             </div>
             <div class="col-md-3">
-                <form action="{{ asset('vouchers') }}" method="GET">
+                <form action="{{ asset('administrator/vouchers') }}" method="GET">
                     <div class="input-group mb-3">
                         <input type="search" class="form-control" placeholder="Search A Employee" value="{{ request('search') }}" name="search">
                       </div>
@@ -70,7 +70,7 @@
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateVoucherModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/vouchers/{{ $data->id }}" method="POST" class="mx-3">
+                                    <form action="administrator/vouchers/{{ $data->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $data->name }}')" class="btn btn-danger">
@@ -116,7 +116,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ asset('vouchers') }}" method="post">
+                <form action="{{ asset('administrator/vouchers') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <div class="form-group">
@@ -229,8 +229,8 @@
 
 <script>
      let getData = id => {
-            fetch(`vouchers/${id}`).then(response => response.json()).then(response => {
-                document.getElementById("edit_form").action = `vouchers/${id}`
+            fetch(`/administrator/vouchers/${id}`).then(response => response.json()).then(response => {
+                document.getElementById("edit_form").action = `/administrator/vouchers/${id}`
                 document.getElementById("edit_name").value = response.name;
                 document.getElementById("edit_code").value = response.code;
                 document.getElementById("edit_expired").value = response.expired;

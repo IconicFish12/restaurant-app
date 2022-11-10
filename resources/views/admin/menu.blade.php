@@ -11,7 +11,7 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('menus') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/menus') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
                         <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
@@ -28,7 +28,7 @@
                 </form>
             </div>
             <div class="col-md-3">
-                <form action="{{ asset('menus') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/menus') }}" method="GET" class="d-block mb-2">
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3">
                         <input type="search" class="form-control" placeholder="Search A Menu" value="{{ request('search') }}" name="search">
@@ -73,7 +73,7 @@
                                     <button type="button"  onclick="getData({{ $menu->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/menus/{{ $menu->id }}" method="POST" class="mx-3">
+                                    <form action="administrator/menus/{{ $menu->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $menu->name }}')" class="btn btn-danger">
@@ -116,7 +116,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ asset('menus') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ asset('administrator/menus') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Menu Name</label>
@@ -224,8 +224,8 @@
 
 <script>
     let getData= id => {
-    fetch(`menus/${id}`).then(response => response.json()).then(response => {
-        document.getElementById("edit_form").action = `menus/${id}`
+    fetch(`/administrator/menus/${id}`).then(response => response.json()).then(response => {
+        document.getElementById("edit_form").action = `/administrator/menus/${id}`
         document.getElementById("edit_name").value = response.name;
         document.getElementById("edit_category_id").value = response.category_id
         document.getElementById("edit_menu_type").value = response.menu_type

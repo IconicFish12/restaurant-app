@@ -51,6 +51,7 @@ class UpdateUserRequest extends FormRequest
             'username.required' => 'A Username is required',
             'username.min' => 'Username cannot be less than 6',
             'username.max' => 'Username cannot be more than 50',
+            'password.required' => "A Password is required",
             'password.min' => 'Password cannot be less than 6',
             'email.required' => 'A Email is required',
             'email.email' => 'Email Must be Verified Email',

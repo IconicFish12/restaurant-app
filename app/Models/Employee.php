@@ -47,7 +47,7 @@ class Employee extends Authenticatable
 
     public function attendance()
     {
-        return $this->hasMany('employee_id');
+        return $this->hasMany(Attendance::class, 'employee_code');
     }
 
     public function scopeFilter($query, array $filter)

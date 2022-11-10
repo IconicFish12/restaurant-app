@@ -23,7 +23,7 @@ class OrderController extends Controller
         return view('admin.order', [
             "title" => "Order Management",
             "page_name" => "Costumer Order",
-            "dataArr" => Order::latest()->filter(request(['search']))->with(['user', 'menu', 'table'])->paginate(request('paginate') ?? 10),
+            "dataArr" => Order::filter(request(['search']))->with(['user', 'menu', 'table'])->paginate(request('paginate') ?? 10),
             "menu" => Menu::all(),
             "table" => Table::all(),
             "user" => User::where("role", "costumer")->get()

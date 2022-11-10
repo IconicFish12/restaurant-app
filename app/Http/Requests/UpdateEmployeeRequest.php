@@ -25,13 +25,14 @@ class UpdateEmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => ["required"],
-            "birth" => ["required", "date"],
-            "age" => ["required","integer","max:60"],
-            "phone_number" => ["required","max:13"],
-            "position" => ["required"],
-            "email" => ["required","email:dns"],
-            "employe_code"  => [Rule::requiredIf(request()->has('employee_code')), "unique:employees", "max:20"]
+            "name" => [Rule::requiredIf(request()->has('name'))],
+            "birth" => [Rule::requiredIf(request()->has('birth')), "date"],
+            "age" => [Rule::requiredIf(request()->has('age')),"integer","max:60"],
+            "phone_number" => [Rule::requiredIf(request()->has('phone_number')),"max:13"],
+            "position" => [Rule::requiredIf(request()->has('position'))],
+            "email" => [Rule::requiredIf(request()->has('email')),"email:dns"],
+            "employe_code"  => [Rule::requiredIf(request()->has('employee_code')), "unique:employees", "max:20"],
+            'password' => [Rule::requiredIf(request()->has('password')), "min:6"],
         ];
     }
 
@@ -54,6 +55,8 @@ class UpdateEmployeeRequest extends FormRequest
             "employee_code.required" => "A Employee Code is required",
             "employee_code.unique" => "Employee Code Must Unique",
             "employee_code.max" => "Employee Code cannot be more than 20",
+            'password.required' => "A Password is required",
+            'password.min' => 'Password cannot be less than 6',
         ];
     }
 }

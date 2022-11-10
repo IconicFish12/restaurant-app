@@ -19,7 +19,7 @@ class VoucherController extends Controller
         return view('admin.voucher', [
             "title" => "Restaurant Voucher",
             "page_name" => "Restaurant's Vouchers",
-            "dataArr" => Voucher::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10)
+            "dataArr" => Voucher::filter(request(['search']))->paginate(request('paginate') ?? 10)
         ]);
     }
 

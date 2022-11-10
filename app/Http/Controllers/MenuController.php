@@ -23,8 +23,7 @@ class MenuController extends Controller
         return view('admin.menu', [
             'title' => "Vanushki Menus",
             'page_name' => "Vanushki Menu",
-            "user" => User::where('role', 'admin')->first(),
-            "dataArr" => Menu::latest()->filter(request(['search']))->with('category')->paginate(request('paginate') ?? 10),
+            "dataArr" => Menu::filter(request(['search']))->with('category')->paginate(request('paginate') ?? 10),
             "category" => Category::all()
         ]);
     }
@@ -47,10 +46,7 @@ class MenuController extends Controller
      */
     public function store(StoreMenuRequest $request)
     {
-        // dd($request);
         $data = $request->validated();
-
-        // $fileName = $request->file('image')->getClientOriginalName();
 
         $data['image'] = $request->file('image')->store('/images', "public_path");
 

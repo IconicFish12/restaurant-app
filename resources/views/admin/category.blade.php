@@ -11,10 +11,10 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('categories') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/categories') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
-                        <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
+                        <input type="hidden" name="search" class="form-control" value="{{ request('search') }}">
                     </div>
                     @endif
                     <span class="d-block">Data Per Page</span>
@@ -28,7 +28,7 @@
                 </form>
             </div>
             <div class="col-md-3 ">
-                <form action="{{ asset('categories') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/categories') }}" method="GET" class="d-block mb-2">
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3 ">
                         <input type="seacrh" class="form-control " placeholder="Search A Category" value="{{ request('search') }}" name="search">
@@ -56,7 +56,7 @@
                                     <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/categories/{{ $category->id }}" method="POST" class="mx-3">
+                                    <form action="administrator/categories/{{ $category->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Suer want to delete {{ $category->category_name }}')" class="btn btn-danger">
@@ -96,7 +96,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{ asset('categories') }}" method="post">
+            <form action="{{ asset('administrator/categories') }}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="category_name">Category Name</label>
@@ -143,8 +143,8 @@
 @section('script')
 <script>
     let getData= id => {
-    fetch(`categories/${id}`).then(response => response.json()).then(response => {
-        document.getElementById("edit_form").action = `categories/${id}`
+    fetch(`/administrator/categories/${id}`).then(response => response.json()).then(response => {
+    document.getElementById("edit_form").action = `/administrator/categories/${id}`
         document.getElementById("edit_category_name").value = response.category_name;
     });
 }

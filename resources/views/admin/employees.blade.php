@@ -11,7 +11,7 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('employees') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/employees') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
                         <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
@@ -28,7 +28,7 @@
                 </form>
             </div>
             <div class="col-md-3">
-                <form action="{{ asset('employees') }}" method="GET">
+                <form action="{{ asset('administrator/employees') }}" method="GET">
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3">
                         <input type="search" class="form-control" placeholder="Search A Employee" value="{{ request('search') }}" name="search">
@@ -62,7 +62,7 @@
                                 <td>{{ $data->employee_code }}</td>
                                 <td>{{ $data->birth }}</td>
                                 <td>
-                                    <form action="/employees/{{ $data->id }}" method="post">
+                                    <form action="{{ asset('administrator/employees/'. $data->id) }}" method="post">
                                         @csrf
                                         @method('PUT')
                                         @if ($data->status == "Y")
@@ -71,7 +71,7 @@
                                             </button>
                                         @else
                                             <button type="submit" class="btn btn-danger" value="Y" name="status">
-                                                Not Active
+                                                Non
                                             </button>
                                         @endif
                                     </form>
@@ -84,7 +84,7 @@
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateEmployeeModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/employees/{{ $data->id }}" method="POST" class="mx-3">
+                                    <form action="{{ asset('administrator/employees/'. $data->id) }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $data->name }}')" class="btn btn-danger">
@@ -129,7 +129,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ asset('employees') }}" method="post">
+                <form action="{{ asset('administrator/employees') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <div class="form-group">
@@ -155,8 +155,8 @@
                                 placeholder="Enter Employee Position">
                         </div>
                         <div class="form-group">
-                            <label for="active">Employee Status</label>
-                            <select name="active" id="active" class="form-select form-control">
+                            <label for="status">Employee Status</label>
+                            <select name="status" id="status" class="form-select form-control">
                                 <option value="Y">Active</option>
                                 <option value="N">Not Active</option>
                             </select>
@@ -165,6 +165,11 @@
                             <label for="email">Email</label>
                             <input type="email" class="form-control form-control-user" id="email" value="{{ old('email') }}" name="email"
                                 placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control form-control-user" id="password" value="{{ old('password') }}" name="password"
+                                placeholder="Password">
                         </div>
                     </div>
                     <div class="modal-">
@@ -230,6 +235,11 @@
                             <input type="email" class="form-control form-control-user" id="edit_email" value="{{ old('email') }}" name="email"
                                 placeholder="Email Address">
                         </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control form-control-user" id="password" value="{{ old('password') }}" name="password"
+                                placeholder="Password">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -241,11 +251,11 @@
     </div>
 </div>
 
-{{-- @section('script')
+@section('script')
     <script>
         let getData = id => {
-            fetch(`employees/${id}`).then(response => response.json()).then(response => {
-                document.getElementById("edit_form").action = `employees/${id}`
+            fetch(`/administrator/employees/${id}`).then(response => response.json()).then(response => {
+                document.getElementById("edit_form").action = `/administrator/employees/${id}`
                 document.getElementById("edit_name").value = response.name;
                 document.getElementById("edit_employee_code").value = response.employee_code;
                 document.getElementById("edit_birth").value = response.birth;
@@ -267,6 +277,6 @@
             })
         })
     </script>
-@endsection --}}
+@endsection
 
 @endsection

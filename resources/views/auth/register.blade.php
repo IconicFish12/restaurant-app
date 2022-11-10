@@ -54,7 +54,7 @@
                                         Show Password
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
+                                <button type="submit" class="btn btn-danger btn-user btn-block">Register Account</button>
                             </form>
                             <hr>
                             {{-- <div class="text-center">

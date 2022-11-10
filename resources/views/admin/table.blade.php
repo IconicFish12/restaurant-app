@@ -10,7 +10,7 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('tables') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/tables') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
                         <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
@@ -27,7 +27,7 @@
                 </form>
             </div>
             <div class="col-md-3 ">
-                <form action="{{ asset('tables') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/tables') }}" method="GET" class="d-block mb-2">
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3 ">
                         <input type="seacrh" class="form-control " placeholder="Search A Category" value="{{ request('search') }}" name="search">
@@ -55,7 +55,7 @@
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateTableModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/tables/{{ $data->id }}" method="POST" class="mx-3">
+                                    <form action="administrator/tables/{{ $data->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Suer want to delete table {{ $data->table_number }}')" class="btn btn-danger">
@@ -95,7 +95,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{ asset('tables') }}" method="post">
+            <form action="{{ asset('administrator/tables') }}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="table_number">Table Number</label>
@@ -142,8 +142,8 @@
 @section('script')
 <script>
     let getData= id => {
-    fetch(`tables/${id}`).then(response => response.json()).then(response => {
-        document.getElementById("edit_form").action = `tables/${id}`
+    fetch(`/administrator/tables/${id}`).then(response => response.json()).then(response => {
+        document.getElementById("edit_form").action = `/administrator/tables/${id}`
         document.getElementById("edit_table_number").value = response.table_number;
     });
 }

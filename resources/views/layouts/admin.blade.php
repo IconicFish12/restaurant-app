@@ -9,7 +9,7 @@
     <meta name="description" content="vanushki admin dashboard">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="ibnu">
-    
+
 
     <title>{{ $title ?? "Vanushki Restaurant" }}</title>
 
@@ -33,7 +33,7 @@
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ asset('/') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ asset('/administrator') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ asset('/') }}">
+                <a class="nav-link" href="{{ asset('/administrator') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -55,11 +55,18 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
+            @if (auth()->guard('admin')->check())
             <div class="sidebar-heading">
                 Restaurant Module
             </div>
+            @else
+            <div class="sidebar-heading">
+                Employee Module
+            </div>
+            @endif
 
             <!-- Nav Item - Pages Collapse Menu -->
+            @auth('admin')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuOne"
                     aria-expanded="true" aria-controls="menuOne">
@@ -69,23 +76,26 @@
                 <div id="menuOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menus Component</h6>
-                        <a class="collapse-item" href="{{ asset('menus') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/menus') }}">
                             <i class="fas fa-utensils"></i>
                             <span>Restaurant Menu</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('categories') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/categories') }}">
                             <i class="fas fa-th-large"></i>
                             <span>Menu Category</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('tables') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/tables') }}">
                             <i class="fas fa-table"></i>
                             <span>Restaurant Tables</span>
                         </a>
                     </div>
                 </div>
             </li>
+            @endauth
+
 
             {{-- <!-- Nav Item - Utilities Collapse Menu --> --}}
+            @auth('admin')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuTwo"
                     aria-expanded="true" aria-controls="menuTwo">
@@ -96,11 +106,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Management</h6>
-                        <a class="collapse-item" href="{{ asset('users') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/users') }}">
                             <i class="fas fa-user"></i>
                             <span>Users</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('employees') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/employees') }}">
                             <i class="fas fa-user-tie"></i>
                             <span>Employees</span>
                         </a>
@@ -118,15 +128,15 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Transaction Component</h6>
-                        <a class="collapse-item" href="{{ asset('orders') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/orders') }}">
                             <i class="fas fa-box-open"></i>
                             <span>Order</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('histories') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/histories') }}">
                             <i class="fas fa-history"></i>
                             <span>History</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('vouchers') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/vouchers') }}">
                             <i class="fas fa-ticket-alt"></i>
                             <span>Voucher</span>
                         </a>
@@ -144,21 +154,22 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Payment Component</h6>
-                        <a class="collapse-item" href="{{ asset('payment-methods') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/payment-methods') }}">
                             <i class="fas fa-file-invoice-dollar"></i>
                             <span>Payment Method</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('e-payments') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/e-payments') }}">
                             <i class="fas fa-money-check-alt"></i>
                             <span>E-Money</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('bank-payments') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/bank-payments') }}">
                             <i class="fas fa-wallet"></i>
                             <span>Bank Transaction</span>
                         </a>
                     </div>
                 </div>
             </li>
+            @endauth
 
             {{-- <!-- Divider -->
             <hr class="sidebar-divider">
@@ -169,6 +180,7 @@
             </div> --}}
 
             <!-- Nav Item - Pages Collapse Menu -->
+            @auth('admin')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuFive"
                     aria-expanded="true" aria-controls="menuFive">
@@ -178,17 +190,18 @@
                 <div id="menuFive" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Contact Service:</h6>
-                        <a class="collapse-item" href="{{ asset('messages') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/messages') }}">
                             <i class="fas fa-bell"></i>
                             <span >Message</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('replies') }}l">
+                        <a class="collapse-item" href="{{ asset('administrator/replies') }}l">
                             <i class="fas fa-reply-all"></i>
                             <span>Replies</span>
                         </a>
                     </div>
                 </div>
             </li>
+            @endauth
 
             <!-- Nav Item - Employee -->
             <li class="nav-item">
@@ -200,39 +213,42 @@
                 <div id="menuSix" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Performance Management:</h6>
-                        <a class="collapse-item" href="{{ asset('works') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/works') }}">
                             <i class="fas fa-tasks"></i>
                             <span >Work Todo</span>
                         </a>
-                        <a class="collapse-item" href="{{ asset('performances') }}">
+                        <a class="collapse-item" href="{{ asset('administrator/performances') }}">
                             <i class="fas fa-chart-bar"></i>
                             <span>Performance</span>
                         </a>
                     </div>
                 </div>
             </li>
+
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ asset('attendances-data') }}">
+                <a class="nav-link" href="{{ asset('administrator/attendances-data') }}">
                     <i class="fas fa-user-clock"></i>
                     <span>Attendance</span>
                 </a>
             </li>
 
             {{-- Nav Item - Database Backup --}}
+            @auth('admin')
             <li class="nav-item">
-                <a class="nav-link" href="{{ asset('backup') }}">
+                <a class="nav-link" href="{{ asset('administrator/backup') }}">
                     <i class="fas fa-database"></i>
                     <span>Database Backup</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ asset('documentation') }}">
+                <a class="nav-link" href="{{ asset('administrator/documentation') }}">
                     <i class="fas fa-book"></i>
                     <span>Documentation</span>
                 </a>
             </li>
+            @endauth
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -304,24 +320,26 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username ?? Auth::guard('employee')->user()->name }}</span>
                                 <img class="img-profile rounded-circle" src="{{ asset('/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+                                @if (auth('admin'))
+                                    <a class="dropdown-item" href=" {{ asset('administrator/me') }}">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Settings
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Activity Log
+                                    </a>
+                                @endif
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

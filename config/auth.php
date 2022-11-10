@@ -38,7 +38,7 @@ return [
     'guards' => [
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'admin',
         ],
 
         'employee' => [
@@ -65,14 +65,14 @@ return [
     */
 
     'providers' => [
-        'admins' => [
+        'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
 
-        'employees' => [
+        'employee' => [
             'driver' => 'eloquent',
-            'table' => App\Models\Employee::class,
+            'model' => App\Models\Employee::class,
         ],
     ],
 

@@ -12,7 +12,7 @@
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
-                <form action="{{ asset('orders') }}" method="GET" class="d-block mb-2">
+                <form action="{{ asset('administrator/orders') }}" method="GET" class="d-block mb-2">
                     @if (request()->has("search"))
                     <div class="form-group">
                         <input type="hidden" name="search" class="form-contrl" value="{{ request('search') }}">
@@ -29,7 +29,7 @@
                 </form>
             </div>
             <div class="col-md-3">
-                <form action="{{ asset('orders') }}" method="GET">
+                <form action="{{ asset('administrator/orders') }}" method="GET">
                     <span class="d-block">Search</span>
                     <div class="input-group mb-3">
                         <input type="search" class="form-control" placeholder="Search A Costumer Order" value="{{ request('search') }}" name="search">
@@ -73,7 +73,7 @@
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateOrderModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="/orders/{{ $data->id }}" method="POST" class="mx-3">
+                                    <form action="administrator/orders/{{ $data->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $data->name }}')" class="btn btn-danger">
@@ -120,7 +120,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ asset('orders') }}" method="post">
+                <form action="{{ asset('administrator/orders') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <div class="form-group">
@@ -267,8 +267,8 @@
 @section('script')
     <script>
         let getData = id => {
-            fetch(`orders/${id}`).then(response => response.json()).then(response => {
-                document.getElementById("edit_form").action = `orders/${id}`
+            fetch(`/administrator/orders/${id}`).then(response => response.json()).then(response => {
+                document.getElementById("edit_form").action = `/administrator/orders/${id}`
                 document.getElementById("edit_menu_id").value = response.menu_id;
                 document.getElementById("edit_table_id").value = response.table_id;
                 document.getElementById("edit_user_id").value = response.user_id;

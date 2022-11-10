@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('schedule');
             $table->string('job_desk');
             $table->enum('status', ['new', 'old']);
-            $table->string('fee', 25);
+            $table->string('fee', 50);
             $table->timestamps();
         });
     }

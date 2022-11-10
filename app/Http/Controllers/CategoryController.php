@@ -20,7 +20,7 @@ class CategoryController extends Controller
         return view('admin.category', [
             'title' => "Menu Categories",
             "page_name" => "Category Menu",
-            "dataArr" => Category::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10)
+            "dataArr" => Category::filter(request(['search']))->paginate(request('paginate') ?? 10)
         ]);
     }
 

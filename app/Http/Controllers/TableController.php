@@ -19,7 +19,7 @@ class TableController extends Controller
         return view('admin.table', [
             "title" => "Table Management",
             "page_name" => "Restaurant Table",
-            "dataArr" => Table::latest()->filter(request(['search']))->paginate(request('paginate') ?? 10)
+            "dataArr" => Table::filter(request(['search']))->paginate(request('paginate') ?? 10)
         ]);
     }
 

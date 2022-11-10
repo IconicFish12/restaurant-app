@@ -11,6 +11,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PerformanceController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
@@ -45,12 +46,11 @@ Route::prefix('registration')->group(function() {
 Route::get('logout', [AuthController::class, 'logout'])->middleware("auth:admin,employee");
 
 //DASHBOARD VIEW / BACKEND SYSTEM
-Route::middleware('auth:admin,employee')->group(function () {
-    // DASHBOARD VIEW
-    Route::get('/', [DashboardController::class, 'dashboardView']);
+Route::prefix('/administrator')->group(function(){
 
-    // DASHBOARD MODULE
-    Route::prefix('/menus')->group(function(){
+    Route::get('/',[DashboardController::class, 'dashboardView'])->middleware('auth:admin,employee');
+
+    Route::prefix('/menus')->middleware('auth:admin')->group(function(){
         Route::get('/', [MenuController::class, 'index']);
         Route::post('/', [MenuController::class, 'store']);
         Route::get('/{menu:id}', [MenuController::class, 'show']);
@@ -58,7 +58,7 @@ Route::middleware('auth:admin,employee')->group(function () {
         Route::delete('/{menu:id}', [MenuController::class, 'destroy']);
     });
 
-    Route::prefix('/categories')->group(function(){
+    Route::prefix('/categories')->middleware('auth:admin')->group(function(){
         Route::get('/', [CategoryController::class, 'index']);
         Route::post('/', [CategoryController::class, 'store']);
         Route::get('/{category:id}', [CategoryController::class, 'show']);
@@ -66,7 +66,7 @@ Route::middleware('auth:admin,employee')->group(function () {
         Route::delete('/{category:id}', [CategoryController::class, 'destroy']);
     });
 
-    Route::prefix('/tables')->group(function() {
+    Route::prefix('/tables')->middleware('auth:admin,employee')->group(function() {
         Route::get('/', [TableController::class, 'index']);
         Route::post('/', [TableController::class, 'store']);
         Route::get('/{table:id}', [TableController::class, 'show']);
@@ -75,7 +75,7 @@ Route::middleware('auth:admin,employee')->group(function () {
     });
 
     // USER AND EMPLOYEE MANAGEMENT
-    Route::prefix('/users')->group(function() {
+    Route::prefix('/users')->middleware('auth:admin')->group(function() {
         Route::get('/', [UserController::class, 'index']);
         Route::post('/', [UserController::class, 'store']);
         Route::get('/{user:id}', [UserController::class, 'show']);
@@ -83,7 +83,7 @@ Route::middleware('auth:admin,employee')->group(function () {
         Route::delete('/{user:id}', [UserController::class, 'destroy']);
     });
 
-    Route::prefix('/employees')->group(function () {
+    Route::prefix('/employees')->middleware('auth:admin')->group(function () {
         Route::get('/', [EmployeeController::class, 'index']);
         Route::post('/', [EmployeeController::class, 'store']);
         Route::get('/{employee:id}', [EmployeeController::class, 'show']);
@@ -92,7 +92,7 @@ Route::middleware('auth:admin,employee')->group(function () {
     });
 
     //CONTACT SERVICE
-    Route::prefix('/messages')->group(function (){
+    Route::prefix('/messages')->middleware('auth:admin')->group(function (){
         Route::get('/', [ContactController::class, 'index']);
         Route::post('/', [ContactController::class, 'store']);
         Route::get('/{contact:id}', [ContactController::class, 'show']);
@@ -100,7 +100,7 @@ Route::middleware('auth:admin,employee')->group(function () {
     });
 
     //TRANSACTION ACTIVITY
-    Route::prefix('/orders')->group(function(){
+    Route::prefix('/orders')->middleware('auth:admin')->group(function(){
         Route::get('/', [OrderController::class, 'index']);
         Route::post('/', [OrderController::class, 'store']);
         Route::get('/{order:id}', [OrderController::class, 'show']);
@@ -108,11 +108,11 @@ Route::middleware('auth:admin,employee')->group(function () {
         Route::put('/{order:id}', [OrderController::class, 'destroy']);
     });
 
-    Route::prefix('/histories')->group(function(){
+    Route::prefix('/histories')->middleware('auth:admin')->group(function(){
         Route::get('/', [OrderController::class, 'orderHistory']);
     });
 
-    Route::prefix('/vouchers')->group(function() {
+    Route::prefix('/vouchers')->middleware('auth:admin')->group(function() {
         Route::get('/', [VoucherController::class, 'index']);
         Route::post('/', [VoucherController::class, 'store']);
         Route::get('/{voucher:id}', [VoucherController::class, 'show']);
@@ -124,23 +124,30 @@ Route::middleware('auth:admin,employee')->group(function () {
 
 
     //EMPLOYEE PERFORMANCE
-    Route::prefix('/performances')->group(function () {
+    Route::prefix('/performances')->middleware('auth:admin,employee')->group(function () {
         Route::get('/', [PerformanceController::class, 'index']);
     });
 
-    Route::prefix('/works')->group(function (){
+    Route::prefix('/works')->middleware('auth:admin,employee')->group(function (){
         Route::get('/', [WorkController::class, 'index']);
     });
 
-    //MORE
-    Route::get('/backup', [BackupController::class, 'index']);
-    Route::get('/backup/create', [BackupController::class, 'store']);
-    Route::delete('/backup/delete/{i}', [BackupController::class, 'destroy']);
+    //PROFILE MANAGEMENT
+    Route::get('/me', [ProfileController::class, 'index'])->middleware('auth:admin');
 
-    Route::get('/documentation', [DashboardController::class, 'documentation']);
+    //MORE
+    Route::middleware('auth:admin')->group(function(){
+        Route::get('/backup', [BackupController::class, 'index']);
+        Route::get('/backup/create', [BackupController::class, 'store']);
+        Route::delete('/backup/delete/{i}', [BackupController::class, 'destroy']);
+    });
+
+    Route::get('/documentation', [DashboardController::class, 'documentation'])->middleware('auth:admin');
 
     Route::prefix('/attendances-data')->group(function(){
         Route::get('/', [AttendanceController::class, 'index']);
     });
-
 });
+
+//WEB VIEW
+Route::get('/', [DashboardController::class, 'webView']);

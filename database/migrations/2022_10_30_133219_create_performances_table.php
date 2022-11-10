@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('performances', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('employee_id');
             $table->date('date');
             $table->time('start');
             $table->time('end');
