@@ -50,6 +50,16 @@ class Employee extends Authenticatable
         return $this->hasMany(Attendance::class, 'employee_code');
     }
 
+    public function work()
+    {
+        return $this->belongsTo(Work::class, 'employee_id');
+    }
+
+    public function Performance()
+    {
+        return $this->belongsTo(Performance::class, 'employee_id');
+    }
+
     public function scopeFilter($query, array $filter)
     {
         $query->when($filter['search'] ?? false, function($query, $collect){

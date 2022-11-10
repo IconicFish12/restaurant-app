@@ -64,7 +64,7 @@ class AuthController extends Controller
             'password' => "required|min:6"
         ]);
 
-
+        //login
         if($request->has('employee_code') && $request->has('email')){
             $code = Employee::where('employee_code', $request->employee_code)->first();
             $email = Employee::where('email', $request->email)->first();
@@ -75,10 +75,9 @@ class AuthController extends Controller
             }
         }
 
-        $query = Attendance::where('employee_code', $data['employee_code'])->first();
-
+        $query = Attendance::where('employee_code', $data['employee_code'])->where("date", date("Y-m-d", strtotime(now())))->first();
+//attending
         if($request->has('status') and $request->status === "IN"){
-
             if(is_null($query)){
                 $create = Attendance::create([
                     'employee_code' => $data['employee_code'],
@@ -90,7 +89,7 @@ class AuthController extends Controller
                     'presence' => $data['presence']
                 ]);
 
-                if($create == true ){
+                if($create){
                     if(Auth::guard('employee')->attempt($request->only(['employee_code', 'email', 'password']))){
                         if(Employee::where('employee_code', $data['employee_code'])->first()->status !== "Y"){
                             Auth::logout();
@@ -102,6 +101,33 @@ class AuthController extends Controller
                         return redirect('/administrator')->with('toast_success', 'Welcome Employee');
                     }
                 }
+                // $date= $query['date'] > date("Y-m-d");
+            }
+
+            if($data['employee_code'] == $query['employee_code'] and date("d", strtotime($query["date"])) < date("d")){
+                    $create = Attendance::create([
+                        'employee_code' => $data['employee_code'],
+                        'email' => $data['email'],
+                        'password' => Hash::make($data['password']),
+                        'date' => date(now()),
+                        'status' => $data['status'],
+                        'in' => date("h:i:s"),
+                        'presence' => $data['presence']
+                    ]);
+
+                    if($create == true){
+                    if(Auth::guard('employee')->attempt($request->only(['employee_code', 'email', 'password']))){
+                        if(Employee::where('employee_code', $data['employee_code'])->first()->status !== "Y"){
+                            Auth::logout();
+
+                            return redirect('/attendance')->with('toast_error', 'This Employee is not active');
+                        }
+                        $request->session()->regenerate();
+
+                        return redirect('/administrator')->with('toast_success', 'Welcome Employee');
+                    }
+                }
+
             }
 
             if($data['employee_code'] == $query['employee_code']){
@@ -122,8 +148,8 @@ class AuthController extends Controller
 
         if($request->has('status') and $request->status === "OUT"){
 
-            // dd($query['in'] == date("h", strtotime(now())) >= 9);
-            if($query['in'] == date("h", strtotime(now())) >= 12){
+            // dd($query['in'] == date("h", strtotime(now())) >= 01);
+            if($query['in'] == date("h", strtotime(now())) >= 01){
                 $update = Attendance::find($query['id'])->update(['out' => date('h:i:s')]);
 
                 if($update == true ){

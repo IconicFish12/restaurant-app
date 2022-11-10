@@ -18,7 +18,7 @@ class AttendanceController extends Controller
         return view('admin.attandance_data', [
             "title" => "Attendance management",
             "page_name" => "Employee Attendance",
-            "dataArr" => Attendance::all()
+            "dataArr" => auth('admin')->check() ? Attendance::with('employee')->paginate(request('paginate') ?? 10) : Attendance::with('employee')->where('employee_code', auth('employee')->user()->employee_code)->paginate(request('paginate') ?? 10)
         ]);
     }
 
