@@ -98,7 +98,23 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        dd($request);
+
+        if($request->validated()){
+            $order->update([
+                "menu_id" => $request->menu_id,
+                "user_id" => $request->user_id,
+                "table_id" => $request->table_id,
+                "payment_method" => $request->payment_method,
+                "quantity" => $request->quantity,
+                "detail" => $request->detail,
+                "price" => $request->price,
+                "total_pay" => $request->quantity *= $request->price
+            ]);
+
+            return back()-> with('toast_success', "Successfully Updating Order code $order->order_code");
+        }
+        return back()-> with('error', "Error when Updating Order code $order->order_code");
+
     }
 
     /**

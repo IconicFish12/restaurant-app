@@ -33,22 +33,5 @@ class UpdateMenuRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'name.required' => 'Menu Name is required',
-            'category_id.required' => "Category Menu is required",
-            'menu_type.required' => "Menu Type is required",
-            'price.required' => "Menu Price Is Required",
-            'description.required' => "menu description is Required",
-            'image.image' => "This field must be filled with pictures",
-            'image.max' => "Image can't be too big",
-            'image.mimes' => "allowed formats are jpg png and jpeg"
-        ];
-    }
+   
 }

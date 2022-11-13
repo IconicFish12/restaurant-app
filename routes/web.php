@@ -16,6 +16,7 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\WorkController;
+use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,7 +106,7 @@ Route::prefix('/administrator')->group(function(){
         Route::post('/', [OrderController::class, 'store']);
         Route::get('/{order:id}', [OrderController::class, 'show']);
         Route::put('/{order:id}', [OrderController::class, 'update']);
-        Route::put('/{order:id}', [OrderController::class, 'destroy']);
+        Route::delete('/{order:id}', [OrderController::class, 'destroy']);
     });
 
     Route::prefix('/histories')->middleware('auth:admin')->group(function(){
@@ -126,10 +127,12 @@ Route::prefix('/administrator')->group(function(){
     //EMPLOYEE PERFORMANCE
     Route::prefix('/performances')->middleware('auth:admin,employee')->group(function () {
         Route::get('/', [PerformanceController::class, 'index']);
+        Route::post('/', [PerformanceController::class, 'store']);
     });
 
     Route::prefix('/works')->middleware('auth:admin,employee')->group(function (){
         Route::get('/', [WorkController::class, 'index']);
+        Route::post('/', [WorkController::class, 'store']);
     });
 
     //PROFILE MANAGEMENT
@@ -146,6 +149,10 @@ Route::prefix('/administrator')->group(function(){
 
     Route::prefix('/attendances-data')->group(function(){
         Route::get('/', [AttendanceController::class, 'index']);
+        Route::middleware('auth:admin')->group(function(){
+            Route::post('/', [AttendanceController::class, 'store']);
+            Route::post('/{attendance:id}', [AttendanceController::class, 'show']);
+        });
     });
 });
 

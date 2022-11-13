@@ -45,7 +45,7 @@
       <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Vanushki<span>.</span></h1>
+      <h1>Vanushki Restaurant<span>.</span></h1>
       </a>
 
       <nav id="navbar" class="navbar">
@@ -87,22 +87,21 @@
         </ul>
       </nav><!-- .navbar -->
 
-      <div class="d-flex align-items-center ms-auto ms-lg-0">
-        <div class="dropdown">
-            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle"></i>
-                <span>{{ Auth::user()->username }}</span>
-            </button>
-            <ul class="dropdown-menu">
-            <li>
-                <a class="dropdown-item" href="{{ asset('logout') }}" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
-            </li>
-
-            {{-- <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
-            </ul>
-        </div>
-        </div>
+        {{-- <div class="d-flex align-items-center ms-auto ms-lg-0">
+            <div class="dropdown">
+                <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                    <span>{{ Auth::user()->username }}</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="{{ asset('logout') }}" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
+                    </li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div> --}}
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>

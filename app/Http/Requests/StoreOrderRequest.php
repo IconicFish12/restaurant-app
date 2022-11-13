@@ -30,7 +30,7 @@ class StoreOrderRequest extends FormRequest
             "payment_method" => ["required", "max:20"],
             "quantity" => ["required", "integer", "max:200"],
             "price" => ["required", "numeric"],
-            "detail" => ["required"]
+            "detail" => ["max:200"]
         ];
     }
 }

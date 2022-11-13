@@ -39,12 +39,12 @@
                                         <button type="submit" class="btn btn-danger btn-user btn-block">Login</button>
                                     </form>
                                     <hr>
-                                    {{-- <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div> --}}
                                     <div class="text-center">
-                                        <a class="small" href="{{ asset('attendance') }}">Employee Attendances</a>
+                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
+                                    {{-- <div class="text-center">
+                                        <a class="small" href="{{ asset('attendance') }}">Employee Attendances</a>
+                                    </div> --}}
                                     <div class="text-center">
                                         <a class="small" href="{{ asset('registration') }}">Create an Account!</a>
                                     </div>

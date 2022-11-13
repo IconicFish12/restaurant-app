@@ -35,27 +35,4 @@ class UpdateUserRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'firstname.required' => 'A Firstname is required',
-            'lastname.required' => 'A Lastname is required',
-            'birth.required' => 'A Date of Birth is required',
-            'phone_number.required' => 'A Phone Number is required',
-            'phone_number.max' => 'Phone number cannot be more than 15',
-            'username.required' => 'A Username is required',
-            'username.min' => 'Username cannot be less than 6',
-            'username.max' => 'Username cannot be more than 50',
-            'password.required' => "A Password is required",
-            'password.min' => 'Password cannot be less than 6',
-            'email.required' => 'A Email is required',
-            'email.email' => 'Email Must be Verified Email',
-            'role.required' => 'A Role is required'
-        ];
-    }
 }

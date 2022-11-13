@@ -45,7 +45,7 @@ class CategoryController extends Controller
         $data = $request->validated();
 
         if(Category::create($data)){
-            return back()->with('success', "$request->category_name created successfully");
+            return back()->with('toast_success', "$request->category_name created successfully");
         }
     }
 
@@ -84,11 +84,11 @@ class CategoryController extends Controller
         $data = $request->validated();
 
         if($request->category_name == $category->category_name){
-            return back()->with('info', "Nothing change");
+            return back()->with('toast_info', "Nothing change");
         }
 
         if(category::find($category->id)->update($data)){
-            return back()->with('success', "Successfully Updated $request->category_name");
+            return back()->with('toast_success', "Successfully Updated $request->category_name");
         }
         return back()->with('error', "Failed to update $request->category_name");
 
@@ -103,8 +103,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if(Category::destroy($category->id)){
-            return back()->with('success', "Success Delete $category->name");
+            return back()->with('toast_success', "Success Delete $category->name");
         }
-        return back()->with('error', "Success Delete $category->name");
+        return back()->with('toast_error', "Success Delete $category->name");
     }
 }

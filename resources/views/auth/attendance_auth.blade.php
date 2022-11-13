@@ -61,10 +61,6 @@
                                     </div>
                                     <button type="submit" class="btn btn-danger btn-user btn-block">Submit</button>
                                 </form>
-                                <hr>
-                                <div class="text-center">
-                                    <a class="small" href="{{ asset('login') }}">Administrator</a>
-                                </div>
                             </div>
                         </div>
                     </div>

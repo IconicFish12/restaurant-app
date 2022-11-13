@@ -28,16 +28,5 @@ class UpdateCategoryRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'category_name.required' => 'A Category Name is required',
-            'category_name.unique' => 'A Category Name is Must Unique'
-        ];
-}
+    
 }

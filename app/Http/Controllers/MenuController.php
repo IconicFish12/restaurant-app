@@ -51,7 +51,7 @@ class MenuController extends Controller
         $data['image'] = $request->file('image')->store('/images', "public_path");
 
         if(Menu::create($data)){
-            return back()->with('success', "Successfully created $request->name");
+            return back()->with('toast_success', "Successfully created $request->name");
         }
         return back()->with('error', "Faild when created $request->name");
 
@@ -99,7 +99,7 @@ class MenuController extends Controller
         }
 
         if($menu->update($data)){
-            return back()->with('success', "Successfully Updating Menu $request->name");
+            return back()->with('toast_success', "Successfully Updating Menu $request->name");
         }
         return back()->with('error', "Error When Updating Menu $request->name");
     }
@@ -115,7 +115,7 @@ class MenuController extends Controller
         if(Menu::destroy($menu->id)){
             Storage::disk('public_path')->delete($menu->image);
 
-            return back()->with('success', "Successfully Delete $menu->name");
+            return back()->with('toast_success', "Successfully Delete $menu->name");
         }
         return back()->with('error', "Failed to Delete $menu->name");
     }

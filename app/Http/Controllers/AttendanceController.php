@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Http\Requests\UpdateAttendanceRequest;
+use App\Models\Employee;
 
 class AttendanceController extends Controller
 {
@@ -18,7 +19,12 @@ class AttendanceController extends Controller
         return view('admin.attandance_data', [
             "title" => "Attendance management",
             "page_name" => "Employee Attendance",
-            "dataArr" => auth('admin')->check() ? Attendance::with('employee')->paginate(request('paginate') ?? 10) : Attendance::with('employee')->where('employee_code', auth('employee')->user()->employee_code)->paginate(request('paginate') ?? 10)
+            "dataArr" => auth('admin')->check() ?
+            Attendance::with('employee')->paginate(request('paginate') ?? 10) :
+            Attendance::with('employee')
+            ->where('employee_code', auth('employee')->user()->employee_code)
+            ->paginate(request('paginate') ?? 10),
+            "employee" => Employee::all()
         ]);
     }
 
@@ -40,7 +46,18 @@ class AttendanceController extends Controller
      */
     public function store(StoreAttendanceRequest $request)
     {
-        dd($request);
+        if($request->has('employee_code') && $request->has('email')){
+            $code = Employee::where('employee_code', $request->employee_code)->first();
+            $email = Employee::where('email', $request->email)->first();
+            $password = Employee::where('password', $request->password)->first();
+
+            if(!$email and !$code and !$password){
+                return back()->with('toast_error', 'Something not match');
+            }
+            // return back()->with('toast_success', 'Success');
+        }
+
+        dd($request->all());
     }
 
     /**

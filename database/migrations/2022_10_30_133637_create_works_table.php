@@ -16,10 +16,8 @@ return new class extends Migration
         Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id');
-            $table->dateTime('schedule');
             $table->string('job_desk');
-            $table->enum('status', ['new', 'old']);
-            $table->string('fee', 50);
+            $table->time('job_done');
             $table->timestamps();
         });
     }

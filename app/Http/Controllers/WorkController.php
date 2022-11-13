@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Work;
 use App\Http\Requests\StoreWorkRequest;
 use App\Http\Requests\UpdateWorkRequest;
+use App\Models\Employee;
+use Illuminate\Support\Facades\Auth;
 
 class WorkController extends Controller
 {
@@ -17,7 +19,12 @@ class WorkController extends Controller
     {
         return view('admin.work', [
             "title" => "Work Management",
-            "page_name" => "Employee Work"
+            "page_name" => "Employee Work",
+            "dataArr" => Auth::guard('admin')->check() ?
+            Work::with('employee')->paginate(request('paginate')??10) :
+            Work::with('employee')->where('employee_id', Auth::guard('employee')->user()->id)
+            ->paginate(request('paginate')??10),
+            "employee" => Employee::all()
         ]);
     }
 
@@ -39,7 +46,7 @@ class WorkController extends Controller
      */
     public function store(StoreWorkRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -73,7 +80,7 @@ class WorkController extends Controller
      */
     public function update(UpdateWorkRequest $request, Work $work)
     {
-        //
+        dd($request->all());
     }
 
     /**

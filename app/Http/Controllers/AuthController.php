@@ -76,7 +76,8 @@ class AuthController extends Controller
         }
 
         $query = Attendance::where('employee_code', $data['employee_code'])->where("date", date("Y-m-d", strtotime(now())))->first();
-//attending
+        
+        //attending
         if($request->has('status') and $request->status === "IN"){
             if(is_null($query)){
                 $create = Attendance::create([
@@ -104,7 +105,7 @@ class AuthController extends Controller
                 // $date= $query['date'] > date("Y-m-d");
             }
 
-            if($data['employee_code'] == $query['employee_code'] and date("d", strtotime($query["date"])) < date("d")){
+            if($data['employee_code'] == $query['employee_code'] or date("d", strtotime($query["date"])) < date("d")){
                     $create = Attendance::create([
                         'employee_code' => $data['employee_code'],
                         'email' => $data['email'],
@@ -198,12 +199,22 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        if(Auth::guard('employee')->check()){
+            Auth::logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+
+            return redirect('/attendance')->with('success', 'Success Logout');
+        }
+
         Auth::logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('login')->with('success', 'Success Logout');
+        return redirect('/login')->with('success', 'Success Logout');
     }
 }

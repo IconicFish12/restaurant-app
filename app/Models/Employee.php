@@ -52,7 +52,7 @@ class Employee extends Authenticatable
 
     public function work()
     {
-        return $this->belongsTo(Work::class, 'employee_id');
+        return $this->hasMany(Work::class, 'employee_id');
     }
 
     public function Performance()

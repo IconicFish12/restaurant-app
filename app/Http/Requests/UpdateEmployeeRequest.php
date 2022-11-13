@@ -36,27 +36,4 @@ class UpdateEmployeeRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'name.required' => 'A Employee Name is required',
-            'birth.unique' => 'A birth is required',
-            'age.required' => "A Employee Age is required",
-            'age.integer' => 'Age Must be a number',
-            'phone_number.required' => 'A Phone Number is required',
-            'phone_number.max' => 'Phone number cannot be more than 15',
-            "position.required" => "A Employee Position is required",
-            "email.required" => "A Email is required",
-            "employee_code.required" => "A Employee Code is required",
-            "employee_code.unique" => "Employee Code Must Unique",
-            "employee_code.max" => "Employee Code cannot be more than 20",
-            'password.required' => "A Password is required",
-            'password.min' => 'Password cannot be less than 6',
-        ];
-    }
 }

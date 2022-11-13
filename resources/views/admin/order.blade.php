@@ -66,7 +66,12 @@
                                 <td>{{ $data->payment_method }}</td>
                                 <td>{{ $data->order_code }}</td>
                                 <td>{{ $data->quantity}}</td>
-                                <td>{{ $data->detail}}</td>
+                                <td>
+                                    @if (is_null($data->detail))
+                                    <p class="text-uppercase text-center">no data</p>
+                                    @endif
+                                    {{ $data->detail }}
+                                </td>
                                 <td>@money($data->price)</td>
                                 <td>@money($data->total_pay)</td>
                                 <td class="d-flex justify-content-center">

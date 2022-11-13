@@ -13,6 +13,6 @@ class Work extends Model
 
     public function employee()
     {
-        return $this->hasMany(Employee::class, 'employee_id');
+        return $this->belongsTo(Employee::class, 'id');
     }
 }
