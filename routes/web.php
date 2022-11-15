@@ -133,6 +133,9 @@ Route::prefix('/administrator')->group(function(){
     Route::prefix('/works')->middleware('auth:admin,employee')->group(function (){
         Route::get('/', [WorkController::class, 'index']);
         Route::post('/', [WorkController::class, 'store']);
+        Route::get('/{work:id}', [WorkController::class, 'show']);
+        Route::put('/{work:id}', [WorkController::class, 'update']);
+        Route::delete('/{work:id}', [WorkController::class, 'destroy']);
     });
 
     //PROFILE MANAGEMENT
@@ -151,7 +154,9 @@ Route::prefix('/administrator')->group(function(){
         Route::get('/', [AttendanceController::class, 'index']);
         Route::middleware('auth:admin')->group(function(){
             Route::post('/', [AttendanceController::class, 'store']);
-            Route::post('/{attendance:id}', [AttendanceController::class, 'show']);
+            Route::get('/{attendance:id}', [AttendanceController::class, 'show']);
+            Route::put('/{attendance:id}', [AttendanceController::class, 'update']);
+            Route::delete('/{attendance:id}', [AttendanceController::class, 'destroy']);
         });
     });
 });

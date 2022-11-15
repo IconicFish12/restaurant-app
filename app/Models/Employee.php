@@ -47,7 +47,7 @@ class Employee extends Authenticatable
 
     public function attendance()
     {
-        return $this->hasMany(Attendance::class, 'employee_code');
+        return $this->hasMany(Attendance::class, 'employee_id');
     }
 
     public function work()
@@ -57,7 +57,7 @@ class Employee extends Authenticatable
 
     public function Performance()
     {
-        return $this->belongsTo(Performance::class, 'employee_id');
+        return $this->hasMany(Performance::class, 'employee_id');
     }
 
     public function scopeFilter($query, array $filter)

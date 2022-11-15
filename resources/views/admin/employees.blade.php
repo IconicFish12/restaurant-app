@@ -44,7 +44,6 @@
                         <tr>
                             <th>No</th>
                             <th>Employee Name</th>
-                            <td>Employee Code</td>
                             <th>Date Birth</th>
                             <th>Employee Status</th>
                             <th>Age</th>
@@ -59,7 +58,6 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->name }}</td>
-                                <td>{{ $data->employee_code }}</td>
                                 <td>{{ $data->birth }}</td>
                                 <td>
                                     <form action="{{ asset('administrator/employees/'. $data->id) }}" method="post">
@@ -84,7 +82,7 @@
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateEmployeeModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="{{ asset('administrator/employees/'. $data->id) }}" method="POST" class="mx-3">
+                                    <form action="{{ asset('/administrator/employees/'. $data->id) }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $data->name }}')" class="btn btn-danger">
@@ -99,7 +97,6 @@
                         <tr>
                             <th>No</th>
                             <th>Employee Name</th>
-                            <td>Employee Code</td>
                             <th>Date Birth</th>
                             <th>Employee Status</th>
                             <th>Age</th>
@@ -205,15 +202,6 @@
                                 placeholder="Enter Employee Name">
                         </div>
                         <div class="form-group">
-                            <label for="employee_code">Employee Code</label>
-                            <input type="text" class="form-control form-control-user" id="edit_employee_code" disabled value="{{ old('employee_code') }}" name="employee_code"
-                                placeholder="Enter Employee Name">
-                            <label for="employee_code" class="mt-3 text-small text-muted">
-                                <input type="checkbox" id="enable">
-                                If you want to edit this Code check this
-                            </label>
-                        </div>
-                        <div class="form-group">
                             <label for="birth">Birth</label>
                             <input type="date" class="form-control form-control-user" id="edit_birth" value="{{ old('birth') }}" name="birth">
                         </div>
@@ -257,7 +245,6 @@
             fetch(`/administrator/employees/${id}`).then(response => response.json()).then(response => {
                 document.getElementById("edit_form").action = `/administrator/employees/${id}`
                 document.getElementById("edit_name").value = response.name;
-                document.getElementById("edit_employee_code").value = response.employee_code;
                 document.getElementById("edit_birth").value = response.birth;
                 document.getElementById("edit_age").value = response.age;
                 document.getElementById("edit_phone_number").value = response.phone_number;
@@ -265,17 +252,6 @@
                 document.getElementById("edit_email").value = response.email;
             });
         }
-
-        $(function(){
-            $("#enable").click(function(){
-                if($(this).is(":checked")){
-                    $("#edit_employee_code").removeAttr("disabled");
-                    $("#edit_employee_code").focus();
-                }else{
-                    $("#edit_employee_code").attr("disabled", "disabled");
-                }
-            })
-        })
     </script>
 @endsection
 

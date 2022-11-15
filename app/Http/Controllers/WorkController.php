@@ -17,12 +17,13 @@ class WorkController extends Controller
      */
     public function index()
     {
+        // dd(Work::with('employee')->where('employee_id', Auth::guard('employee')->user()->id)->first());
         return view('admin.work', [
             "title" => "Work Management",
             "page_name" => "Employee Work",
-            "dataArr" => Auth::guard('admin')->check() ?
+            "dataArr" => auth('admin')->check() ?
             Work::with('employee')->paginate(request('paginate')??10) :
-            Work::with('employee')->where('employee_id', Auth::guard('employee')->user()->id)
+            Work::with('employee')->where('employee_id', auth('employee')->user()->id)
             ->paginate(request('paginate')??10),
             "employee" => Employee::all()
         ]);
@@ -46,7 +47,16 @@ class WorkController extends Controller
      */
     public function store(StoreWorkRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        if($request->validated()){
+            Work::insert([
+                "employee_id" => $request->employee_id,
+                "job_desk" => $request->job_desk,
+            ]);
+
+            return back()->with('toast_success', "Successfully Creating $request->job_desk");
+        }
+        return back()->with('error', "Error when Creating $request->job_desk");
     }
 
     /**
@@ -57,7 +67,7 @@ class WorkController extends Controller
      */
     public function show(Work $work)
     {
-        //
+        return response()->json(Work::find($work->id), 200);
     }
 
     /**
@@ -79,8 +89,17 @@ class WorkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateWorkRequest $request, Work $work)
-    {
-        dd($request->all());
+    {;
+        if($request->validated()){
+            $work->update([
+                "employee_id" => $request->employee_id,
+                "job_desk" => $request->job_desk,
+                "job_done" => $request->job_done
+            ]);
+
+            return back()->with('toast_success', "Successfully Updating Employee Job");
+        }
+        return back()->with('toast_error', "Error When Updating Employee Job");
     }
 
     /**
@@ -91,6 +110,9 @@ class WorkController extends Controller
      */
     public function destroy(Work $work)
     {
-        //
+        if(Work::destroy($work->id)){
+            return back()->with('toast_success', "Successfully Deleting Employee Job");
+        }
+        return back()->with('toast_error', "Error When Deleting Employee Job");
     }
 }

@@ -56,7 +56,7 @@
                                     <button type="button"  onclick="getData({{ $category->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="administrator/categories/{{ $category->id }}" method="POST" class="mx-3">
+                                    <form action="/administrator/categories/{{ $category->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Suer want to delete {{ $category->category_name }}')" class="btn btn-danger">
@@ -143,11 +143,11 @@
 @section('script')
 <script>
     let getData= id => {
-    fetch(`/administrator/categories/${id}`).then(response => response.json()).then(response => {
-    document.getElementById("edit_form").action = `/administrator/categories/${id}`
-        document.getElementById("edit_category_name").value = response.category_name;
-    });
-}
+        fetch(`/administrator/categories/${id}`).then(response => response.json()).then(response => {
+            document.getElementById("edit_form").action = `/administrator/categories/${id}`
+            document.getElementById("edit_category_name").value = response.category_name;
+        });
+    }
 </script>
 @endsection
 

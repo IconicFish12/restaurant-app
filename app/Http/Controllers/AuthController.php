@@ -5,14 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Employee;
 use App\Models\User;
-use Attribute;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpFoundation\RequestStack;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -57,31 +52,35 @@ class AuthController extends Controller
     public function attendanceAction(Request $request, Employee $employee)
     {
         $data = $request->validate([
-            'employee_code' => "required|max:15",
             'email' => "required|email:dns",
             'status' => "required",
             'presence' => "required",
             'password' => "required|min:6"
         ]);
 
-        //login
-        if($request->has('employee_code') && $request->has('email')){
-            $code = Employee::where('employee_code', $request->employee_code)->first();
-            $email = Employee::where('email', $request->email)->first();
-            $password = Employee::where('password', $request->password)->first();
+        //checking
+        if($request->has('email')){
+            $employee = Employee::where('email', $data['email'])->first();
 
-            if(!$email and !$code and !$password){
-                return redirect('/attendance')->with('toast_error', 'Something not match');
+            if(is_null($employee)){
+                return redirect('/attendance')->with('toast_error', "Your Email is Wrong or not found");
             }
+
+            if(!$employee['password']){
+                return redirect('/attendance')->with('toast_error', "Your Password is Wrong");
+            }
+
         }
 
-        $query = Attendance::where('employee_code', $data['employee_code'])->where("date", date("Y-m-d", strtotime(now())))->first();
-        
+        $employee = Employee::where('email', $data['email'])->first();
+        $query = Attendance::where('email', $data['email'])->where("date", date("Y-m-d", strtotime(now())))->first();
+        $in = date("h", strtotime(now())) <= 9;
+
         //attending
         if($request->has('status') and $request->status === "IN"){
-            if(is_null($query)){
+            if(is_null($query) and $in){
                 $create = Attendance::create([
-                    'employee_code' => $data['employee_code'],
+                    'employee_id' => $employee['id'],
                     'email' => $data['email'],
                     'password' => Hash::make($data['password']),
                     'date' => date(now()),
@@ -91,8 +90,8 @@ class AuthController extends Controller
                 ]);
 
                 if($create){
-                    if(Auth::guard('employee')->attempt($request->only(['employee_code', 'email', 'password']))){
-                        if(Employee::where('employee_code', $data['employee_code'])->first()->status !== "Y"){
+                    if(Auth::guard('employee')->attempt($request->only(['email', 'password']))){
+                        if(Employee::where('email', $data['email'])->first()->status !== "Y"){
                             Auth::logout();
 
                             return redirect('/attendance')->with('toast_error', 'This Employee is not active');
@@ -102,12 +101,12 @@ class AuthController extends Controller
                         return redirect('/administrator')->with('toast_success', 'Welcome Employee');
                     }
                 }
-                // $date= $query['date'] > date("Y-m-d");
+                return back()->with('toast_error', "Absence must be up at 7 am");
             }
 
-            if($data['employee_code'] == $query['employee_code'] or date("d", strtotime($query["date"])) < date("d")){
+            if($data['email'] == $query['email'] and date("d", strtotime($query["date"])) < date("d") and $in){
                     $create = Attendance::create([
-                        'employee_code' => $data['employee_code'],
+                        'employee_id' => $query['id'],
                         'email' => $data['email'],
                         'password' => Hash::make($data['password']),
                         'date' => date(now()),
@@ -117,8 +116,8 @@ class AuthController extends Controller
                     ]);
 
                     if($create == true){
-                    if(Auth::guard('employee')->attempt($request->only(['employee_code', 'email', 'password']))){
-                        if(Employee::where('employee_code', $data['employee_code'])->first()->status !== "Y"){
+                    if(Auth::guard('employee')->attempt($request->only(['email', 'password']))){
+                        if(Employee::where('email', $data['email'])->first()->status !== "Y"){
                             Auth::logout();
 
                             return redirect('/attendance')->with('toast_error', 'This Employee is not active');
@@ -131,9 +130,9 @@ class AuthController extends Controller
 
             }
 
-            if($data['employee_code'] == $query['employee_code']){
-                if(Auth::guard('employee')->attempt($request->only(['employee_code', 'email', 'password']))){
-                    if(Employee::where('employee_code', $data['employee_code'])->first()->status !== "Y"){
+            if($data['email'] == $query['email']){
+                if(Auth::guard('employee')->attempt($request->only(['email', 'password']))){
+                    if(Employee::where('email', $data['email'])->first()->status !== "Y"){
                         Auth::logout();
 
                         return redirect('/attendance')->with('toast_error', 'This Employee is not active');
@@ -144,18 +143,16 @@ class AuthController extends Controller
                 }
             }
 
-
         }
 
         if($request->has('status') and $request->status === "OUT"){
 
-            // dd($query['in'] == date("h", strtotime(now())) >= 01);
             if($query['in'] == date("h", strtotime(now())) >= 01){
                 $update = Attendance::find($query['id'])->update(['out' => date('h:i:s')]);
 
                 if($update == true ){
-                    if(Auth::guard('employee')->attempt($request->only(['employee_code', 'email', 'password']))){
-                        if(Employee::where('employee_code', $data['employee_code'])->first()->status !== "Y"){
+                    if(Auth::guard('employee')->attempt($request->only(['email', 'password']))){
+                        if(Employee::where('email', $data['email'])->first()->status !== "Y"){
                             Auth::logout();
 
                             return redirect('/attendance')->with('toast_error', 'This Employee is not active');
@@ -177,8 +174,6 @@ class AuthController extends Controller
 
     public function registerAction(Request $request)
     {
-        // dd($request->all());
-
         $validated = $request->validate([
             "firstname" => "required",
             "lastname" => "required",
@@ -206,7 +201,7 @@ class AuthController extends Controller
 
             $request->session()->regenerateToken();
 
-            return redirect('/attendance')->with('success', 'Success Logout');
+            return redirect('/attendance')->with('toast_success', 'Success Logout');
         }
 
         Auth::logout();
@@ -215,6 +210,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Success Logout');
+        return redirect('/login')->with('toast_success', 'Success Logout');
     }
 }

@@ -2,12 +2,14 @@
 @section('container')
 
 <div class="card shadow mb-4">
+    @auth('admin')
     <div class="card-header py-3">
         <button type="button" class="btn btn-danger mx-3" data-toggle="modal" data-target="#createAttendanceModal">
             <i class="fas fa-plus"></i>
             <span>Create</span>
         </button>
     </div>
+    @endauth
     <div class="card-body">
         <div class=" d-flex justify-content-between flex-column flex-md-row">
             <div class="col-md-3 ">
@@ -46,7 +48,6 @@
                             @auth('admin')
                             <th>Employee Name</th>
                             @endauth
-                            <td>Employee Code</td>
                             <th>Attendance Date</th>
                             <th>Absent in</th>
                             <th>Absent Out</th>
@@ -67,15 +68,14 @@
                                 @auth('admin')
                                 <td>{{ $data->employee->name }}</td>
                                 @endauth
-                                <td>{{ $data->employee_code }}</td>
                                 <td>{{ $data->date }}</td>
                                 <td>{{ $data->in }}</td>
                                 <td>
                                     @if (is_null($data->out))
-                                    <p class="text-uppercase text-center">
-                                        <i class="fas fa-folder-times"></i>
-                                       <span>No Data</span>
-                                    </p>
+                                        <p class="text-uppercase text-center">
+                                            <i class="fas fa-folder-times"></i>
+                                        <span>No Data</span>
+                                        </p>
                                     @else
                                     {{ $data->out }}
                                     @endif
@@ -87,23 +87,16 @@
                                 <td>{{ $data->presence}}</td>
                                 @auth('admin')
                                 <td class="d-flex justify-content-center">
-                                    <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateEmployeeModal">
+                                    <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateAttendanceModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="{{ asset('administrator/employees/'. $data->id) }}" method="POST" class="mx-3">
+                                    <form action="{{ asset('/administrator/attendances-data/'. $data->id) }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $data->name }}')" class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
-                                </td>
-                                @endauth
-                                @auth('employee')
-                                <td>
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
                                 </td>
                                 @endauth
                             </tr>
@@ -115,7 +108,6 @@
                             @auth('admin')
                             <th>Employee Name</th>
                             @endauth
-                            <td>Employee Code</td>
                             <th>Attendance Date</th>
                             <th>Absent in</th>
                             <th>Absent Out</th>
@@ -124,7 +116,9 @@
                             @endauth
                             <th>Attendace Status</th>
                             <th>Attendace Presence</th>
+                            @auth('admin')
                             <th>Action</th>
+                            @endauth
                         </tr>
                     </tfoot>
                     @else
@@ -151,10 +145,14 @@
                     @csrf
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="employee_code">Employee Code</label>
-                            <input type="text" class="form-control form-control-user"
-                                id="employee_code" aria-describedby="emailHelp" name="employee_code"
-                                placeholder="Enter Your Employee Code" value="{{ old('employee_code') }}">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control form-control-user" name="email"
+                            id="email" placeholder="Employee Email" value="{{ old('email') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control form-control-user" name="password"
+                            id="password" placeholder="Password">
                         </div>
                         <div class="form-group">
                             <label for="date">Attendance Date</label>
@@ -162,11 +160,11 @@
                         </div>
                         <div class="form-group">
                             <label for="in">Absent in</label>
-                            <input type="time" class="form-control form-control-user" id="in" value="{{ old('in') }}" name="in">
+                            <input type="text" class="form-control form-control-user" placeholder="Enter Time In" id="in" value="{{ old('in') }}" name="in">
                         </div>
                         <div class="form-group">
                             <label for="out">Absent out</label>
-                            <input type="time" class="form-control form-control-user" id="out" value="{{ old('out') }}" name="out">
+                            <input type="text" class="form-control form-control-user" placeholder="Enter Time Out" id="out" value="{{ old('out') }}" name="out">
                         </div>
                         <div class="form-group">
                             <label for="status">Attendance Status</label>
@@ -182,19 +180,68 @@
                                 <option value="permit">permit</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="modal-">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateAttendanceModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Update Employee Attendance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="edit_form">
+                    @method('PUT')
+                    @csrf
+                    <div class="form-group">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control form-control-user" name="email"
-                            id="email" placeholder="Employee Email" value="{{ old('email') }}">
+                            id="edit_email" placeholder="Employee Email" value="{{ old('email') }}">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control form-control-user" name="password"
-                            id="password" placeholder="Password">
-                            <label for="" style="font-size: 14.7px">
-                                <i class="fas fa-eye mt-2 text-muted" id="toggle" style="margin-left: 5px; cursor: pointer;"></i>
-                                Show Password
-                            </label>
+                            <input type="text" class="form-control form-control-user" name="password"
+                            id="edit_password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Attendance Date</label>
+                            <input type="date" class="form-control form-control-user" id="edit_date" value="{{ old('date') }}" name="date" placeholder="Your Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="in">Absent in</label>
+                            <input type="text" class="form-control form-control-user" id="edit_in" value="{{ old('in') }}" name="in">
+                        </div>
+                        <div class="form-group">
+                            <label for="out">Absent out</label>
+                            <input type="text" class="form-control form-control-user" id="edit_out" value="{{ old('out') }}" name="out">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Attendance Status</label>
+                            <select name="status" id="edit_status" class="costum-select form-control">
+                                <option value="IN">Absent in</option>
+                                <option value="OUT">Absent out</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="presence">Attendance Presence</label>
+                            <select name="presence" id="edit_presence" class="costum-select form-control">
+                                <option value="attend">Attend</option>
+                                <option value="permit">permit</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-">
@@ -210,16 +257,17 @@
 </div>
 
 
-
 <script>
-    const toggle = document.querySelector('#toggle')
-    const password = document.querySelector('#password')
-
-    toggle.addEventListener('click', function(e) {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password'
-        password.setAttribute('type', type)
-
-        this.classList.toggle('fa-eye-slash');
-    })
+    let getData = id => {
+        fetch(`/administrator/attendances-data/${id}`).then(response => response.json()).then(response => {
+            document.getElementById("edit_form").action = `/administrator/attendances-data/${id}`
+            document.getElementById("edit_email").value = response.email;
+            document.getElementById("edit_date").value = response.date
+            document.getElementById("edit_in").value = response.in
+            document.getElementById("edit_out").value = response.out
+            document.getElementById("edit_status").value = response.status
+            document.getElementById("edit_presence").value = response.presence
+        });
+    }
 </script>
 @endsection

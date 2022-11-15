@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id');
             $table->string('job_desk');
-            $table->time('job_done');
+            $table->enum('job_done', ['1', '0'])->default('0');
             $table->timestamps();
         });
     }

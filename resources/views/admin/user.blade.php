@@ -69,7 +69,7 @@
                                         <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateUserModal">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <form action="administrator/users/{{ $data->id }}" method="POST" class="mx-3">
+                                        <form action="/administrator/users/{{ $data->id }}" method="POST" class="mx-3">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" onclick="return alert('Are you Suer want to delete {{ $data->category_name }}')" class="btn btn-danger">

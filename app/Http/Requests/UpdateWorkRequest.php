@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateWorkRequest extends FormRequest
 {
@@ -24,7 +25,9 @@ class UpdateWorkRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "employee_id" => [Rule::requiredIf(auth('admin')->check())],
+            "job_desk" => [Rule::requiredIf(auth('admin')->check()), "max:100", "min:10"],
+            "job_done" => [Rule::requiredIf(auth('employee')->check() and request()->has('job_done'))]
         ];
     }
 }

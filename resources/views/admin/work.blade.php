@@ -46,11 +46,11 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            @auth(auth('admin')->check())
+                            @auth('admin')
                             <th scope="col">Employee Name</th>
                             @endauth
                             <th scope="col">Job Desk</th>
-                            <th scope="col">Job Done</th>
+                            <th scope="col">Job Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -63,20 +63,50 @@
                                 @endauth
                                 <td>{{ $item->job_desk }}</td>
                                 <td>
-                                    @if (is_null($item->done))
+                                    @if (auth('admin')->check())
+                                        @if (is_null($item->job_done))
                                         <p class="text-uppercase text-center">
                                             <i class="fas fa-folder-times"></i>
-                                        <span>No Data</span>
+                                            <span>No Data</span>
                                         </p>
+                                        @else
+                                            @if ($item->job_done === "0")
+                                                <p class="btn btn-danger text-center">
+                                                    Not Finish
+                                                </p>
+                                            @else
+                                                <p class="btn btn-success text-center">
+                                                    Finish
+                                                </p>
+                                            @endif
+                                        @endif
                                     @else
-                                        {{ $item->done }}
+                                        @if (is_null($item->job_done))
+                                            <p class="text-uppercase text-center">
+                                                <i class="fas fa-folder-times"></i>
+                                                <span>No Data</span>
+                                            </p>
+                                        @else
+                                            @if ($item->job_done === "0")
+                                            <form action="{{ asset('administrator/employees/'. $item->id) }}" method="post">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-danger" value="1" name="status">
+                                                    Not Finish
+                                                </button>
+                                            </form>
+                                            @else
+                                                <p class="btn btn-success">Finish</p>
+                                            @endif
+                                        @endif
                                     @endif
                                 </td>
+                                @auth('admin')
                                 <td class="d-flex justify-content-center">
-                                    <button type="button"  onclick="getData({{ $item->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
+                                    <button type="button"  onclick="getData({{ $item->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateWorkModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="administrator/works/{{ $item->id }}" method="POST" class="mx-3">
+                                    <form action="/administrator/works/{{ $item->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Suer want to delete {{ $item->category_name }}')" class="btn btn-danger">
@@ -84,17 +114,25 @@
                                         </button>
                                     </form>
                                 </td>
+                                @endauth
+                                @auth('employee')
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPerformanceModal">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                                @endauth
                             </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <th scope="col">No</th>
-                            @auth(auth('admin')->check())
+                            @auth('admin')
                             <th scope="col">Employee Name</th>
                             @endauth
                             <th scope="col">Employee Job</th>
-                            <th scope="col">Job Done</th>
+                            <th scope="col">Job Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </tfoot>
@@ -124,7 +162,7 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label for="employee_id">Employee Name</label>
-                            <select class="costume-select form-control" name="employee_id" id="edit_employee_id" aria-label="Default select example">
+                            <select class="costume-select form-control" name="employee_id" id="employee_id" aria-label="Default select example">
                                 <option selected > Select Employee</option>
                                 @foreach ($employee as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -137,10 +175,6 @@
                         <div class="form-group">
                             <label for="job_desk">Job Desk</label>
                             <input type="text" name="job_desk" id="job_desk" class="form-control" value="{{ old('job_desk') }}" placeholder="Enter Employee Job">
-                        </div>
-                        <div class="form-group">
-                            <label for="job_done">Job Done</label>
-                            <input type="time" class="form-control form-control-user" id="job_done" value="{{ old('job_done') }}" name="job_done">
                         </div>
                     </div>
                     <div class="modal-">
@@ -155,5 +189,89 @@
     </div>
 </div>
 
+<div class="modal fade" id="updateWorkModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">Update Employee Job</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="edit_form">
+                    @method('PUT')
+                    @csrf
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="employee_id">Employee Name</label>
+                            <select class="costume-select form-control" name="employee_id" id="edit_employee_id" aria-label="Default select example">
+                                <option selected > Select Employee</option>
+                                @foreach ($employee as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @if (old('employee_id') == $item->id)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="job_done">Job Status</label>
+                            <select name="job_done" id="edit_job_done" class="costume-select form-control">
+                                <option value="1">Finish</option>
+                                <option selected value="0">Not Finish</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="job_desk">Job Desk</label>
+                            <input type="text" name="job_desk" id="edit_job_desk" class="form-control" value="{{ old('job_desk') }}" placeholder="Enter Employee Job">
+                        </div>
+                    </div>
+                    <div class="modal-">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createPerformanceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+@section('script')
+
+<script>
+    let getData= id => {
+        fetch(`/administrator/works/${id}`).then(response => response.json()).then(response => {
+            document.getElementById("edit_form").action = `/administrator/works/${id}`
+            document.getElementById("edit_employee_id").value = response.employee_id;
+            document.getElementById("edit_job_desk").value = response.job_desk;
+            document.getElementById("edit_job_done").value = response.job_done;
+        });
+    }
+</script>
+
+@endsection
 
 @endsection

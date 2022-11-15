@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('employee_code');
+            $table->foreignId('employee_id');
             $table->date('date');
             $table->time('in');
             $table->time('out')->nullable();

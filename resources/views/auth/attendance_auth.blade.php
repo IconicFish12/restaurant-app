@@ -23,12 +23,6 @@
                                 <form method="POST" action="{{ asset('attendance/action') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="employee_code">Employee Code</label>
-                                        <input type="text" class="form-control form-control-user"
-                                            id="employee_code" aria-describedby="emailHelp" name="employee_code"
-                                            placeholder="Enter Your Employee Code" value="{{ old('employee_code') }}">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" class="form-control form-control-user" name="email"
                                         id="email" placeholder="Employee Email" value="{{ old('email') }}">

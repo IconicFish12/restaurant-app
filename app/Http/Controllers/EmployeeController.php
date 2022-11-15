@@ -48,7 +48,6 @@ class EmployeeController extends Controller
             Employee::insert([
                 "name" => $request->name,
                 "birth" => $request->birth,
-                "employee_code" => "employee-" . random_int(10, 99),
                 "phone_number" => $request->phone_number,
                 "age" => $request->age,
                 "position" => $request->position,
@@ -112,12 +111,6 @@ class EmployeeController extends Controller
         if($request->has('status')){
             if(Employee::find($employee->id)->update(["status" => $request->status])){
                 return back()->with("toast_success", "Successfully updating Employee Status");
-            }
-        }
-
-        if($request->has('employee_code')){
-            if(Employee::find($employee->id)->update(["employee_code" => $request->employee_code])){
-                return back()->with("toast_success", "Successfully updating Employee Code");
             }
         }
 

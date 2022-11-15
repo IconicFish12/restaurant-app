@@ -28,7 +28,6 @@ class StoreWorkRequest extends FormRequest
         return [
             "employee_id" => ["required"],
             "job_desk" => ["required", "max:100", "min:10"],
-            "job_done" => [Rule::requiredIf(Auth::guard('employee')->check() and request()->has('job_done')), "date_format:h:i:s"]
         ];
     }
 }

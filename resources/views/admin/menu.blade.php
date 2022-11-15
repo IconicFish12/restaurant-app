@@ -73,7 +73,7 @@
                                     <button type="button"  onclick="getData({{ $menu->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="administrator/menus/{{ $menu->id }}" method="POST" class="mx-3">
+                                    <form action="/administrator/menus/{{ $menu->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Sure want to delete {{ $menu->name }}')" class="btn btn-danger">
@@ -125,8 +125,9 @@
                     <div class="form-group">
                         <label for="category_id">Menu Category</label>
                         <select class="form-select form-control" name="category_id" id="category_id" aria-label="Default select example">
+                            <option value="" selected>Selcet Category Menu</option>
                             @foreach ($category as $item)
-                                <option selected value="{{ $item->id }}">{{ $item->category_name }}</option>
+                                <option value="{{ $item->id }}">{{ $item->category_name }}</option>
                                 @if (old('category_id') == $item->id)
                                     <option value="{{ $item->id }}">{{ $item->category_name }}</option>
                                 @endif
@@ -225,15 +226,15 @@
 
 <script>
     let getData= id => {
-    fetch(`/administrator/menus/${id}`).then(response => response.json()).then(response => {
-        document.getElementById("edit_form").action = `/administrator/menus/${id}`
-        document.getElementById("edit_name").value = response.name;
-        document.getElementById("edit_category_id").value = response.category_id
-        document.getElementById("edit_menu_type").value = response.menu_type
-        document.getElementById("edit_price").value = response.price
-        document.getElementById("edit_description").value = response.description
-     });
-}
+        fetch(`/administrator/menus/${id}`).then(response => response.json()).then(response => {
+            document.getElementById("edit_form").action = `/administrator/menus/${id}`
+            document.getElementById("edit_name").value = response.name;
+            document.getElementById("edit_category_id").value = response.category_id
+            document.getElementById("edit_menu_type").value = response.menu_type
+            document.getElementById("edit_price").value = response.price
+            document.getElementById("edit_description").value = response.description
+        });
+    }
 </script>
 
 @endsection

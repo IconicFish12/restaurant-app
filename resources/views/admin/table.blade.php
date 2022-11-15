@@ -55,7 +55,7 @@
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateTableModal">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form action="administrator/tables/{{ $data->id }}" method="POST" class="mx-3">
+                                    <form action="/administrator/tables/{{ $data->id }}" method="POST" class="mx-3">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" onclick="return alert('Are you Suer want to delete table {{ $data->table_number }}')" class="btn btn-danger">

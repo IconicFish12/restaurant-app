@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreAttendanceRequest extends FormRequest
 {
@@ -24,7 +25,13 @@ class StoreAttendanceRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'email' => ["required","email:dns"],
+            'status' => ["required"],
+            'presence' => ["required"],
+            'password' => ["required", "min:6"],
+            'in' => ["date_format:H:i:s"],
+            'out' => ["date_format:H:i:s"],
+            "date" => ["required", "date"]
         ];
     }
 }
