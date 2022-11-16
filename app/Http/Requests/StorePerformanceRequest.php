@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePerformanceRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StorePerformanceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,10 @@ class StorePerformanceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "employee_id" => [Rule::requiredIf(request()->has("employee_id") and auth('admin')->check())],
+            "date" => ["required", "date"],
+            "start" => ["required"],
+            "description" => ["required", "max:100"]
         ];
     }
 }

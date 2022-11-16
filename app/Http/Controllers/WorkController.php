@@ -89,16 +89,22 @@ class WorkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateWorkRequest $request, Work $work)
-    {;
+    {
         if($request->validated()){
             $work->update([
                 "employee_id" => $request->employee_id,
                 "job_desk" => $request->job_desk,
-                "job_done" => $request->job_done
             ]);
 
             return back()->with('toast_success', "Successfully Updating Employee Job");
         }
+
+        if($request->has('job_done')){
+            if(Work::find($work->id)->update(["job_done" => $request->job_done])){
+                return back()->with("toast_info", "Thank you for completing this work");
+            }
+        }
+
         return back()->with('toast_error', "Error When Updating Employee Job");
     }
 

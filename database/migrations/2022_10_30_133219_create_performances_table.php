@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('employee_id');
             $table->date('date');
             $table->time('start');
-            $table->time('end');
+            $table->time('end')->nullable();
             $table->longText('description');
             $table->timestamps();
         });

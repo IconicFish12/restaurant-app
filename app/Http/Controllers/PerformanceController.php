@@ -39,7 +39,20 @@ class PerformanceController extends Controller
      */
     public function store(StorePerformanceRequest $request)
     {
-        //
+        // dd($request->all());
+
+        if($request->validated()){
+            Performance::create([
+                "employee_id" => auth('employee')->check() ? auth('employee')->user()->id : $request->employee_id,
+                "date" => $request->date,
+                "start" => $request->start,
+                "end" => null,
+                "description" => $request->description
+            ]);
+
+            return redirect('administrator/performances')->with("toast_success", "Successfully Creating Perfomance data");
+        }
+        return back()->with("toast_error", "Error when Creating Perfomance data");
     }
 
     /**

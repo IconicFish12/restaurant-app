@@ -72,10 +72,11 @@
                                 <td>{{ $data->in }}</td>
                                 <td>
                                     @if (is_null($data->out))
-                                        <p class="text-uppercase text-center">
-                                            <i class="fas fa-folder-times"></i>
-                                        <span>No Data</span>
-                                        </p>
+                                        <div class="text-uppercase text-center">
+                                            <i class="fas fa-times"></i>
+                                            <span>No Data</span>
+                                            <i class="fas fa-times"></i>
+                                        </div>
                                     @else
                                     {{ $data->out }}
                                     @endif

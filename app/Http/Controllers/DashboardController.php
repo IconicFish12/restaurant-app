@@ -13,10 +13,9 @@ class DashboardController extends Controller
 
     public function dashboardView()
     {
-        // dd(Order::all()->sum('total_pay'));
 
         return view('admin.home', [
-            "page_name" => "Dashboard Vanushki",
+            "page_name" => auth('admin')->check() ? "Dashboard restaurant" : "Dasboard Employee",
             "menu" =>  Menu::all()->count(),
             "employee" => Employee::all()->count(),
             "income" => Order::all()->sum('total_pay') ?? 0

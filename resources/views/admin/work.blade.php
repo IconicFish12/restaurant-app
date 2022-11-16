@@ -65,43 +65,45 @@
                                 <td>
                                     @if (auth('admin')->check())
                                         @if (is_null($item->job_done))
-                                        <p class="text-uppercase text-center">
-                                            <i class="fas fa-folder-times"></i>
+                                        <div class="text-uppercase text-center">
+                                            <i class="fas fa-times"></i>
                                             <span>No Data</span>
-                                        </p>
+                                            <i class="fas fa-times"></i>
+                                        </div>
                                         @else
                                             @if ($item->job_done === "0")
-                                                <p class="btn btn-danger text-center">
+                                                <div class="btn btn-danger text-center">
                                                     Not Finish
-                                                </p>
+                                                </div>
                                             @else
-                                                <p class="btn btn-success text-center">
+                                                <div class="btn btn-success text-center">
                                                     Finish
-                                                </p>
+                                                </div>
                                             @endif
                                         @endif
                                     @else
                                         @if (is_null($item->job_done))
-                                            <p class="text-uppercase text-center">
-                                                <i class="fas fa-folder-times"></i>
+                                            <div class="text-uppercase text-center">
+                                                <i class="fas fa-times"></i>
                                                 <span>No Data</span>
-                                            </p>
+                                                <i class="fas fa-times"></i>
+                                            </div>
                                         @else
                                             @if ($item->job_done === "0")
-                                            <form action="{{ asset('administrator/employees/'. $item->id) }}" method="post">
+                                            <form action="{{ asset('administrator/works/'. $item->id) }}" method="post">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit" class="btn btn-danger" value="1" name="status">
+                                                <button type="submit" class="btn btn-danger" value="1" name="job_done">
                                                     Not Finish
                                                 </button>
                                             </form>
                                             @else
-                                                <p class="btn btn-success">Finish</p>
+                                                <div class="btn btn-success">Finish</div>
                                             @endif
                                         @endif
                                     @endif
                                 </td>
-                                @auth('admin')
+                                @if (Auth::guard('admin')->check())
                                 <td class="d-flex justify-content-center">
                                     <button type="button"  onclick="getData({{ $item->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateWorkModal">
                                         <i class="fas fa-edit"></i>
@@ -114,14 +116,13 @@
                                         </button>
                                     </form>
                                 </td>
-                                @endauth
-                                @auth('employee')
+                                @else
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPerformanceModal">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createPerformanceModal">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </td>
-                                @endauth
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
@@ -241,23 +242,38 @@
 
 <div class="modal fade" id="createPerformanceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add your Performance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ asset('administrator/performances') }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="date" value="{{ date("Y-m-d"), old('date') }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="start">Start</label>
+                        <input type="time" name="start" id="start" value="{{ date("H:i:s"), old('start') }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" class="form-control" placeholder="What are you doing today"></textarea>
+                    </div>
+                    @csrf
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Save</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 @section('script')
 

@@ -36,6 +36,12 @@
                                                 Show Password
                                             </label>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="remember">
+                                                <input type="checkbox" name="remember" id="remember" value="1">
+                                                Remember Me
+                                            </label>
+                                        </div>
                                         <button type="submit" class="btn btn-danger btn-user btn-block">Login</button>
                                     </form>
                                     <hr>

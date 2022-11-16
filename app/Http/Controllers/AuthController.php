@@ -28,12 +28,16 @@ class AuthController extends Controller
 
     public function auth(Request $request, User $user)
     {
+        // dd($request->all());
+
         $data = $request->validate([
             'username' => "required",
             'password' => "required"
         ]);
 
-        if(Auth::guard('admin')->attempt($data)){
+        $remember = $request->remember;
+
+        if(Auth::guard('admin')->attempt($data, $remember)){
             if(User::where("username", $data["username"])->first()->role !== "admin"){
                 Auth::logout();
 
@@ -146,6 +150,19 @@ class AuthController extends Controller
         }
 
         if($request->has('status') and $request->status === "OUT"){
+
+            if($data['email'] == $query['email'] and !is_null($query['out'])){
+                if(Auth::guard('employee')->attempt($request->only(['email', 'password']))){
+                    if(Employee::where('email', $data['email'])->first()->status !== "Y"){
+                        Auth::logout();
+
+                        return redirect('/attendance')->with('toast_error', 'This Employee is not active');
+                    }
+                    $request->session()->regenerate();
+
+                    return redirect('/administrator')->with('toast_success', 'Welcome Employee');
+                }
+            }
 
             if($query['in'] == date("h", strtotime(now())) >= 01){
                 $update = Attendance::find($query['id'])->update(['out' => date('h:i:s')]);
