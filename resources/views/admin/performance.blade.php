@@ -213,6 +213,12 @@
                         <label for="start">Job Start</label>
                         <input type="time" name="start" id="edit_start"  class="form-control">
                     </div>
+                    @auth('admin')
+                    <div class="form-group">
+                        <label for="end">Job End</label>
+                        <input type="time" name="end" id="edit_end"  class="form-control">
+                    </div>
+                    @endauth
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea name="description" id="edit_description" class="form-control" placeholder="What are you doing today"></textarea>
@@ -262,6 +268,7 @@
             document.getElementById("edit_form").action = `/administrator/performances/${id}`
             @auth('admin')
             document.getElementById("edit_employee_id").value = response.employee_id;
+            document.getElementById("edit_end").value = response.end;
             @endauth
             document.getElementById("edit_date").value = response.date;
             document.getElementById("edit_start").value = response.start;

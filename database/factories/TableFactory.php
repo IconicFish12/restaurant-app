@@ -17,7 +17,7 @@ class TableFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "table_number" => "Table-" . $this->faker->numberBetween(0, 100)
         ];
     }
 }

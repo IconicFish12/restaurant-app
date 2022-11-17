@@ -16,7 +16,7 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\WorkController;
-use App\Models\Attendance;
+use App\Http\Controllers\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,11 @@ Route::prefix('registration')->group(function() {
 });
 
 Route::get('logout', [AuthController::class, 'logout'])->middleware("auth:admin,employee");
+
+Route::get('forgot', [ResetPasswordController::class, "forgotView"]);
+Route::post('forgotAction', [ResetPasswordController::class, "forgotAction"]);
+Route::get('reset-password', [ResetPasswordController::class, "resetView"]);
+Route::post('reset-password-action', [ResetPasswordController::class, "resetAction"]);
 
 //DASHBOARD VIEW / BACKEND SYSTEM
 Route::prefix('/administrator')->group(function(){

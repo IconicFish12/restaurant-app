@@ -262,7 +262,7 @@
                     </div>
                     <div class="form-group">
                         <label for="start">Start</label>
-                        <input type="time" name="start" id="start" value="{{ date("H:i:s"), old('start') }}" class="form-control">
+                        <input type="time" name="start" id="start" value="{{ date("H:i"), old('start') }}" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>

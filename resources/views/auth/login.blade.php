@@ -46,7 +46,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="{{ asset('forgot') }}">Forgot Password?</a>
                                     </div>
                                     {{-- <div class="text-center">
                                         <a class="small" href="{{ asset('attendance') }}">Employee Attendances</a>
