@@ -25,8 +25,8 @@ class UpdateWorkRequest extends FormRequest
     public function rules()
     {
         return [
-            "employee_id" => [Rule::requiredIf(auth('admin')->check())],
-            "job_desk" => [Rule::requiredIf(auth('admin')->check()), "max:100", "min:10"],
+            "employee_id" => [Rule::requiredIf(auth('admin')->check() and request()->has('employee_id'))],
+            "job_desk" => [Rule::requiredIf(auth('admin')->check() and request()->has('job_desk')), "max:100", "min:10"],
         ];
     }
 }

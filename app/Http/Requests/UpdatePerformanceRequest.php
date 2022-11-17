@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePerformanceRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdatePerformanceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,11 @@ class UpdatePerformanceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "employee_id" => [Rule::requiredIf(request()->has("employee_id") and auth('admin')->check())],
+            "date" => [Rule::requiredIf(request()->has("date") ), "date"],
+            "start" => [Rule::requiredIf(request()->has("start") )],
+            "end" => [Rule::requiredIf(request()->has("end") and auth('admin')->check())],
+            "description" => [Rule::requiredIf(request()->has("description") ), "max:100"]
         ];
     }
 }

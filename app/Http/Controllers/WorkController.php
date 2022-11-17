@@ -101,7 +101,10 @@ class WorkController extends Controller
 
         if($request->has('job_done')){
             if(Work::find($work->id)->update(["job_done" => $request->job_done])){
-                return back()->with("toast_info", "Thank you for completing this work");
+                if(auth('employee')->check()){
+                    return back()->with("toast_info", "Thank you for completing this work");
+                }
+                return back()->with("toast_info", "Succesfully Updating Job Status");
             }
         }
 

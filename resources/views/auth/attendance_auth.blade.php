@@ -18,7 +18,7 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <span><h1 class="h4 text-gray-900 mb-4">Enter Attendance</h1></span>
+                                    <span><h1 class="h4 text-gray-900 mb-4">Employee Attendance</h1></span>
                                 </div>
                                 <form method="POST" action="{{ asset('attendance/action') }}">
                                     @csrf

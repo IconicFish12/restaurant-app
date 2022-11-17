@@ -28,6 +28,7 @@ class StorePerformanceRequest extends FormRequest
             "employee_id" => [Rule::requiredIf(request()->has("employee_id") and auth('admin')->check())],
             "date" => ["required", "date"],
             "start" => ["required"],
+            "end" => [Rule::requiredIf(request()->has("end") and auth('admin')->check())],
             "description" => ["required", "max:100"]
         ];
     }

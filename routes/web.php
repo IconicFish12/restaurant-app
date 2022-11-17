@@ -128,6 +128,9 @@ Route::prefix('/administrator')->group(function(){
     Route::prefix('/performances')->middleware('auth:admin,employee')->group(function () {
         Route::get('/', [PerformanceController::class, 'index']);
         Route::post('/', [PerformanceController::class, 'store']);
+        Route::get('/{performance:id}', [PerformanceController::class, 'show']);
+        Route::put('/{performance:id}', [PerformanceController::class, 'update']);
+        Route::delete('/{performance:id}', [PerformanceController::class, 'destroy']);
     });
 
     Route::prefix('/works')->middleware('auth:admin,employee')->group(function (){

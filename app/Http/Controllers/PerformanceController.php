@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Performance;
 use App\Http\Requests\StorePerformanceRequest;
 use App\Http\Requests\UpdatePerformanceRequest;
+use App\Models\Employee;
 
 class PerformanceController extends Controller
 {
@@ -18,6 +19,11 @@ class PerformanceController extends Controller
         return view('admin.performance', [
             "title" => "Performance Management",
             "page_name" =>  "Employee Performance",
+            "dataArr" => auth('admin')->check() ?
+            Performance::with('employee')->paginate(request("paginate") ?? 10):
+            Performance::with('employee')->where("employee_id", auth('employee')->user()->id)
+            ->paginate(request("paginate") ?? 10),
+            "employee" => Employee::all()
         ]);
     }
 
@@ -39,18 +45,19 @@ class PerformanceController extends Controller
      */
     public function store(StorePerformanceRequest $request)
     {
-        // dd($request->all());
-
         if($request->validated()){
             Performance::create([
                 "employee_id" => auth('employee')->check() ? auth('employee')->user()->id : $request->employee_id,
                 "date" => $request->date,
                 "start" => $request->start,
-                "end" => null,
+                "end" => null ?? $request->end,
                 "description" => $request->description
             ]);
 
-            return redirect('administrator/performances')->with("toast_success", "Successfully Creating Perfomance data");
+            if(auth('employee')->check()){
+                return redirect('administrator/performances')->with("toast_success", "Successfully Creating Perfomance data");
+            }
+            return back()->with("toast_success", "Successfully Creating Perfomance data");
         }
         return back()->with("toast_error", "Error when Creating Perfomance data");
     }
@@ -63,7 +70,7 @@ class PerformanceController extends Controller
      */
     public function show(Performance $performance)
     {
-        //
+        return response()->json(Performance::find($performance->id), 200);
     }
 
     /**
@@ -86,7 +93,23 @@ class PerformanceController extends Controller
      */
     public function update(UpdatePerformanceRequest $request, Performance $performance)
     {
-        //
+        if($request->has('end')){
+            $performance->update(["end" => $request->end]);
+
+            return back()->with("toast_info", "Work has been completed on $request->end");
+        }
+
+        if($request->validated()){
+            $performance->update([
+                "employee_id" => auth('employee')->check() ? auth('employee')->user()->id : $request->employee_id,
+                "date" => $request->date,
+                "start" => $request->start,
+                "description" => $request->description
+            ]);
+
+            return back()->with("toast_success", "Successfully Updating Performance data");
+        }
+        return back()->with("toast_error", "Successfully Updating Performance data");
     }
 
     /**
@@ -97,6 +120,9 @@ class PerformanceController extends Controller
      */
     public function destroy(Performance $performance)
     {
-        //
+        if(Performance::destroy($performance->id)){
+            return back()->with("toast_success", "Successfully Deleting Performance data");
+        }
+        return back()->with("toast_error", "Error when Deleting Performance data");
     }
 }

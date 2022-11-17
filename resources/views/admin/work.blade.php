@@ -71,15 +71,19 @@
                                             <i class="fas fa-times"></i>
                                         </div>
                                         @else
+                                        <form action="{{ asset('administrator/works/'. $item->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
                                             @if ($item->job_done === "0")
-                                                <div class="btn btn-danger text-center">
-                                                    Not Finish
-                                                </div>
+                                            <button type="submit" class="btn btn-danger" value="1" name="job_done">
+                                                Not Finish
+                                            </button>
                                             @else
-                                                <div class="btn btn-success text-center">
-                                                    Finish
-                                                </div>
+                                            <button type="submit" class="btn btn-success" value="0" name="job_done">
+                                                Finish
+                                            </button>
                                             @endif
+                                        </form>
                                         @endif
                                     @else
                                         @if (is_null($item->job_done))
