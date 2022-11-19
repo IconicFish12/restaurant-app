@@ -23,7 +23,7 @@ class OrderController extends Controller
         return view('admin.order', [
             "title" => "Order Management",
             "page_name" => "Costumer Order",
-            "dataArr" => Order::filter(request(['search']))->with(['user', 'menu', 'table'])->paginate(request('paginate') ?? 10),
+            "dataArr" => Order::filter(request(['search']))->with('user', 'menu', 'table')->paginate(request('paginate') ?? 10),
             "menu" => Menu::all(),
             "table" => Table::all(),
             "user" => User::where("role", "costumer")->get()
@@ -62,7 +62,7 @@ class OrderController extends Controller
                 "total_pay" => $request->quantity *= $request->price
             ]);
 
-            return back()->with('success', "Successfully Creating Data Order");
+            return back()->with('toast_success', "Successfully Creating Data Order");
         }
         return back()->with('error', "Error When Creating Order");
     }
@@ -126,7 +126,7 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         if(Order::destroy($order->id)) {
-            return back()->with('success', "Successfully Deleting Order data");
+            return back()->with('toast_success', "Successfully Deleting Order data");
         }
         return back()->with('error', "Error When Deleting Order data");
     }

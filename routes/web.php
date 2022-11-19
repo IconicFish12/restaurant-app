@@ -46,10 +46,10 @@ Route::prefix('registration')->group(function() {
 
 Route::get('logout', [AuthController::class, 'logout'])->middleware("auth:admin,employee");
 
-Route::get('forgot', [ResetPasswordController::class, "forgotView"]);
-Route::post('forgotAction', [ResetPasswordController::class, "forgotAction"]);
-Route::get('reset-password', [ResetPasswordController::class, "resetView"]);
-Route::post('reset-password-action', [ResetPasswordController::class, "resetAction"]);
+Route::get('forgot', [ResetPasswordController::class, "forgotView"])->middleware('guest');
+Route::post('forgotAction', [ResetPasswordController::class, "forgotAction"])->middleware("guest");
+Route::get('reset-password/{token}', [ResetPasswordController::class, "resetView"])->middleware("guest");
+Route::post('reset-password-action', [ResetPasswordController::class, "resetAction"])->middleware("guest");
 
 //DASHBOARD VIEW / BACKEND SYSTEM
 Route::prefix('/administrator')->group(function(){
