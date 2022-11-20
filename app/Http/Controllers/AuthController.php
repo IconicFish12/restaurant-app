@@ -28,8 +28,6 @@ class AuthController extends Controller
 
     public function auth(Request $request, User $user)
     {
-        // dd($request->all());
-
         $data = $request->validate([
             'username' => "required",
             'password' => "required"
@@ -38,6 +36,12 @@ class AuthController extends Controller
         $remember = $request->remember;
 
         if(Auth::guard('admin')->attempt($data, $remember)){
+            if(User::where("username", $data["username"])->first()->role === "costumer"){
+                $request->session()->regenerate();
+
+                return redirect()->intended('/')->with('toast_success', "Welcome, $request->username");
+            }
+
             if(User::where("username", $data["username"])->first()->role !== "admin"){
                 Auth::logout();
 
@@ -219,6 +223,14 @@ class AuthController extends Controller
             $request->session()->regenerateToken();
 
             return redirect('/attendance')->with('toast_success', 'Success Logout');
+        }elseif(Auth::user()->role == "admin"){
+            Auth::logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+
+            return redirect('/login')->with('toast_success', 'Success Logout');
         }
 
         Auth::logout();
@@ -227,6 +239,7 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('toast_success', 'Success Logout');
+        return redirect('/')->with('toast_success', 'Success Logout');
+
     }
 }

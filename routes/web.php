@@ -171,3 +171,5 @@ Route::prefix('/administrator')->group(function(){
 
 //WEB VIEW
 Route::get('/', [DashboardController::class, 'webView']);
+Route::post('/messages', [ContactController::class, 'store']);
+

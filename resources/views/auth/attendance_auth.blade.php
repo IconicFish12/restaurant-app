@@ -54,6 +54,10 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-danger btn-user btn-block">Submit</button>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="{{ asset('forgot') }}">Forgot Password?</a>
+                                    </div>
                                 </form>
                             </div>
                         </div>

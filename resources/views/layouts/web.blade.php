@@ -42,7 +42,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+      <a href="{{ asset('/') }}" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
       <h1>Vanushki Restaurant<span>.</span></h1>
@@ -84,24 +84,33 @@
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
+          <li class="ms-auto">
+            @auth
+            <div class="d-flex align-items-center ms-auto ms-lg-0">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i>
+                        <span>{{ Auth::user()->username }}</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ asset('logout') }}" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+            </div>
+            @else
+            <a href="{{ asset('login') }}">
+                <i class="bi bi-box-arrow-in-right fs-4"></i>
+                &nbsp;
+                <span>Login</span>
+            </a>
+            @endauth
+          </li>
         </ul>
       </nav><!-- .navbar -->
-
-        {{-- <div class="d-flex align-items-center ms-auto ms-lg-0">
-            <div class="dropdown">
-                <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-circle"></i>
-                    <span>{{ Auth::user()->username }}</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="{{ asset('logout') }}" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div> --}}
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
@@ -711,7 +720,7 @@
 
         </div>
 
-        {{-- <form action="{{ asset('messages') }}" method="post" role="form" class="php-email-form p-3 p-md-4">
+        <form action="{{ asset('messages') }}" method="post" class="php-email-form p-3 p-md-4">
             @csrf
             <div class="row">
                 <div class="col-xl-6 form-group">
@@ -727,13 +736,8 @@
             <div class="form-group">
                 <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
             </div>
-            <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-            </div>
             <div class="text-center"><button type="submit">Send Message</button></div>
-        </form> --}}
+        </form>
         <!--End Contact Form -->
 
       </div>
@@ -826,6 +830,8 @@
 
   {{-- Font Awasome --}}
   <script src="https://kit.fontawesome.com/7ffd803955.js" crossorigin="anonymous"></script>
+  @include('sweetalert::alert')
+
 
 </body>
 

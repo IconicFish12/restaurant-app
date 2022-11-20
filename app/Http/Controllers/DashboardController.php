@@ -6,6 +6,8 @@ use App\Models\Menu;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Employee;
+use App\Models\Performance;
+use App\Models\Work;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -18,15 +20,15 @@ class DashboardController extends Controller
             "page_name" => auth('admin')->check() ? "Dashboard restaurant" : "Dasboard Employee",
             "menu" =>  Menu::all()->count(),
             "employee" => Employee::all()->count(),
-            "income" => Order::all()->sum('total_pay') ?? 0
+            "income" => Order::all()->sum('total_pay') ?? 0,
+            "work" => Work::all()->sum(),
+            "performance" => Performance::all()->sum()
         ]);
     }
 
-    public function webView(User $user)
+    public function webView()
     {
-        return view('layouts.web', [
-            'user' => User::where("username", "IbnuKamil")->first()
-        ]);
+        return view('layouts.web');
     }
 
     public function documentation()
