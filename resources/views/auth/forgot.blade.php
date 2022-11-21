@@ -30,9 +30,6 @@
                                     <button type="submit" class="btn btn-danger btn-user btn-block">Send Email</button>
                                 </form>
                                 <hr>
-                                <div class="text-center">
-                                    <a class="small" href="{{ asset('login') }}">Login</a>
-                                </div>
                             </div>
                         </div>
                     </div>

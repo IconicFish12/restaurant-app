@@ -52,7 +52,7 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, "resetView
 Route::post('reset-password-action', [ResetPasswordController::class, "resetAction"])->middleware("guest");
 
 //DASHBOARD VIEW / BACKEND SYSTEM
-Route::prefix('/administrator')->group(function(){
+Route::prefix('/administrator')->middleware('role:admin')->group(function(){
 
     Route::get('/',[DashboardController::class, 'dashboardView'])->middleware('auth:admin,employee');
 
@@ -170,6 +170,7 @@ Route::prefix('/administrator')->group(function(){
 });
 
 //WEB VIEW
-Route::get('/', [DashboardController::class, 'webView']);
+Route::get('/', [DashboardController::class, 'webView'])->middleware("guest");
+Route::get('/home', [DashboardController::class, 'webView'])->middleware(['auth', "role:costumer"]);
 Route::post('/messages', [ContactController::class, 'store']);
 
