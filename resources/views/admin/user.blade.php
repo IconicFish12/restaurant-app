@@ -44,8 +44,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
+                                <th>Name</th>
                                 <th>Date Birth</th>
                                 <th>Phone Number</th>
                                 <th>Username</th>
@@ -58,8 +57,7 @@
                             @foreach ($user as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td style="font-size: 17.8px">{{ $data->firstname }}</td>
-                                    <td style="font-size: 17.8px">{{ $data->lastname }}</td>
+                                    <td style="font-size: 17.8px">{{ $data->name }}</td>
                                     <td style="font-size: 17.8px">{{ $data->birth }}</td>
                                     <td style="font-size: 17.8px">{{ $data->phone_number }}</td>
                                     <td style="font-size: 17.8px">{{ $data->username }}</td>
@@ -83,8 +81,7 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
+                                <th>Name</th>
                                 <th>Date Birth</th>
                                 <th>Phone Number</th>
                                 <th>Username</th>
@@ -108,7 +105,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="userModalLabel">Create User</h5>
+                <h5 class="modal-title" id="userModalLabel">Create User Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -117,17 +114,10 @@
                 <form action="{{ asset('administrator/users') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <label for="firstname">First Name</label>
-                                <input type="text" class="form-control form-control-user" id="firstname" value="{{ old('firstname') }}" name="firstname"
-                                    placeholder="First Name">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" class="form-control form-control-user" id="lastName" value="{{ old('lastname') }}" name="lastname"
-                                    placeholder="Last Name">
-                            </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control form-control-user" id="name" name="name"
+                                 placeholder="Your Name" value="{{ old('name') }}">
                         </div>
                         <div class="form-group">
                             <label for="birth">Birth</label>
@@ -167,27 +157,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="userModalLabel">Create User</h5>
+                <h5 class="modal-title" id="userModalLabel">Update User Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="post" id="edit_form">\
+                <form action="" method="post" id="edit_form">
                     @method('put')
                     @csrf
                     <div class="form-group">
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <label for="firstname">First Name</label>
-                                <input type="text" class="form-control form-control-user" id="edit_firstname" name="firstname"
-                                    placeholder="First Name">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" class="form-control form-control-user" id="edit_lastname" name="lastname"
-                                    placeholder="Last Name">
-                            </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control form-control-user" id="edit_name" name="name"
+                                 placeholder="Your Name" value="{{ old('name') }}">
                         </div>
                         <div class="form-group">
                             <label for="birth">Birth</label>
@@ -235,13 +218,12 @@
     let getData= id => {
     fetch(`/administrator/users/${id}`).then(response => response.json()).then(response => {
         document.getElementById("edit_form").action = `/administrator/users/${id}`
-        document.getElementById("edit_firstname").value = response.firstname;
+        document.getElementById("edit_name").value = response.name;
         document.getElementById("edit_birth").value = response.birth;
         document.getElementById("edit_phone_number").value = response.phone_number;
         document.getElementById("edit_email").value = response.email;
         document.getElementById("edit_username").value = response.username;
         document.getElementById("edit_role").value = response.role;
-        document.getElementById("edit_lastname").value = response.lastname;
     });
 }
 </script>

@@ -3,10 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserRole
+class EmployeeAttend
 {
     /**
      * Handle an incoming request.
@@ -15,18 +14,10 @@ class UserRole
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, ...$roles)
+    public function handle(Request $request, Closure $next)
     {
-        if(auth("admin")->check())
-        {
-            if(in_array(strtolower(auth()->user()->role), $roles)){
-            return $next($request);
-            }
-        }
+        if(auth('employee')->check()) return $next($request);
 
-        if(auth("employee")->check()) return $next($request);
-
-        abort(403);
-
+        return $next($request);
     }
 }

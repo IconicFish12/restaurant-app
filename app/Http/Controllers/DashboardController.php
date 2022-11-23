@@ -20,14 +20,22 @@ class DashboardController extends Controller
             "menu" =>  Menu::all()->count(),
             "employee" => Employee::all()->count(),
             "income" => Order::all()->sum('total_pay') ?? 0,
-            "work" => Work::all()->sum(),
-            "performance" => Performance::all()->sum()
+            "work" => Work::all()->count(),
+            "performance" => Performance::all()->count()
         ]);
     }
 
     public function webView()
     {
-        return view('layouts.web');
+        $user = User::where("role", "costumer")->get();
+        $total = $user->count("username");
+
+        return view('layouts.web',[
+            "total_menu" =>  Menu::all()->count(),
+            "total_employee" => Employee::all()->count(),
+            "total_user" => $total,
+            "menu" => Menu::all()
+        ]);
     }
 
     public function documentation()

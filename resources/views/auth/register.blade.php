@@ -15,17 +15,10 @@
                             </div>
                             <form action="{{ asset('registration/register') }}" method="POST">
                                 @csrf
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="firstname">First Name</label>
-                                        <input type="text" class="form-control form-control-user" id="firstname" name="firstname"
-                                            placeholder="First Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="lastname">Last Name</label>
-                                        <input type="text" class="form-control form-control-user" id="lastName" name="lastname"
-                                            placeholder="Last Name">
-                                    </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control form-control-user" id="name" name="name"
+                                         placeholder="Your Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="birth">Birth</label>

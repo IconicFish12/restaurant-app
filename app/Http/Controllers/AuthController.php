@@ -196,8 +196,7 @@ class AuthController extends Controller
     public function registerAction(Request $request)
     {
         $validated = $request->validate([
-            "firstname" => "required",
-            "lastname" => "required",
+            "name" => "required",
             "birth" => "required|date",
             "phone_number" => "required|unique:users",
             "username" => "required|max:50|unique:users",

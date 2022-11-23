@@ -22,8 +22,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = User::insert([
-            "firstname" => $request->firstname,
-            "lastname" => $request->lastname,
+            "name" => $request->name,
             "birth" => $request->birth,
             "phone_number" => $request->phone_number,
             "username" => $request->username,
@@ -42,8 +41,7 @@ class UserController extends Controller
     public function update(User $user, UpdateUserRequest $request)
     {
         $user->update([
-            "firstname" => $request->firstname,
-            "lastname" => $request->lastname,
+            "name" => $request->firstname,
             "birth" => $request->birth,
             "phone_number" => $request->phone_number,
             "username" => $request->username,

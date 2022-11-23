@@ -26,8 +26,7 @@ class DatabaseSeeder extends Seeder
 
         $data = [
             [
-                "firstname" => "Ibnu Syawal",
-                "lastname" => "Aliefian",
+                "name" => "Ibnu Syawal Aliefian",
                 "birth" => "2004-11-04",
                 "phone_number" => "082162941198",
                 "role" => "admin",
@@ -36,8 +35,7 @@ class DatabaseSeeder extends Seeder
                 "email" => "superglidingogre0571@gmail.com"
             ],
             [
-                "firstname" => "Mochammad Ibnu",
-                "lastname" => "Kamil",
+                "name" => "Mochammad Ibnu Kamil",
                 "birth" => "2007-05-13",
                 "phone_number" => "081123515454",
                 "role" => "costumer",

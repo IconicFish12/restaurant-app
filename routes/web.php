@@ -52,11 +52,11 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, "resetView
 Route::post('reset-password-action', [ResetPasswordController::class, "resetAction"])->middleware("guest");
 
 //DASHBOARD VIEW / BACKEND SYSTEM
-Route::prefix('/administrator')->middleware('role:admin')->group(function(){
+Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(function(){
 
-    Route::get('/',[DashboardController::class, 'dashboardView'])->middleware('auth:admin,employee');
+    Route::get('/',[DashboardController::class, 'dashboardView'])->middleware(['auth:admin,employee']);
 
-    Route::prefix('/menus')->middleware('auth:admin')->group(function(){
+    Route::prefix('/menus')->middleware(['auth:admin', 'role:admin'])->group(function(){
         Route::get('/', [MenuController::class, 'index']);
         Route::post('/', [MenuController::class, 'store']);
         Route::get('/{menu:id}', [MenuController::class, 'show']);
@@ -64,7 +64,7 @@ Route::prefix('/administrator')->middleware('role:admin')->group(function(){
         Route::delete('/{menu:id}', [MenuController::class, 'destroy']);
     });
 
-    Route::prefix('/categories')->middleware('auth:admin')->group(function(){
+    Route::prefix('/categories')->middleware(['auth:admin', 'role:admin'])->group(function(){
         Route::get('/', [CategoryController::class, 'index']);
         Route::post('/', [CategoryController::class, 'store']);
         Route::get('/{category:id}', [CategoryController::class, 'show']);
@@ -81,7 +81,7 @@ Route::prefix('/administrator')->middleware('role:admin')->group(function(){
     });
 
     // USER AND EMPLOYEE MANAGEMENT
-    Route::prefix('/users')->middleware('auth:admin')->group(function() {
+    Route::prefix('/users')->middleware(['auth:admin', 'role:admin'])->group(function() {
         Route::get('/', [UserController::class, 'index']);
         Route::post('/', [UserController::class, 'store']);
         Route::get('/{user:id}', [UserController::class, 'show']);
@@ -89,7 +89,7 @@ Route::prefix('/administrator')->middleware('role:admin')->group(function(){
         Route::delete('/{user:id}', [UserController::class, 'destroy']);
     });
 
-    Route::prefix('/employees')->middleware('auth:admin')->group(function () {
+    Route::prefix('/employees')->middleware(['auth:admin', 'role:admin'])->group(function () {
         Route::get('/', [EmployeeController::class, 'index']);
         Route::post('/', [EmployeeController::class, 'store']);
         Route::get('/{employee:id}', [EmployeeController::class, 'show']);
@@ -98,7 +98,7 @@ Route::prefix('/administrator')->middleware('role:admin')->group(function(){
     });
 
     //CONTACT SERVICE
-    Route::prefix('/messages')->middleware('auth:admin')->group(function (){
+    Route::prefix('/messages')->middleware(['auth:admin', 'role:admin'])->group(function (){
         Route::get('/', [ContactController::class, 'index']);
         Route::post('/', [ContactController::class, 'store']);
         Route::get('/{contact:id}', [ContactController::class, 'show']);
@@ -106,7 +106,7 @@ Route::prefix('/administrator')->middleware('role:admin')->group(function(){
     });
 
     //TRANSACTION ACTIVITY
-    Route::prefix('/orders')->middleware('auth:admin')->group(function(){
+    Route::prefix('/orders')->middleware(['auth:admin', 'role:admin'])->group(function(){
         Route::get('/', [OrderController::class, 'index']);
         Route::post('/', [OrderController::class, 'store']);
         Route::get('/{order:id}', [OrderController::class, 'show']);
@@ -114,11 +114,11 @@ Route::prefix('/administrator')->middleware('role:admin')->group(function(){
         Route::delete('/{order:id}', [OrderController::class, 'destroy']);
     });
 
-    Route::prefix('/histories')->middleware('auth:admin')->group(function(){
+    Route::prefix('/histories')->middleware(['auth:admin', 'role:admin'])->group(function(){
         Route::get('/', [OrderController::class, 'orderHistory']);
     });
 
-    Route::prefix('/vouchers')->middleware('auth:admin')->group(function() {
+    Route::prefix('/vouchers')->middleware(['auth:admin', 'role:admin'])->group(function() {
         Route::get('/', [VoucherController::class, 'index']);
         Route::post('/', [VoucherController::class, 'store']);
         Route::get('/{voucher:id}', [VoucherController::class, 'show']);
@@ -147,20 +147,20 @@ Route::prefix('/administrator')->middleware('role:admin')->group(function(){
     });
 
     //PROFILE MANAGEMENT
-    Route::get('/me', [ProfileController::class, 'index'])->middleware('auth:admin');
+    Route::get('/me', [ProfileController::class, 'index'])->middleware(['auth:admin', 'role:admin']);
 
     //MORE
-    Route::middleware('auth:admin')->group(function(){
+    Route::middleware(['auth:admin', 'role:admin'])->group(function(){
         Route::get('/backup', [BackupController::class, 'index']);
         Route::get('/backup/create', [BackupController::class, 'store']);
         Route::delete('/backup/delete/{i}', [BackupController::class, 'destroy']);
     });
 
-    Route::get('/documentation', [DashboardController::class, 'documentation'])->middleware('auth:admin');
+    Route::get('/documentation', [DashboardController::class, 'documentation'])->middleware(['auth:admin', 'role:admin']);
 
     Route::prefix('/attendances-data')->group(function(){
         Route::get('/', [AttendanceController::class, 'index']);
-        Route::middleware('auth:admin')->group(function(){
+        Route::middleware(['auth:admin', 'role:admin'])->group(function(){
             Route::post('/', [AttendanceController::class, 'store']);
             Route::get('/{attendance:id}', [AttendanceController::class, 'show']);
             Route::put('/{attendance:id}', [AttendanceController::class, 'update']);
