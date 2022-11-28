@@ -57,7 +57,6 @@
                     @endif
                 </table>
             </div>
-            {{-- {{ $dataArr->links() }} --}}
         </div>
     </div>
 </div>

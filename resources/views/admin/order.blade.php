@@ -61,7 +61,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->menu->name }}</td>
-                                <td>{{ $data->user->firstname }}</td>
+                                <td>{{ $data->user->name }}</td>
                                 <td>{{ $data->table->table_number }}</td>
                                 <td>{{ $data->payment_method }}</td>
                                 <td>{{ $data->order_code }}</td>
@@ -146,9 +146,9 @@
                                 <option value="" selected>Select The User</option>
                                 @foreach ($user as $item)
                                     @if (old('menu_id' == $item->id))
-                                        <option value="{{ $item->id }}" selected>{{ $item->firstname }}</option>
+                                        <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                     @endif
-                                <option value="{{ $item->id }}">{{ $item->firstname }}</option>
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
