@@ -122,7 +122,7 @@
                                 </td>
                                 @else
                                 <td>
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createPerformanceModal">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createPerformanceModal" onclick="">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </td>

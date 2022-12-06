@@ -23,7 +23,7 @@ class EmployeeSeeder extends Seeder
                 "age" => "18",
                 "phone_number" => "082162941198",
                 "position" => "Admin",
-                "email" => "superglidingogre0571@gmail.com",
+                "email" => "ibnuSyawal@gmail.com",
                 "status" => "Y",
                 "password" => Hash::make("gigantara")
             ],

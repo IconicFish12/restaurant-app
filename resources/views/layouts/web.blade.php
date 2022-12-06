@@ -90,7 +90,7 @@
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
-                        <span>{{ Auth::user()->username }}</span>
+                        <span>{{ Auth::user()->name }}</span>
                     </button>
                     <ul class="dropdown-menu">
                         <li>

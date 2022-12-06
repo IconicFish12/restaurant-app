@@ -17,4 +17,9 @@ class Table extends Model
             $query->where('table_number', 'LIKE' , '%' . $collect . '%');
         });
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

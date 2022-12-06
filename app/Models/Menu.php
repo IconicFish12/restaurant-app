@@ -16,6 +16,11 @@ class Menu extends Model
         return $this->belongsTo(Category::class, "category_id");
     }
 
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function scopeFilter($query, array $filter)
     {
         // if(isset($filter['search'])  ? $filter['search'] : false){
