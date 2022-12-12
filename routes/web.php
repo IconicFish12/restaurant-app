@@ -171,6 +171,6 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
 
 //WEB VIEW
 Route::get('/', [DashboardController::class, 'webView'])->middleware("guest");
-Route::get('/home', [DashboardController::class, 'webView'])->middleware(['auth', "role:costumer"]);
+Route::get('/index', [DashboardController::class, 'webView'])->middleware(['auth', "role:costumer"]);
 Route::post('/messages', [ContactController::class, 'store']);
 

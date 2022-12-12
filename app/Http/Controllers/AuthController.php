@@ -36,21 +36,17 @@ class AuthController extends Controller
         $remember = $request->remember;
 
         if(Auth::guard('admin')->attempt($data, $remember)){
-            if(User::where("username", $data["username"])->first()->role === "costumer"){
+            // dd(User::where("username", $data["username"])->first()->role == "admin");
+            if(User::where("username", $data["username"])->first()->role == "admin"){
                 $request->session()->regenerate();
 
-                return redirect()->intended('/')->with('toast_success', "Welcome, $request->username");
+                return redirect('/administrator')->with('toast_success', "Welcome, $request->username");
             }
-
-            if(User::where("username", $data["username"])->first()->role !== "admin"){
-                Auth::logout();
-
-                return redirect('login')->with('toast_error', 'You Are Not Admin');
-            }
-
             $request->session()->regenerate();
 
-            return redirect('/administrator')->with('toast_success', "Welcome, $request->username");
+            return redirect('index')->with('toast_success', "Welcome, $request->username");
+
+
         }
 
         return redirect("login")->with("toast_error", "Username or password not found or wrong");
@@ -111,8 +107,8 @@ class AuthController extends Controller
                         return redirect('/administrator')->with('toast_success', 'Welcome Employee');
                     }
                 }
+                return back()->with('toast_error', "Absence must be up at 7 am");
             }
-            return back()->with('toast_error', "Absence must be up at 7 am");
 
             if($data['email'] == $query['email'] and date("d", strtotime($query["date"])) < date("d") and $in){
                     $create = Attendance::create([
