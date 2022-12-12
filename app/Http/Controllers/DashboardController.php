@@ -28,7 +28,7 @@ class DashboardController extends Controller
     public function webView()
     {
         $user = User::where("role", "costumer")->get();
-        $total = $user->count("username");
+        $total = $user->count("name");
 
         return view('layouts.web',[
             "total_menu" =>  Menu::all()->count(),
