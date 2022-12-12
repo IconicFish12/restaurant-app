@@ -82,7 +82,9 @@ class AuthController extends Controller
 
         $employee = Employee::where('email', $data['email'])->first();
         $query = Attendance::where('email', $data['email'])->where("date", date("Y-m-d", strtotime(now())))->first();
+        // dd(is_null($query));
         $in = date("h", strtotime(now())) <= 9;
+        // dd($in);
 
         //attending
         if($request->has('status') and $request->status === "IN"){
@@ -109,8 +111,8 @@ class AuthController extends Controller
                         return redirect('/administrator')->with('toast_success', 'Welcome Employee');
                     }
                 }
-                return back()->with('toast_error', "Absence must be up at 7 am");
             }
+            return back()->with('toast_error', "Absence must be up at 7 am");
 
             if($data['email'] == $query['email'] and date("d", strtotime($query["date"])) < date("d") and $in){
                     $create = Attendance::create([
