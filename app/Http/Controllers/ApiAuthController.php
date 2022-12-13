@@ -54,7 +54,7 @@ class ApiAuthController extends Controller
             return response()->json(["message" => "Forbidden"], 403);
         }
 
-        if(Auth::guard('admin')->attempt($request->only(["email", "password"]))){
+        if(Auth::guard('web')->attempt($request->only(["email", "password"]))){
             $user =  User::where("email", $request->email)->first();
             $token = $user->createToken("auth_token")->plainTextToken;
 

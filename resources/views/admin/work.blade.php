@@ -3,7 +3,7 @@
 
 
 <div class="card shadow mb-4">
-    @auth('admin')
+    @auth('web')
     <div class="card-header py-3">
         <button type="button" class="btn btn-danger mx-4" data-toggle="modal" data-target="#createWorkModal">
             <i class="fas fa-plus"></i>
@@ -46,7 +46,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            @auth('admin')
+                            @auth('web')
                             <th scope="col">Employee Name</th>
                             @endauth
                             <th scope="col">Job Desk</th>
@@ -58,12 +58,12 @@
                         @foreach ($dataArr as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                @auth('admin')
+                                @auth('web')
                                 <td>{{ $item->employee->name }}</td>
                                 @endauth
                                 <td>{{ $item->job_desk }}</td>
                                 <td>
-                                    @if (auth('admin')->check())
+                                    @if (auth('web')->check())
                                         @if (is_null($item->job_done))
                                         <div class="text-uppercase text-center">
                                             <i class="fas fa-times"></i>
@@ -107,7 +107,7 @@
                                         @endif
                                     @endif
                                 </td>
-                                @if (Auth::guard('admin')->check())
+                                @if (Auth::guard('web')->check())
                                 <td class="d-flex justify-content-center">
                                     <button type="button"  onclick="getData({{ $item->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateWorkModal">
                                         <i class="fas fa-edit"></i>
@@ -133,7 +133,7 @@
                     <tfoot>
                         <tr>
                             <th scope="col">No</th>
-                            @auth('admin')
+                            @auth('web')
                             <th scope="col">Employee Name</th>
                             @endauth
                             <th scope="col">Employee Job</th>

@@ -3,7 +3,7 @@
 
 
 <div class="card shadow mb-4">
-    @auth('admin')
+    @auth('web')
     <div class="card-header py-3">
         <button type="button" class="btn btn-danger mx-3" data-toggle="modal" data-target="#createPerformanceModal">
             <i class="fas fa-plus"></i>
@@ -46,7 +46,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            @auth('admin')
+                            @auth('web')
                             <th>Employee Name</th>
                             @endauth
                             <th>Date</th>
@@ -60,7 +60,7 @@
                         @foreach ($dataArr as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                @auth('admin')
+                                @auth('web')
                                 <td>{{ $data->employee->name }}</td>
                                 @endauth
                                 <td>{{ $data->date }}</td>
@@ -107,7 +107,7 @@
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            @auth('admin')
+                            @auth('web')
                             <th>Employee Name</th>
                             @endauth
                             <th>Date</th>
@@ -191,7 +191,7 @@
                 <form action="" method="post" id="edit_form">
                     @method('PUT')
                     @csrf
-                    @auth('admin')
+                    @auth('web')
                     <div class="form-group">
                         <label for="employee_id">Employee Name</label>
                         <select name="employee_id" id="edit_employee_id" class="form-control">
@@ -213,7 +213,7 @@
                         <label for="start">Job Start</label>
                         <input type="time" name="start" id="edit_start"  class="form-control">
                     </div>
-                    @auth('admin')
+                    @auth('web')
                     <div class="form-group">
                         <label for="end">Job End</label>
                         <input type="time" name="end" id="edit_end"  class="form-control">
@@ -266,7 +266,7 @@
         let getData= id => {
         fetch(`/administrator/performances/${id}`).then(response => response.json()).then(response => {
             document.getElementById("edit_form").action = `/administrator/performances/${id}`
-            @auth('admin')
+            @auth('web')
             document.getElementById("edit_employee_id").value = response.employee_id;
             document.getElementById("edit_end").value = response.end;
             @endauth

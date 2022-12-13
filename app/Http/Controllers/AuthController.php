@@ -35,7 +35,7 @@ class AuthController extends Controller
 
         $remember = $request->remember;
 
-        if(Auth::guard('admin')->attempt($data, $remember)){
+        if(Auth::guard('web')->attempt($data, $remember)){
             // dd(User::where("username", $data["username"])->first()->role == "admin");
             if(User::where("username", $data["username"])->first()->role == "admin"){
                 $request->session()->regenerate();
@@ -44,7 +44,7 @@ class AuthController extends Controller
             }
             $request->session()->regenerate();
 
-            return redirect('index')->with('toast_success', "Welcome, $request->username");
+            return redirect()->intended('/')->with('toast_success', "Welcome, $request->username");
 
 
         }

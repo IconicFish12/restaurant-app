@@ -2,7 +2,7 @@
 @section('container')
 
 <div class="card shadow mb-4">
-    @auth('admin')
+    @auth('web')
     <div class="card-header py-3">
         <button type="button" class="btn btn-danger mx-3" data-toggle="modal" data-target="#createAttendanceModal">
             <i class="fas fa-plus"></i>
@@ -45,18 +45,18 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            @auth('admin')
+                            @auth('web')
                             <th>Employee Name</th>
                             @endauth
                             <th>Attendance Date</th>
                             <th>Absent in</th>
                             <th>Absent Out</th>
-                            @auth('admin')
+                            @auth('web')
                             <th>Employee Email</th>
                             @endauth
                             <th>Attendace Status</th>
                             <th>Attendace Presence</th>
-                            @auth('admin')
+                            @auth('web')
                             <th>Action</th>
                             @endauth
                         </tr>
@@ -65,7 +65,7 @@
                         @foreach ($dataArr as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                @auth('admin')
+                                @auth('web')
                                 <td>{{ $data->employee->name }}</td>
                                 @endauth
                                 <td>{{ $data->date }}</td>
@@ -81,12 +81,12 @@
                                     {{ $data->out }}
                                     @endif
                                 </td>
-                                @auth('admin')
+                                @auth('web')
                                 <td>{{ $data->email }}</td>
                                 @endauth
                                 <td>{{ $data->status}}</td>
                                 <td>{{ $data->presence}}</td>
-                                @auth('admin')
+                                @auth('web')
                                 <td class="d-flex justify-content-center">
                                     <button type="button"  onclick="getData({{ $data->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateAttendanceModal">
                                         <i class="fas fa-edit"></i>
@@ -106,18 +106,18 @@
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            @auth('admin')
+                            @auth('web')
                             <th>Employee Name</th>
                             @endauth
                             <th>Attendance Date</th>
                             <th>Absent in</th>
                             <th>Absent Out</th>
-                            @auth('admin')
+                            @auth('web')
                             <th>Employee Email</th>
                             @endauth
                             <th>Attendace Status</th>
                             <th>Attendace Presence</th>
-                            @auth('admin')
+                            @auth('web')
                             <th>Action</th>
                             @endauth
                         </tr>

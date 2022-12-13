@@ -44,7 +44,7 @@ Route::prefix('registration')->group(function() {
     Route::post('/register', [AuthController::class, 'registerAction']);
 });
 
-Route::get('logout', [AuthController::class, 'logout'])->middleware("auth:admin,employee");
+Route::get('logout', [AuthController::class, 'logout'])->middleware("auth:web,employee");
 
 Route::get('forgot', [ResetPasswordController::class, "forgotView"])->middleware('guest');
 Route::post('forgotAction', [ResetPasswordController::class, "forgotAction"])->middleware("guest");
@@ -52,11 +52,11 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, "resetView
 Route::post('reset-password-action', [ResetPasswordController::class, "resetAction"])->middleware("guest");
 
 //DASHBOARD VIEW / BACKEND SYSTEM
-Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(function(){
+Route::prefix('/webistrator')->middleware(['role:web', 'attend'])->group(function(){
 
-    Route::get('/',[DashboardController::class, 'dashboardView'])->middleware(['auth:admin,employee']);
+    Route::get('/',[DashboardController::class, 'dashboardView'])->middleware(['auth:web,employee']);
 
-    Route::prefix('/menus')->middleware(['auth:admin', 'role:admin'])->group(function(){
+    Route::prefix('/menus')->middleware(['auth:web', 'role:web'])->group(function(){
         Route::get('/', [MenuController::class, 'index']);
         Route::post('/', [MenuController::class, 'store']);
         Route::get('/{menu:id}', [MenuController::class, 'show']);
@@ -64,7 +64,7 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
         Route::delete('/{menu:id}', [MenuController::class, 'destroy']);
     });
 
-    Route::prefix('/categories')->middleware(['auth:admin', 'role:admin'])->group(function(){
+    Route::prefix('/categories')->middleware(['auth:web', 'role:web'])->group(function(){
         Route::get('/', [CategoryController::class, 'index']);
         Route::post('/', [CategoryController::class, 'store']);
         Route::get('/{category:id}', [CategoryController::class, 'show']);
@@ -72,7 +72,7 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
         Route::delete('/{category:id}', [CategoryController::class, 'destroy']);
     });
 
-    Route::prefix('/tables')->middleware('auth:admin,employee')->group(function() {
+    Route::prefix('/tables')->middleware('auth:web,employee')->group(function() {
         Route::get('/', [TableController::class, 'index']);
         Route::post('/', [TableController::class, 'store']);
         Route::get('/{table:id}', [TableController::class, 'show']);
@@ -81,7 +81,7 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
     });
 
     // USER AND EMPLOYEE MANAGEMENT
-    Route::prefix('/users')->middleware(['auth:admin', 'role:admin'])->group(function() {
+    Route::prefix('/users')->middleware(['auth:web', 'role:web'])->group(function() {
         Route::get('/', [UserController::class, 'index']);
         Route::post('/', [UserController::class, 'store']);
         Route::get('/{user:id}', [UserController::class, 'show']);
@@ -89,7 +89,7 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
         Route::delete('/{user:id}', [UserController::class, 'destroy']);
     });
 
-    Route::prefix('/employees')->middleware(['auth:admin', 'role:admin'])->group(function () {
+    Route::prefix('/employees')->middleware(['auth:web', 'role:web'])->group(function () {
         Route::get('/', [EmployeeController::class, 'index']);
         Route::post('/', [EmployeeController::class, 'store']);
         Route::get('/{employee:id}', [EmployeeController::class, 'show']);
@@ -98,7 +98,7 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
     });
 
     //CONTACT SERVICE
-    Route::prefix('/messages')->middleware(['auth:admin', 'role:admin'])->group(function (){
+    Route::prefix('/messages')->middleware(['auth:web', 'role:web'])->group(function (){
         Route::get('/', [ContactController::class, 'index']);
         Route::post('/', [ContactController::class, 'store']);
         Route::get('/{contact:id}', [ContactController::class, 'show']);
@@ -106,7 +106,7 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
     });
 
     //TRANSACTION ACTIVITY
-    Route::prefix('/orders')->middleware(['auth:admin', 'role:admin'])->group(function(){
+    Route::prefix('/orders')->middleware(['auth:web', 'role:web'])->group(function(){
         Route::get('/', [OrderController::class, 'index']);
         Route::post('/', [OrderController::class, 'store']);
         Route::get('/{order:id}', [OrderController::class, 'show']);
@@ -114,11 +114,11 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
         Route::delete('/{order:id}', [OrderController::class, 'destroy']);
     });
 
-    Route::prefix('/histories')->middleware(['auth:admin', 'role:admin'])->group(function(){
+    Route::prefix('/histories')->middleware(['auth:web', 'role:web'])->group(function(){
         Route::get('/', [OrderController::class, 'orderHistory']);
     });
 
-    Route::prefix('/vouchers')->middleware(['auth:admin', 'role:admin'])->group(function() {
+    Route::prefix('/vouchers')->middleware(['auth:web', 'role:web'])->group(function() {
         Route::get('/', [VoucherController::class, 'index']);
         Route::post('/', [VoucherController::class, 'store']);
         Route::get('/{voucher:id}', [VoucherController::class, 'show']);
@@ -130,7 +130,7 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
 
 
     //EMPLOYEE PERFORMANCE
-    Route::prefix('/performances')->middleware('auth:admin,employee')->group(function () {
+    Route::prefix('/performances')->middleware('auth:web,employee')->group(function () {
         Route::get('/', [PerformanceController::class, 'index']);
         Route::post('/', [PerformanceController::class, 'store']);
         Route::get('/{performance:id}', [PerformanceController::class, 'show']);
@@ -138,7 +138,7 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
         Route::delete('/{performance:id}', [PerformanceController::class, 'destroy']);
     });
 
-    Route::prefix('/works')->middleware('auth:admin,employee')->group(function (){
+    Route::prefix('/works')->middleware('auth:web,employee')->group(function (){
         Route::get('/', [WorkController::class, 'index']);
         Route::post('/', [WorkController::class, 'store']);
         Route::get('/{work:id}', [WorkController::class, 'show']);
@@ -147,20 +147,20 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
     });
 
     //PROFILE MANAGEMENT
-    Route::get('/me', [ProfileController::class, 'index'])->middleware(['auth:admin', 'role:admin']);
+    Route::get('/me', [ProfileController::class, 'index'])->middleware(['auth:web', 'role:web']);
 
     //MORE
-    Route::middleware(['auth:admin', 'role:admin'])->group(function(){
+    Route::middleware(['auth:web', 'role:web'])->group(function(){
         Route::get('/backup', [BackupController::class, 'index']);
         Route::get('/backup/create', [BackupController::class, 'store']);
         Route::delete('/backup/delete/{i}', [BackupController::class, 'destroy']);
     });
 
-    Route::get('/documentation', [DashboardController::class, 'documentation'])->middleware(['auth:admin', 'role:admin']);
+    Route::get('/documentation', [DashboardController::class, 'documentation'])->middleware(['auth:web', 'role:web']);
 
     Route::prefix('/attendances-data')->group(function(){
         Route::get('/', [AttendanceController::class, 'index']);
-        Route::middleware(['auth:admin', 'role:admin'])->group(function(){
+        Route::middleware(['auth:web', 'role:web'])->group(function(){
             Route::post('/', [AttendanceController::class, 'store']);
             Route::get('/{attendance:id}', [AttendanceController::class, 'show']);
             Route::put('/{attendance:id}', [AttendanceController::class, 'update']);
@@ -171,6 +171,6 @@ Route::prefix('/administrator')->middleware(['role:admin', 'attend'])->group(fun
 
 //WEB VIEW
 Route::get('/', [DashboardController::class, 'webView'])->middleware("guest");
-Route::get('/index', [DashboardController::class, 'webView'])->middleware(['auth', "role:costumer"]);
+Route::get('/home', [DashboardController::class, 'webView'])->middleware(['auth', "role:costumer"]);
 Route::post('/messages', [ContactController::class, 'store']);
 

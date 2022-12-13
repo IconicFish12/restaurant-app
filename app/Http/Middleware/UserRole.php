@@ -17,7 +17,7 @@ class UserRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if(auth("admin")->check())
+        if(auth("web")->check())
         {
             if(in_array(strtolower(auth()->user()->role), $roles)){
             return $next($request);
