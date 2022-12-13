@@ -61,7 +61,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->menu->name }}</td>
-                                <td>{{ $data->user->firstname }}</td>
+                                <td>{{ $data->user->name }}</td>
                                 <td>{{ $data->table->table_number }}</td>
                                 <td>{{ $data->payment_method }}</td>
                                 <td>{{ $data->order_code }}</td>

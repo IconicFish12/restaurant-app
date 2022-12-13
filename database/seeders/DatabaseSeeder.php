@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Attendance;
 use App\Models\Employee;
 use App\Models\Table;
 use App\Models\User;
@@ -49,7 +50,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CategorySeeder::class,
-            EmployeeSeeder::class
+            EmployeeSeeder::class,
+            AttendanceSeeder::class
         ]);
     }
 }

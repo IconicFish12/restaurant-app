@@ -90,7 +90,7 @@
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
-                        <span>{{ Auth::user()->username }}</span>
+                        <span>{{ Auth::user()->name }}</span>
                     </button>
                     <ul class="dropdown-menu">
                         <li>
@@ -319,7 +319,7 @@
                             @foreach ($menu as $item)
                                 <div class="col-lg-4 menu-item">
                                     <a href="{{ asset("$item->image") }}" class="glightbox">
-                                        <img src="{{ asset('$item->image') }}" class="menu-img img-fluid" alt="Image Menu">
+                                        <img src="{{ asset("$item->image") }}" class="menu-img img-fluid" alt="Image Menu">
                                     </a>
                                     <h4>{{ $item->name }}</h4>
                                     <p class="ingredients">

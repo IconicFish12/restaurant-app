@@ -244,7 +244,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ asset('/administrator/performances/'. $data->id) }}" method="post">
+                <form action="" method="post" id="edit_form">
                     @method('PUT')
                     @csrf
                     <div class="form-group">
