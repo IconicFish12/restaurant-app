@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Attendance;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
-class AttendanceSeeder extends Seeder
+class GallerySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +14,6 @@ class AttendanceSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
-            //data
-        ];
-
-        Attendance::insert($data);
+        //
     }
 }

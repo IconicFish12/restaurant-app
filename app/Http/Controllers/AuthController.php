@@ -36,21 +36,17 @@ class AuthController extends Controller
         $remember = $request->remember;
 
         if(Auth::guard('admin')->attempt($data, $remember)){
-            if(User::where("username", $data["username"])->first()->role === "costumer"){
+            // dd(User::where("username", $data["username"])->first()->role == "admin");
+            if(User::where("username", $data["username"])->first()->role == "admin"){
                 $request->session()->regenerate();
 
-                return redirect()->intended('/')->with('toast_success', "Welcome, $request->username");
+                return redirect('/administrator')->with('toast_success', "Welcome, $request->username");
             }
-
-            if(User::where("username", $data["username"])->first()->role !== "admin"){
-                Auth::logout();
-
-                return redirect('login')->with('toast_error', 'You Are Not Admin');
-            }
-
             $request->session()->regenerate();
 
-            return redirect('/administrator')->with('toast_success', "Welcome, $request->username");
+            return redirect('index')->with('toast_success', "Welcome, $request->username");
+
+
         }
 
         return redirect("login")->with("toast_error", "Username or password not found or wrong");
@@ -82,7 +78,9 @@ class AuthController extends Controller
 
         $employee = Employee::where('email', $data['email'])->first();
         $query = Attendance::where('email', $data['email'])->where("date", date("Y-m-d", strtotime(now())))->first();
+        // dd(is_null($query));
         $in = date("h", strtotime(now())) <= 9;
+        // dd($in);
 
         //attending
         if($request->has('status') and $request->status === "IN"){

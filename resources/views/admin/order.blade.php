@@ -146,9 +146,9 @@
                                 <option value="" selected>Select The User</option>
                                 @foreach ($user as $item)
                                     @if (old('menu_id' == $item->id))
-                                        <option value="{{ $item->id }}" selected>{{ $item->firstname }}</option>
+                                        <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                     @endif
-                                <option value="{{ $item->id }}">{{ $item->firstname }}</option>
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>

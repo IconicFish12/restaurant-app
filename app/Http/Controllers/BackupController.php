@@ -34,9 +34,9 @@ class BackupController extends Controller
     public function store()
     {
         if(!\Artisan::call('db:backup')){
-            return back()->with('success', 'Successfully Backup Database');
+            return back()->with('toast_success', 'Successfully Backup Database');
         }
-        return back()->with('error', 'Error When Backup Database');
+        return back()->with('toast_error', 'Error When Backup Database');
     }
 
     public function destroy($i)
@@ -48,8 +48,8 @@ class BackupController extends Controller
         }
         $file = $files->sortByDesc("filename")[$i]["basename"];
         if(Storage::disk("public_path")->delete("backups/$file")){
-            return back()->with("success", "Successfully Delete this Backup file");
+            return back()->with("toast_success", "Successfully Delete this Backup file");
         }
-        return back()->with("error", "Error when Delete this Backup file");
+        return back()->with("toast_error", "Error when Delete this Backup file");
     }
 }

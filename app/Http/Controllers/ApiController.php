@@ -14,7 +14,8 @@ class ApiController extends Controller
     {
         $data = Category::orderBy("id", "ASC")->get();
 
-        if(is_null($data)){
+
+        if($data->count() == 0){
             return response()->json(["message" => "Data is empty"], 404);
         }
 
@@ -25,7 +26,7 @@ class ApiController extends Controller
     {
         $data = Menu::where("category_id", $request->category_id)->with("category")->orderBy("id", "ASC")->get();
 
-        if(!$data){
+        if($data->count() == 0 ){
             return response()->json(["message" => "error"], 500);
         }
         return response()->json(["message" => "success", "data" => $data], 200);
@@ -35,7 +36,7 @@ class ApiController extends Controller
     {
         $menu = Menu::orderBy("id", "ASC")->with("category")->get();
 
-        if(is_null($menu)){
+        if($menu->count() == 0){
             return response()->json(["message" => "Data is empty"], 404);
         }
 
@@ -46,7 +47,7 @@ class ApiController extends Controller
     {
         $table =  Table::orderBy("id", "ASC")->get();
 
-        if(is_null($table)){
+        if($table->count() == 0){
             return response()->json(["message" => "Data is empty"], 404);
         }
 
