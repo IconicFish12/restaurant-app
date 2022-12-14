@@ -16,7 +16,7 @@ class DashboardController extends Controller
     public function dashboardView()
     {
         return view('admin.home', [
-            "page_name" => auth('admin')->check() ? "Dashboard restaurant" : "Dasboard Employee",
+            "page_name" => auth('web')->check() ? "Dashboard restaurant" : "Dasboard Employee",
             "menu" =>  Menu::all()->count(),
             "employee" => Employee::all()->count(),
             "income" => Order::all()->sum('total_pay') ?? 0,

@@ -42,16 +42,23 @@ class AuthController extends Controller
 
         if(Auth::guard('web')->attempt($request->only(['email', 'password']), $remember)){
             $user =  User::where('email', $request->only(['email', 'password']))->first();
-            if(User::where("email", $request->only(['email', 'password']))->first()->role == "admin"){
+            if(User::where("email", $request->email)->first()->role === "costumer"){
                 $request->session()->regenerate();
 
-                return redirect('/administrator')->with('toast_success', "Welcome, $request->username");
+                return redirect()->intended('/')->with('toast_success', "Welcome, $user->name");
+            }
+            if(User::where("email", $request->email)->first()->role !== "admin"){
+                Auth::logout();
+
+                $request->session()->invalidate();
+
+                $request->session()->regenerateToken();
+
+                return redirect('login')->with('toast_error', 'You Are Not Admin');
             }
             $request->session()->regenerate();
 
-            return redirect('/home')->with('toast_success', "Welcome, $user->name");
-
-
+            return redirect('/administrator')->with('success', "Welcome, $request->username");
         }
 
         return redirect("login")->with("toast_error", "Username or password not found or wrong");

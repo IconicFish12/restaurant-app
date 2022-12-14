@@ -86,7 +86,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        
     }
 
     /**

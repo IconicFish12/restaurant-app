@@ -19,13 +19,13 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">PLEASE LOG IN FIRST</h1>
                                     </div>
-                                    <form class="" method="POST" action="{{ asset('login') }}" autocomplete="off">
+                                    <form class="" method="POST" action="{{ asset('login') }}">
                                         @csrf
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" name="email" class="form-control form-control-user"
-                                                id="email" aria-describedby="emailHelp"
-                                                placeholder="Enter Your Email...">
+                                                id="email" aria-describedby="emailHelp" autofocus
+                                                placeholder="Enter Your Email..." value="{{ old('email') }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Password</label>
