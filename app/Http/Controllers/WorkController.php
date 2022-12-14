@@ -21,7 +21,7 @@ class WorkController extends Controller
         return view('admin.work', [
             "title" => "Work Management",
             "page_name" => "Employee Work",
-            "dataArr" => auth('admin')->check() ?
+            "dataArr" => auth('web')->check() ?
             Work::with('employee')->paginate(request('paginate')??10) :
             Work::with('employee')->where('employee_id', auth('employee')->user()->id)
             ->paginate(request('paginate')??10),

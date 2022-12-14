@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('order_code');
             $table->string('quantity', 50);
             // $table->enum("service", ["takeAway", "delivery"]);
-            $table->longText('detail');
+            $table->longText('detail')->nullable();
             $table->string('price', 50);
             $table->string('total_pay', 50);
             $table->timestamps();

@@ -36,6 +36,7 @@ class WebController extends Controller
     public function order()
     {
         return view('web.order', [
+            "title" => "Restaurant Menu Ordering",
             "menu" => Menu::all(),
             "table" => Table::all(),
         ]);
@@ -43,6 +44,7 @@ class WebController extends Controller
 
     public function orderAction(Request $request)
     {
+        // dd($request->all());
         $data = Validator::make($request->all(), [
             "menu_id" => ["required"],
             "table_id" => ["required"],
@@ -59,7 +61,7 @@ class WebController extends Controller
         $order = Order::create([
             "menu_id" => $request->menu_id,
             "table_id" => $request->table_id,
-            "user_id" => $request->user_id,
+            "user_id" => auth()->user()->id ,
             "payment_method" => $request->payment_method,
             "order_code" => Str::random(4) . random_int(10, 99) . Str::random('3'),
             "quantity" => $request->quantity,

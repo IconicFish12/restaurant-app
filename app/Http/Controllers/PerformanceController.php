@@ -19,7 +19,7 @@ class PerformanceController extends Controller
         return view('admin.performance', [
             "title" => "Performance Management",
             "page_name" =>  "Employee Performance",
-            "dataArr" => auth('admin')->check() ?
+            "dataArr" => auth('web')->check() ?
             Performance::with('employee')->paginate(request("paginate") ?? 10):
             Performance::with('employee')->where("employee_id", auth('employee')->user()->id)
             ->paginate(request("paginate") ?? 10),

@@ -55,7 +55,7 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            @if (auth()->guard('admin')->check())
+            @if (auth()->guard('web')->check())
             <div class="sidebar-heading">
                 Restaurant Module
             </div>
@@ -66,7 +66,7 @@
             @endif
 
             <!-- Nav Item - Pages Collapse Menu -->
-            @auth('admin')
+            @auth('web')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuOne"
                     aria-expanded="true" aria-controls="menuOne">
@@ -95,7 +95,7 @@
 
 
             {{-- <!-- Nav Item - Utilities Collapse Menu --> --}}
-            @auth('admin')
+            @auth('web')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuTwo"
                     aria-expanded="true" aria-controls="menuTwo">
@@ -180,7 +180,7 @@
             </div> --}}
 
             <!-- Nav Item - Pages Collapse Menu -->
-            @auth('admin')
+            @auth('web')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menuFive"
                     aria-expanded="true" aria-controls="menuFive">
@@ -234,7 +234,7 @@
             </li>
 
             {{-- Nav Item - Database Backup --}}
-            @auth('admin')
+            @auth('web')
             <li class="nav-item">
                 <a class="nav-link" href="{{ asset('administrator/backup') }}">
                     <i class="fas fa-database"></i>
@@ -326,7 +326,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                @if (auth('admin'))
+                                @if (auth('web'))
                                     <a class="dropdown-item" href=" {{ asset('administrator/me') }}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile

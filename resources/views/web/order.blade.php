@@ -19,58 +19,62 @@
         </div>
     </section>
 
-    <section class="contact">
-        <div class="container-fluid" data-aos="fade-up">
-            <form class="row g-3" action="" method="POST">
-                <div class="form-group col-md-6 mx-auto">
-                    <div class="form-group">
-                        <label for="menu_id">Menu</label>
-                        <select name="menu_id" id="menu_id" class="form-control">
-                            <option value="" selected>Select The Menu</option>
-                            @foreach ($menu as $item)
-                                @if (old('menu_id' == $item->id))
-                                    <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                @endif
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="table_id">Table Number</label>
-                        <select name="table_id" id="table_id" class="form-control">
-                            <option value="" selected>Select The Table</option>
-                            @foreach ($table as $item)
-                                @if (old('menu_id' == $item->id))
-                                    <option value="{{ $item->id }}" selected>{{ $item->table_number }}</option>
-                                @endif
-                            <option value="{{ $item->id }}">{{ $item->table_number }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="payment_method">Payment Method</label>
-                        <input type="text" class="form-control form-control-user" id="payment_method" value="{{ old('payment_method') }}" name="payment_method" placeholder="Enter Payment Method">
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">Item Quantity</label>
-                        <input type="number" class="form-control form-control-user" id="quantity" value="{{ old('quantity') }}" name="quantity" placeholder="Enter Item Quantity">
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Menu Price</label>
-                        <input type="number" class="form-control form-control-user" id="price" value="{{ old('price') }}" name="price" placeholder="Enter Menu Price">
-                    </div>
-                    <div class="form-group">
-                        <label for="detail">Order Detail</label>
-                        <textarea name="detail" id="detail" class="form-control" rows="4" aria-valuenow="{{ old('detail') }}" placeholder="Detail"></textarea>
+    <section >
+        <div data-aos="fade-up">
+            <div class="container">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title text-center">
+                            <h1>Enter Your Order Here</h1>
+                        </div>
+                        <form action="{{ asset('/home/order') }}" method="POST">
+                            @csrf
+                            <div class="my-3 row g-2 col-md-7 mx-auto">
+                                <div class="col-md-6">
+                                    <select name="menu_id" id="menu_id" class="form-control">
+                                        <option value="" selected>Select The Menu</option>
+                                        @foreach ($menu as $item)
+                                            @if (old('menu_id' == $item->id))
+                                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                            @endif
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="table_id" id="table_id" class="form-control">
+                                        <option value="" selected>Select The Table</option>
+                                        @foreach ($table as $item)
+                                            @if (old('menu_id' == $item->id))
+                                                <option value="{{ $item->id }}" selected>{{ $item->table_number }}</option>
+                                            @endif
+                                        <option value="{{ $item->id }}">{{ $item->table_number }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control form-control-user" id="payment_method" value="{{ old('payment_method') }}" name="payment_method" placeholder="Enter Payment Method">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control form-control-user" id="quantity" value="{{ old('quantity') }}" name="quantity" placeholder="Enter Item Quantity">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control form-control-user" id="price" value="{{ old('price') }}" name="price" placeholder="Enter Menu Price">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="detail" id="detail" class="form-control" rows="4" aria-valuenow="{{ old('detail') }}" placeholder="Order Detail"></textarea>
+                                </div>
+                            </div>
+                            <div class="vstack gap-2 col-md-5 mx-auto">
+                                <button type="submit" class="w-56 btn btn-danger">Order</button>
+                                {{-- <a href="{{ asset('/home') }}">
+                                    <button type="submit" class="w-56 btn btn-danger">back</button>
+                                </a> --}}
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="w-56 btn btn-danger">Order</button>
-                    <a href="">
-                        <button type="submit" class="w-56 btn btn-danger">Order</button>
-                    </a>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
 </main>

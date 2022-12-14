@@ -43,13 +43,19 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#menu">Menu</a></li>
+          <li>
+            <a href="@auth('web') {{ asset('/home') }} @else {{ asset('/') }} @endauth">Home</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#menu">Menu</a>
+          </li>
           {{-- <li><a href="#events">Events</a></li>
           <li><a href="#chefs">Chefs</a></li>
           <li><a href="#gallery">Gallery</a></li> --}}
-          <li class="dropdown">
+          {{-- <li class="dropdown">
             <a href="#">
                 <span>Category</span>
                 <i class="bi bi-chevron-down dropdown-indicator"></i>
@@ -75,7 +81,7 @@
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
-          </li>
+          </li> --}}
           <li><a href="#contact">Contact</a></li>
           <li class="ms-auto">
             @auth

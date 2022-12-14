@@ -42,6 +42,7 @@ class AuthController extends Controller
 
         if(Auth::guard('web')->attempt($request->only(['email', 'password']), $remember)){
             $user =  User::where('email', $request->only(['email', 'password']))->first();
+            // dd($user->role);
             if(User::where("email", $request->email)->first()->role === "costumer"){
                 $request->session()->regenerate();
 

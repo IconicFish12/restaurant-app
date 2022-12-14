@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row d-flex ">
          <!-- Earnings (Monthly) Card Example -->
-        @auth('admin')
+        @auth('web')
         <div class="col-xl-3 col-md-6 mt-3">
             <div class="card border-left-primary shadow h-100 w-100 py-2">
                 <div class="card-body">
