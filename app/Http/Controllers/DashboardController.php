@@ -25,19 +25,6 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function webView()
-    {
-        $user = User::where("role", "costumer")->get();
-        $total = $user->count("name");
-
-        return view('layouts.web',[
-            "total_menu" =>  Menu::all()->count(),
-            "total_employee" => Employee::all()->count(),
-            "total_user" => $total,
-            "menu" => Menu::all()
-        ]);
-    }
-
     public function documentation()
     {
         return view('admin.documentation', [

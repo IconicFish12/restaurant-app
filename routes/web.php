@@ -17,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\WebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -170,7 +171,8 @@ Route::prefix('/webistrator')->middleware(['role:web', 'attend'])->group(functio
 });
 
 //WEB VIEW
-Route::get('/', [DashboardController::class, 'webView'])->middleware("guest");
-Route::get('/home', [DashboardController::class, 'webView'])->middleware(['auth', "role:costumer"]);
+Route::get('/', [WebController::class, 'webView'])->middleware("guest");
+Route::get('/menus', [WebController::class, 'menuView'])->middleware('guest');
+Route::get('/home', [WebController::class, 'webView'])->middleware(['auth', "role:costumer"]);
 Route::post('/messages', [ContactController::class, 'store']);
 

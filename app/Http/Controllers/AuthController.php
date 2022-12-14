@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -28,23 +29,27 @@ class AuthController extends Controller
 
     public function auth(Request $request, User $user)
     {
-        $data = $request->validate([
-            'username' => "required",
-            'password' => "required"
+        $validator =  Validator::make($request->only(['email', 'password']), [
+            'email' => 'required|email:dns',
+            'password' => 'required|min:6'
         ]);
+
+        if($validator->fails()){
+            return back()->with('toast_error', 'Something is wrong');
+        }
 
         $remember = $request->remember;
 
-        if(Auth::guard('web')->attempt($data, $remember)){
-            // dd(User::where("username", $data["username"])->first()->role == "admin");
-            if(User::where("username", $data["username"])->first()->role == "admin"){
+        if(Auth::guard('web')->attempt($request->only(['email', 'password']), $remember)){
+            $user =  User::where('email', $request->only(['email', 'password']))->first();
+            if(User::where("email", $request->only(['email', 'password']))->first()->role == "admin"){
                 $request->session()->regenerate();
 
                 return redirect('/administrator')->with('toast_success', "Welcome, $request->username");
             }
             $request->session()->regenerate();
 
-            return redirect()->intended('/')->with('toast_success', "Welcome, $request->username");
+            return redirect('/home')->with('toast_success', "Welcome, $user->name");
 
 
         }

@@ -22,10 +22,10 @@
                                     <form class="" method="POST" action="{{ asset('login') }}" autocomplete="off">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="username" aria-describedby="emailHelp" name="username"
-                                                placeholder="Enter Your Username...">
+                                            <label for="email">Email</label>
+                                            <input type="email" name="email" class="form-control form-control-user"
+                                                id="email" aria-describedby="emailHelp"
+                                                placeholder="Enter Your Email...">
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Password</label>

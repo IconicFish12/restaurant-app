@@ -23,7 +23,7 @@ Route::post('login', [ApiAuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('getCategory', [ApiController::class, "getCategory"]);
     Route::get('getTable', [ApiController::class, "getTable"]);
-    Route::get('getMenu-1', [ApiController::class, "getMenuWithcategory"]);
+    Route::get('getMenu-1/{id}', [ApiController::class, "getMenuWithcategory"]);
     Route::get('getMenu-2', [ApiController::class, "getMenu"]);
 }
 );

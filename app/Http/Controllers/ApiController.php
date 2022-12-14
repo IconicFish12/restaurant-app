@@ -27,7 +27,7 @@ class ApiController extends Controller
         $data = Menu::where("category_id", $request->category_id)->with("category")->orderBy("id", "ASC")->get();
 
         if($data->count() == 0 ){
-            return response()->json(["message" => "error"], 500);
+            return response()->json(["message" => "Data is Empty"], 500);
         }
         return response()->json(["message" => "success", "data" => $data], 200);
     }
