@@ -180,6 +180,7 @@ Route::prefix('/home')->middleware(['auth', 'role:costumer'])->group(function(){
         Route::get('/', [WebController::class, 'order']);
         Route::post('/', [WebController::class, 'orderAction']);
     });
+    Route::get('/histories', [WebController::class, 'historyWeb']);
 });
 Route::post('/messages', [ContactController::class, 'store']);
 

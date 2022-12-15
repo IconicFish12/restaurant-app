@@ -42,6 +42,15 @@ class WebController extends Controller
         ]);
     }
 
+    public function historyWeb()
+    {
+        // dd(Order::where('user_id', auth('web')->user()->id)->get());
+        return view('web.histories_web', [
+            'title' => "Order History",
+            'dataArr' => Order::where('user_id', auth('web')->user()->id)->get()
+        ]);
+    }
+
     public function orderAction(Request $request)
     {
         // dd($request->all());

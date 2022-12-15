@@ -95,7 +95,7 @@
                         <li>
                             <a class="dropdown-item" href="{{ asset('logout') }}" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="{{ asset('/home/histories') }}">Order History</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </div>
