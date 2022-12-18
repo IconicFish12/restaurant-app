@@ -35,7 +35,7 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return back()->with('toast_error', 'Something is wrong');
+            return back()->with('toast_error', 'Email ord password is wrong');
         }
 
         $remember = $request->remember;
@@ -62,7 +62,7 @@ class AuthController extends Controller
             return redirect('/administrator')->with('success', "Welcome, $request->username");
         }
 
-        return redirect("login")->with("toast_error", "Username or password not found or wrong");
+        return redirect("login")->with("toast_error", "Email or password not found");
 
     }
 

@@ -125,7 +125,7 @@
                     <div class="form-group">
                         <label for="category_id">Menu Category</label>
                         <select class="form-select form-control" name="category_id" id="category_id" aria-label="Default select example">
-                            <option value="" selected>Selcet Category Menu</option>
+                        <option value="" selected>Select Category Menu</option>
                             @foreach ($category as $item)
                                 <option value="{{ $item->id }}">{{ $item->category_name }}</option>
                                 @if (old('category_id') == $item->id)

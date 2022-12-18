@@ -176,6 +176,9 @@
                                     </p>
                                 </div>
                             @endforeach
+                            <a href="{{ asset('/home/order') }}" class="text-center">
+                                <button class="btn btn-danger col-md-5  mx-auto py-2" >Order Here</button>
+                            </a>
                         @else
                             <div class="text-center">
                                 <h1 class="bi bi-clipboard2-x-fill fs-1 "></h1>
@@ -185,9 +188,6 @@
                                 </p>
                             </div>
                         @endif
-                        <a href="{{ asset('/home/order') }}" class="text-center">
-                            <button class="btn btn-danger col-md-5  mx-auto py-2" >Order Here</button>
-                        </a>
                     </div>
                 </div>
             </div>

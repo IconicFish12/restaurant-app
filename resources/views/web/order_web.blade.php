@@ -29,7 +29,7 @@
                         </div>
                         <form action="{{ asset('/home/order') }}" method="POST">
                             @csrf
-                            <div class="my-3 row g-2 col-md-7 mx-auto">
+                            <div class="my-3 row g-3 col-xl-7 mx-auto">
                                 <div class="col-md-6">
                                     <select name="menu_id" id="menu_id" class="form-control">
                                         <option value="" selected>Select The Menu</option>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select name="table_id" id="table_id" class="form-control">
-                                        <option value="" selected>Select The Table</option>
+                                        <option selected>Select The Table</option>
                                         @foreach ($table as $item)
                                             @if (old('menu_id' == $item->id))
                                                 <option value="{{ $item->id }}" selected>{{ $item->table_number }}</option>
@@ -53,23 +53,35 @@
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control form-control-user" id="payment_method" value="{{ old('payment_method') }}" name="payment_method" placeholder="Enter Payment Method">
+                                    <select name="payment_method" id="payment_method" class="form-control">
+                                        <option selected >Select The Payment Method</option>
+                                        <option value="bank">Bank</option>
+                                        <option value="e-wallet">E-Wallet</option>
+                                        <option value="cash">Cash</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <input type="number" class="form-control form-control-user" id="quantity" value="{{ old('quantity') }}" name="quantity" placeholder="Enter Item Quantity">
                                 </div>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control form-control-user" id="price" value="{{ old('price') }}" name="price" placeholder="Enter Menu Price">
-                                </div>
+                                {{-- <div class="col-md-6" id="menu_price">
+                                    @foreach ($menu as $item)
+                                    <input type="number" class="form-control form-control-user" id="price" value="{{ $item->price }}" name="price" readonly disabled>
+                                    @endforeach
+                                </div> --}}
                                 <div class="col-12">
                                     <textarea name="detail" id="detail" class="form-control" rows="4" aria-valuenow="{{ old('detail') }}" placeholder="Order Detail"></textarea>
                                 </div>
                             </div>
                             <div class="vstack gap-2 col-md-5 mx-auto">
                                 <button type="submit" class="w-56 btn btn-danger">Order</button>
-                                {{-- <a href="{{ asset('/home') }}">
-                                    <button type="submit" class="w-56 btn btn-danger">back</button>
-                                </a> --}}
+                                {{--
+                                    <a href="{{ asset('/home') }}">
+                                        <button type="submit" class="w-56 btn btn-danger">back</button>
+                                    </a>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control form-control-user" id="price" value="{{ old('price') }}" name="price" placeholder="Enter Menu Price">
+                                    </div>
+                                --}}
                             </div>
                         </form>
                     </div>

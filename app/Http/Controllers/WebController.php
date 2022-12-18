@@ -28,14 +28,14 @@ class WebController extends Controller
 
     public function menuView()
     {
-        return view('web.menu', [
+        return view('web.menu_web', [
             'title' => "Menu restaurant"
         ]);
     }
 
     public function order()
     {
-        return view('web.order', [
+        return view('web.order_web', [
             "title" => "Restaurant Menu Ordering",
             "menu" => Menu::all(),
             "table" => Table::all(),
@@ -53,13 +53,14 @@ class WebController extends Controller
 
     public function orderAction(Request $request)
     {
-        // dd($request->all());
+        // dd();
+        $price = Menu::where("id", $request->menu_id)->first()->price;
         $data = Validator::make($request->all(), [
             "menu_id" => ["required"],
             "table_id" => ["required"],
             "payment_method" => ["required", "max:20"],
             "quantity" => ["required", "integer", "max:200"],
-            "price" => ["required", "numeric"],
+            "price" => ["numeric"],
             "detail" => ["max:200"]
         ]);
 
@@ -74,9 +75,9 @@ class WebController extends Controller
             "payment_method" => $request->payment_method,
             "order_code" => Str::random(4) . random_int(10, 99) . Str::random('3'),
             "quantity" => $request->quantity,
-            "price" => $request->price,
+            "price" => $request->price ?? null,
             "detail" => $request->detail,
-            "total_pay" => $request->quantity *= $request->price
+            "total_pay" => $request->quantity *= $request->price ?? $price
         ]);
 
         if($order){
