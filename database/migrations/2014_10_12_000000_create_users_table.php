@@ -19,6 +19,9 @@ return new class extends Migration
             $table->date('birth');
             $table->string('phone_number');
             $table->enum('role',['costumer', 'admin'])->default('costumer');
+            $table->enum('gender', ['Male', 'Female'])->nullable();
+            $table->string('profile', 50)->nullable();
+            $table->longText('address')->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');

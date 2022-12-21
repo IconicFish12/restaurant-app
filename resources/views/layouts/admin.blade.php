@@ -9,7 +9,7 @@
     <meta name="description" content="vanushki admin dashboard">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="ibnu">
-
+    <link rel="shortcut icon" href="{{ asset('/img/favico.png') }}" type="image/x-icon">
 
     <title>{{ $title ?? "Vanushki Restaurant" }}</title>
 
@@ -34,10 +34,10 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ asset('/administrator') }}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    <img src="{{ asset('/img/Vanushki (2).png') }}" width="100">
                 </div>
-                <div class="sidebar-brand-text mx-3">Vanuski Restaurant</div>
+                <div class="sidebar-brand-text">Vanushki Restaurant</div>
             </a>
 
             <!-- Divider -->

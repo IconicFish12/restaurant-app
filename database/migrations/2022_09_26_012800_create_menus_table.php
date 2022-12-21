@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->string('name');
-            $table->enum('menu_type', ['mainCourse', 'appetizer', 'dessert']);
             $table->string('price');
             $table->string('image');
+            $table->string('brief_description', 100);
             $table->longText('description');
             $table->timestamps();
         });

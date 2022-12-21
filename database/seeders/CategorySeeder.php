@@ -16,18 +16,20 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $data = [
-            ["category_name" => "Mie"],
-            ["category_name" => "Makanan Berat"],
+            ["category_name" => "Hors d'oeuvres"],
+            ["category_name" => "Amuse-bouche"],
             ["category_name" => "Salad"],
-            ["category_name" => "Makanan Ringan"],
-            ["category_name" => "Es Krim"],
-            ["category_name" => "Gak tau"],
-            ["category_name" => "Lah sih "],
-            ["category_name" => "Makanan Berlemak"],
-            ["category_name" => "Keripik"],
-            ["category_name" => "yohh"],
-            ["category_name" => "adasd"],
-            ["category_name" => "Es Krim"],
+            ["category_name" => "Breakfast"],
+            ["category_name" => "Dinner"],
+            ["category_name" => "Sup"],
+            ["category_name" => "Seafood"],
+            ["category_name" => "Appetizer"],
+            ["category_name" => "First Main Course"],
+            ["category_name" => "Second Main Course"],
+            ["category_name" => "Dessert"],
+            ["category_name" => "Mignardise"],
+            ["category_name" => "Cheese"],
+            ["category_name" => "Palate Cleanser"],
         ];
 
         Category::insert($data);

@@ -45,9 +45,9 @@
                             <th>No</th>
                             <th>Menu Name</th>
                             <td>Menu Category</td>
-                            <th>Menu Type</th>
                             <th>Menu Price</th>
                             <th>Image</th>
+                            <th>Brief Description</th>
                             <th>Description</th>
                             <th>Action</th>
                         </tr>
@@ -58,16 +58,16 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $menu->name }}</td>
                                 <td>{{ $menu->category->category_name }}</td>
-                                <td>{{ $menu->menu_type }}</td>
                                 <td>@money($menu->price)</td>
                                 <td>
                                     @if (Storage::disk("public_path")->exists($menu->image))
-                                        <img src="{{ asset($menu->image) }}" alt="" width="85px">
+                                    <img src="{{ asset($menu->image) }}" alt="" width="85px">
                                     @else
-                                        <i class="fas fa-image"></i>
-                                        <span>Image Not Found</span>
+                                    <i class="fas fa-image"></i>
+                                    <span>Image Not Found</span>
                                     @endif
                                 </td>
+                                <td>{{ $menu->brief_description }}</td>
                                 <td>{{ $menu->description}}</td>
                                 <td class="d-flex justify-content-center">
                                     <button type="button"  onclick="getData({{ $menu->id }})" class="btn btn-warning" data-toggle="modal" data-target="#updateCategoryModal">
@@ -89,9 +89,9 @@
                             <th>No</th>
                             <th>Menu Name</th>
                             <td>Menu Category</td>
-                            <th>Menu Type</th>
                             <th>Menu Price</th>
                             <th>Image</th>
+                            <th>Brief Description</th>
                             <th>Description</th>
                             <th>Action</th>
                         </tr>
@@ -135,20 +135,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="menu_type">Menu Type</label>
-                        <select class="form-select form-control" name="menu_type" id="menu_type" aria-label="Default select example">
-                            <option value="mainCourse">Main Course</option>
-                            <option value="appetizer">Appetizer</option>
-                            <option value="dessert">Dessert</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="price">Menu Price</label>
                         <input type="number" class="form-control" name="price" id="price" value="{{ old('price') }}" placeholder="Enter Menu price">
                     </div>
                     <div class="form-group">
                         <label for="image">Menu Image</label>
                         <input type="file" class="form-control" name="image" id="image" value="{{ old('image') }}" placeholder="Enter Menu price">
+                    </div>
+                    <div class="form-group">
+                        <label for="menu_type">Menu Type</label>
+                        <textarea name="brief_description" id="brief_description" class="form-control" rows="4" placeholder="Enter Brief Decsription"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="description">Menu Description</label>
@@ -195,20 +191,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="menu_type">Menu Type</label>
-                        <select class="form-select form-control" name="menu_type" id="edit_menu_type" aria-label="Default select example">
-                            <option value="mainCourse">Main Course</option>
-                            <option value="appetizer">Appetizer</option>
-                            <option value="dessert">Dessert</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="price">Menu Price</label>
                         <input type="number" class="form-control" name="price" id="edit_price" value="{{ old('price') }}" placeholder="Enter Menu price">
                     </div>
                     <div class="form-group">
                         <label for="image">Menu Image</label>
                         <input type="file" class="form-control" name="image" id="edit_image" value="{{ old('image') }}" placeholder="Enter Menu price">
+                    </div>
+                    <div class="form-group">
+                        <label for="menu_type">Menu Type</label>
+                        <textarea name="brief_description" id="edit_brief_description" class="form-control" rows="4" placeholder="Enter Brief Decsription"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="description">Menu Description</label>
@@ -230,7 +222,7 @@
             document.getElementById("edit_form").action = `/administrator/menus/${id}`
             document.getElementById("edit_name").value = response.name;
             document.getElementById("edit_category_id").value = response.category_id
-            document.getElementById("edit_menu_type").value = response.menu_type
+            document.getElementById("edit_brief_description").value = response.brief_description
             document.getElementById("edit_price").value = response.price
             document.getElementById("edit_description").value = response.description
         });

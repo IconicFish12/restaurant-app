@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Menu;
 use App\Models\User;
 use App\Models\Order;
@@ -28,8 +29,18 @@ class WebController extends Controller
 
     public function menuView()
     {
+        $menu = Menu::all();
+        // dd($menu);
         return view('web.menu_web', [
-            'title' => "Menu restaurant"
+            'title' => "Menu restaurant",
+            'dataArr' => Menu::all()
+        ]);
+    }
+
+    public function categoriesView()
+    {
+        return view('web.category_web', [
+            'title' => "Menu Categories"
         ]);
     }
 
@@ -42,9 +53,17 @@ class WebController extends Controller
         ]);
     }
 
+    public function profileView()
+    {
+        $user = auth('web')->user()->name;
+
+        return view('web.profile_web', [
+            'title' => auth()->user()->name. " " . "Profile",
+        ]);
+    }
+
     public function historyWeb()
     {
-        // dd(Order::where('user_id', auth('web')->user()->id)->get());
         return view('web.histories_web', [
             'title' => "Order History",
             'dataArr' => Order::where('user_id', auth('web')->user()->id)->get()
@@ -53,7 +72,7 @@ class WebController extends Controller
 
     public function orderAction(Request $request)
     {
-        // dd();
+        // dd(Menu::where("id", $request->menu_id)->first()->price);
         $price = Menu::where("id", $request->menu_id)->first()->price;
         $data = Validator::make($request->all(), [
             "menu_id" => ["required"],
@@ -80,9 +99,34 @@ class WebController extends Controller
             "total_pay" => $request->quantity *= $request->price ?? $price
         ]);
 
-        if($order){
-            return back()->with('toast_success', "Thank you for ordering". auth()->user()->name);
+        return back()->with('toast_success', "Thank you for ordering"." ".auth()->user()->name);
+    }
+
+    public function messages(Request $request)
+    {
+        $data = Validator::make($request->all(), [
+            'name' => ["required", "max:100", "string"],
+            'email' => ["required", "email:dns", "unique:contacts"],
+            'subject' => ["required", "max:50",],
+            'message' => ["required", "string"]
+        ]);
+
+        if($data->fails()){
+            return back()->with('toast_error', "Something is Wrong");
         }
-        return back()->with('error', "Error When Creating Order");
+
+        $messages = Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message
+        ]);
+
+        return back()->with('toast_success', "Thank you for sending a message, message will be replied via email");
+    }
+
+    public function updateProfile(Request $request)
+    {
+
     }
 }

@@ -172,7 +172,9 @@ Route::prefix('/administrator')->middleware(['role:admin'])->group(function(){
 
 //WEB VIEW
 Route::get('/', [WebController::class, 'webView'])->middleware("guest");
-// Route::get('/menus', [WebController::class, 'menuView'])->middleware('guest');
+Route::get('/menus', [WebController::class, 'menuView'])->middleware('guest');
+Route::get('/categories', [WebController::class, 'menuView'])->middleware('guest');
+Route::post('/messages', [WebCOntroller::class, 'message']);
 Route::prefix('/home')->middleware(['auth', 'role:costumer'])->group(function(){
     Route::get('/', [WebController::class, 'webView']);
 
@@ -180,7 +182,17 @@ Route::prefix('/home')->middleware(['auth', 'role:costumer'])->group(function(){
         Route::get('/', [WebController::class, 'order']);
         Route::post('/', [WebController::class, 'orderAction']);
     });
+
     Route::get('/histories', [WebController::class, 'historyWeb']);
+    Route::get('/menus', [WebController::class, 'menuView']);
+    Route::get('/categories', [WebController::class, 'categoriesView']);
+
+
+    Route::prefix('/profile')->group(function(){
+        Route::get('/', [WebController::class, 'profileView']);
+        Route::put('/update', [WebController::class, 'updateProfile']);
+    });
+
+
 });
-Route::post('/messages', [ContactController::class, 'store']);
 

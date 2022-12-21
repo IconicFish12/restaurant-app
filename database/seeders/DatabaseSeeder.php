@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
         Employee::factory(10)->create();
         Table::factory(30)->create();
 
@@ -51,7 +49,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             EmployeeSeeder::class,
-            AttendanceSeeder::class,
         ]);
     }
 }

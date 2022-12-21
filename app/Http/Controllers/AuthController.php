@@ -59,7 +59,7 @@ class AuthController extends Controller
             }
             $request->session()->regenerate();
 
-            return redirect('/administrator')->with('success', "Welcome, $request->username");
+            return redirect('/administrator')->with('success', "Welcome, $user->role");
         }
 
         return redirect("login")->with("toast_error", "Email or password not found");

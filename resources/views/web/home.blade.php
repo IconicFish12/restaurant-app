@@ -1,26 +1,24 @@
 @extends('web.web')
 @section('content')
-<section id="hero" class="hero d-flex align-items-center section-bg">
-    <div class="container">
-        <div class="row justify-content-between gy-5">
-            <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-                    <h2 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food</h2>
-                    <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
-                <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#book-a-table" class="btn-book-a-table">Book a Table</a>
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+<main id="main">
+    <section class="hero d-flex align-items-center section-bg">
+        <div class="container">
+            <div class="row justify-content-between gy-5">
+                <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+                        <h2 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food</h2>
+                        <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+                    <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <a href="#book-a-table" class="btn-book-a-table">Book a Table</a>
+                        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                    </div>
+                </div>
+                <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+                    <img src="assets/img/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
                 </div>
             </div>
-            <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-                <img src="assets/img/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
-            </div>
         </div>
-    </div>
-</section>
-
-<main id="main">
-    {{-- About Section --}}
-    <section id="about" class="about">
+    </section>
+    <section class="about">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h2>About Us</h2>
@@ -61,7 +59,7 @@
 
     {{-- Why Us Section --}}
 
-    <section id="why-us" class="why-us section-bg">
+    <section class="why-us section-bg">
         <div class="container" data-aos="fade-up">
             <div class="row gy-4">
 
@@ -109,7 +107,7 @@
 
     {{-- Status Section --}}
 
-    <section id="stats-counter" class="stats-counter">
+    <section class="stats-counter">
         <div class="container" data-aos="zoom-out">
             <div class="row gy-4">
                 <div class="col-lg-3 col-md-6">
@@ -141,7 +139,7 @@
     </section>
 
     {{-- Menu Section --}}
-    <section id="menu" class="menu">
+    <section class="menu">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h2>Our Menu</h2>
@@ -195,7 +193,7 @@
     </section>
 
     {{-- Gallery Section --}}
-    <section id="gallery" class="gallery section-bg">
+    <section  class="gallery section-bg">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h2>gallery</h2>
@@ -218,7 +216,7 @@
     </section>
 
     {{-- Contect Section --}}
-    <section id="contact" class="contact">
+    <section class="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h2>Contact</h2>
@@ -242,7 +240,7 @@
                         <i class="icon bi bi-envelope flex-shrink-0"></i>
                         <div>
                             <h3>Email Us</h3>
-                            <p>contact@example.com</p>
+                            <p>vanushkirestaurant781@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -267,27 +265,27 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <form action="{{ asset('messages') }}" method="post" class="php-email-form p-3 p-md-4">
-                @csrf
-                <div class="row">
-                    <div class="col-xl-6 form-group">
+                <form action="{{ asset('/messages') }}" method="post" class="php-email-form p-3 p-md-4">
+                    <div class="row">
+                      <div class="col-xl-6 form-group">
                         <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="col-xl-6 form-group">
+                      </div>
+                      <div class="col-xl-6 form-group">
                         <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                      </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="text-center"><button type="submit">Send Message</button></div>
+                </form>
+            </div>
         </div>
     </section>
 </main>
 
+@include('layouts.footer')
 @endsection
