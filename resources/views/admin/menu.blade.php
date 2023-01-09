@@ -38,7 +38,7 @@
         </div>
         <div class="table-wrapper">
             <div class="md-card-content" style="overflow-x: auto;">
-                <table class="table table-bordered table-striped table-hover">
+                <table class="table table-bordered table-striped">
                     @if ($dataArr->count())
                     <thead>
                         <tr>
@@ -143,12 +143,12 @@
                         <input type="file" class="form-control" name="image" id="image" value="{{ old('image') }}" placeholder="Enter Menu price">
                     </div>
                     <div class="form-group">
-                        <label for="menu_type">Menu Type</label>
-                        <textarea name="brief_description" id="brief_description" class="form-control" rows="4" placeholder="Enter Brief Decsription"></textarea>
+                        <label for="menu_type">Short Description</label>
+                        <textarea name="brief_description" id="brief_description" aria-valuenow="{{ old('brief_description') }}" class="form-control" rows="4" placeholder="Enter Brief Decsription"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="description">Menu Description</label>
-                        <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter Menu Decsription"></textarea>
+                        <textarea name="description" id="description" aria-valuenow="{{ old('description') }}" class="form-control" rows="4" placeholder="Enter Menu Decsription"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

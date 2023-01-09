@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register', [ApiAuthController::class, 'register']);
-Route::post('login', [ApiAuthController::class, 'login']);
+Route::post('register', [ApiAuthController::class, 'register'])->middleware('guest');
+Route::post('login', [ApiAuthController::class, 'login'])->middleware('guest');
 
 //GET ROUTE
 Route::middleware('auth:sanctum')->group(function(){
@@ -25,5 +25,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('getTable', [ApiController::class, "getTable"]);
     Route::get('getMenu-1/{id}', [ApiController::class, "getMenuWithcategory"]);
     Route::get('getMenu-2', [ApiController::class, "getMenu"]);
+
+    Route::post('/logout', [ApiAuthController::class, 'logout']);
 }
 );

@@ -63,11 +63,6 @@
                                 <div class="col-12">
                                     <input type="number" class="form-control form-control-user" id="quantity" value="{{ old('quantity') }}" name="quantity" placeholder="Enter Item Quantity">
                                 </div>
-                                {{-- <div class="col-md-6" id="menu_price">
-                                    @foreach ($menu as $item)
-                                    <input type="number" class="form-control form-control-user" id="price" value="{{ $item->price }}" name="price" readonly disabled>
-                                    @endforeach
-                                </div> --}}
                                 <div class="col-12">
                                     <textarea name="detail" id="detail" class="form-control" rows="4" aria-valuenow="{{ old('detail') }}" placeholder="Order Detail"></textarea>
                                 </div>
@@ -79,9 +74,9 @@
                                         <button type="submit" class="w-56 btn btn-danger">back</button>
                                     </a>
                                     <div class="col-md-6">
-                                        <input type="number" class="form-control form-control-user" id="price" value="{{ old('price') }}" name="price" placeholder="Enter Menu Price">
+                                        <input type="number" class="form-control form-control-user" id="price" value="{{ old('price') }}" disabled readonly name="price" placeholder="Enter Menu Price">
                                     </div>
-                                --}}
+                                    --}}
                             </div>
                         </form>
                     </div>

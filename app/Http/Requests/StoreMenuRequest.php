@@ -26,12 +26,12 @@ class StoreMenuRequest extends FormRequest
         return [
             "name" => "required|unique:menus",
             "category_id" => "required",
-            "menu_type" => "required",
             "price" => "required|integer",
             "description" => "required",
+            "brief_description" => "required|max:50",
             "image" => "required|image|max:6000|mimes:png,jpg,jpeg"
         ];
     }
 
-    
+
 }

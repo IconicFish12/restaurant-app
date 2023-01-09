@@ -49,8 +49,13 @@ class ApiAuthController extends Controller
         if($validator->fails()){
             return response()->json(["message" => $validator->errors()->all()],400);
         }
+        $user = User::where("email", $request->email)->first();
 
-        if(User::where("email", $request->email)->first()->role != "costumer"){
+        if(!$user){
+            return response()->json(["message" => "There is no user with this email"], 400);
+        }
+
+        if($user->role != "costumer"){
             return response()->json(["message" => "Forbidden"], 403);
         }
 
@@ -65,7 +70,12 @@ class ApiAuthController extends Controller
             ], 200);
         }
         return response()->json(["message" => "Unauthorized"], 401);
+   }
 
+   public function logout()
+   {
+        auth()->user()->tokens()->delete();
 
+        return response()->json(["message" => "Successfully Logout"], 200);
    }
 }

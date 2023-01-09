@@ -18,6 +18,8 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\WebController;
+use Illuminate\Support\Facades\Request;
+use App\Models\Menu;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +53,7 @@ Route::get('forgot', [ResetPasswordController::class, "forgotView"])->middleware
 Route::post('forgotAction', [ResetPasswordController::class, "forgotAction"])->middleware("guest");
 Route::get('reset-password/{token}', [ResetPasswordController::class, "resetView"])->middleware("guest");
 Route::post('reset-password-action', [ResetPasswordController::class, "resetAction"])->middleware("guest");
-
+Route::post('update-profile', [DashboardController::class, 'updateProfile']);
 //DASHBOARD VIEW / BACKEND SYSTEM
 Route::prefix('/administrator')->middleware(['role:admin'])->group(function(){
 
@@ -174,14 +176,18 @@ Route::prefix('/administrator')->middleware(['role:admin'])->group(function(){
 Route::get('/', [WebController::class, 'webView'])->middleware("guest");
 Route::get('/menus', [WebController::class, 'menuView'])->middleware('guest');
 Route::get('/categories', [WebController::class, 'menuView'])->middleware('guest');
-Route::post('/messages', [WebCOntroller::class, 'message']);
+Route::post('/messages', [WebCOntroller::class, 'messages']);
 Route::prefix('/home')->middleware(['auth', 'role:costumer'])->group(function(){
     Route::get('/', [WebController::class, 'webView']);
 
-    Route::prefix('/order')->group(function(){
-        Route::get('/', [WebController::class, 'order']);
-        Route::post('/', [WebController::class, 'orderAction']);
-    });
+    if(Menu::all()->count()){
+        Route::prefix('/order')->group(function(){
+            Route::get('/', [WebController::class, 'order']);
+            Route::post('/', [WebController::class, 'orderAction']);
+        });
+    }else{
+        Route::get('/', [WebController::class, 'webView']);
+    }
 
     Route::get('/histories', [WebController::class, 'historyWeb']);
     Route::get('/menus', [WebController::class, 'menuView']);

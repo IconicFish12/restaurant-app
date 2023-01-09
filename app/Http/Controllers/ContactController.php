@@ -7,7 +7,7 @@ use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Models\Employee;
 use App\Models\User;
-use Illuminate\Mail\Mailables\Content;
+use Illuminate\Support\Facades\Request;
 
 class ContactController extends Controller
 {
@@ -98,5 +98,10 @@ class ContactController extends Controller
             return back()->with('toast_success', "Successfully Deleting Message From $contact->name");
         }
         return back()->with('toast_error', "Error When Deleting Message From $contact->name");
+    }
+
+    public function send(Request $request)
+    {
+        # code...
     }
 }

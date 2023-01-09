@@ -266,12 +266,13 @@
                     </div>
                 </div>
                 <form action="{{ asset('/messages') }}" method="post" class="php-email-form p-3 p-md-4">
+                    @csrf
                     <div class="row">
                       <div class="col-xl-6 form-group">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                        <input type="text" name="name" class="form-control" id="name" value="@auth {{ auth()->user()->name }} @endauth" placeholder="Your Name" required>
                       </div>
                       <div class="col-xl-6 form-group">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                        <input type="email" class="form-control" name="email" id="email" value="@auth {{ auth()->user()->email }} @endauth" placeholder="Your Email" required>
                       </div>
                     </div>
                     <div class="form-group">

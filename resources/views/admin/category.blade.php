@@ -38,7 +38,7 @@
         </div>
         <div class="table-wrapper">
             <div class="md-card-content" style="overflow-x: auto;">
-                <table class="table table-bordered table-striped table-hover">
+                <table class="table table-bordered table-striped">
                     @if ($dataArr->count())
                     <thead>
                         <tr>

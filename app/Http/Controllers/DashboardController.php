@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Models\Employee;
 use App\Models\Performance;
 use App\Models\Work;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -31,6 +31,11 @@ class DashboardController extends Controller
             "title" => "Dashboard Documentation",
             "page_name" => "Restaurant Admin Documentation"
         ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        dd($request->all());
     }
 
 }
